@@ -64,9 +64,9 @@ De kunst is om de groeten in zo veel mogelijk stukken te hakken. 1 schijf is 1 p
 # IDEA 2
 
 ## Concept / Doel
-1. Binnen ons spel, voeren de kinderen een ware strijd tegen de klok. Hierbij geeft de Chefkok hen de opdracht om binnen x-aantal tijd groenten te snijden voor een gerecht. Zijn alle groenten gesneden binnen de tijd, is de chef blij. Zo niet is de chef boos.
+1. Binnen onze installation, voeren de kinderen een ware strijd tegen de klok. Hierbij geeft de Chefkok hen de opdracht om binnen x-aantal tijd groenten te snijden voor een gerecht. Zijn alle groenten gesneden binnen de tijd, is de chef blij. Zo niet is de chef boos.
 
-Het **edacatieve doel**: Weten welke groenten in welke gerecht zitten.
+Het **educatieve doel**: Het aanleren welke groenten in welke gerecht zitten.
 
 Uitdagend maar ook educatief gehalte, zo leren kinderen welke groenten erin een gerecht zitten.
 
@@ -82,7 +82,7 @@ Uitdagend maar ook educatief gehalte, zo leren kinderen welke groenten erin een 
     De groenten die op je plank liggen zijn al in stukken verdeeld, je ziet dus al hoeveel keer je moet snijden. Dit is ook bij objecten die niet in het gerecht horen. Als je de groente in de aangeduide hoeveelheid hebt gesneden gaat hij over naar de volgende groente. (We kunnen dit ook visueel voorstellen door de plakjes die al zijn gesneden te animeren.)
 
     Het doel is om alle groenten te snijden en het gerecht af te werken.
-    **Obstakels**: *groenten/vlees/vis/ die niet in het gerecht horen.* **Bij ajuinen kunnen we standaard die traantjes genereren (belemmerd zicht). Als ajuin gesneden is effect weg.** Bij Vis (wat niet in spaghetti hoort) weg swipen [leap motion testen], **maar** als je er wel in snijdt: effe scene van boze kok met nog eens extra: kijk goed wat er op je plank ligt. Zo wordt het educatieve zeker onderstreept in ons concept.
+    **Obstakels**: *groenten/vlees/vis/ die niet in het gerecht horen.* **Bij ajuinen kunnen we standaard die traantjes genereren (belemmerd zicht). Als ajuin gesneden is effect weg.** Bij Vis (wat niet in spaghetti hoort) weg swipen [leap motion testen], **maar** als je er wel in snijdt: effe scene van boze kok met nog eens extra: Je moet goed kijken wat er op je plank ligt. Zo wordt het educatieve nog eens onderstreept in ons concept.
   - #### 3. Einde
     Heb je alle groenten gesneden, komt de chef af met een mooi bord spaghetti.
 
