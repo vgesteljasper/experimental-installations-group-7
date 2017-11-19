@@ -1,13 +1,15 @@
 Presentation
 ============
 
+# IDEA 1
+
 ## Document:
 1. Kidproof
   - MakeyMakey Kabels met juiste kleur attatchen aan juiste kleur-knob. Het kan zijn dat kinderen de kabels lostrekken, zo is de installatie snel monteer & fixbaar.
 
 
 ## Extra:
-- Interactie insteken ivm roeren in een pot. Je moet zoveel mogelijk cirkels rondmaken door te roeren en op het scherm lijkt het dan of je roert in een pot. 
+- Interactie insteken ivm roeren in een pot. Je moet zoveel mogelijk cirkels rondmaken door te roeren en op het scherm lijkt het dan of je roert in een pot.
 
 
 ## Idee:
@@ -56,3 +58,32 @@ De kunst is om de groeten in zo veel mogelijk stukken te hakken. 1 schijf is 1 p
   - *Cactus*: Trek je handschoenen aan
   - *Ajuin*: Zet de bril op
   - ...
+
+
+
+# IDEA 2
+
+## Concept / Doel
+1. Binnen ons spel, voeren de kinderen een ware strijd tegen de klok. Hierbij geeft de Chefkok hen de opdracht om binnen x-aantal tijd groenten te snijden voor een gerecht. Zijn alle groenten gesneden binnen de tijd, is de chef blij. Zo niet is de chef boos.
+
+Het **edacatieve doel**: Weten welke groenten in welke gerecht zitten.
+
+Uitdagend maar ook educatief gehalte, zo leren kinderen welke groenten erin een gerecht zitten.
+
+## Spel
+
+1. Gerecht kiezen
+
+2. Instructies van de chef: ***Italiaanse chef*** zegt: *In 5minuten (tijdspanne) moet die spaghetti (gerecht naar keuze) klaar zijn. Zorg dat deze groenten (overzicht van opgelijste groenten) gesneden zijn, maar kijk goed naar wat er op je plank ligt. Anders word ik boos.*
+
+3. Spel
+  - #### 1. Timer Start
+  - #### 2. Groenten verschijnen 1 per 1 op plank
+    De groenten die op je plank liggen zijn al in stukken verdeeld, je ziet dus al hoeveel keer je moet snijden. Dit is ook bij objecten die niet in het gerecht horen. Als je de groente in de aangeduide hoeveelheid hebt gesneden gaat hij over naar de volgende groente. (We kunnen dit ook visueel voorstellen door de plakjes die al zijn gesneden te animeren.)
+
+    Het doel is om alle groenten te snijden en het gerecht af te werken.
+    **Obstakels**: *groenten/vlees/vis/ die niet in het gerecht horen.* **Bij ajuinen kunnen we standaard die traantjes genereren (belemmerd zicht). Als ajuin gesneden is effect weg.** Bij Vis (wat niet in spaghetti hoort) weg swipen [leap motion testen], **maar** als je er wel in snijdt: effe scene van boze kok met nog eens extra: kijk goed wat er op je plank ligt. Zo wordt het educatieve zeker onderstreept in ons concept.
+  - #### 3. Einde
+    Heb je alle groenten gesneden, komt de chef af met een mooi bord spaghetti.
+
+    Zoniet, is de chef boos en komt hij met een leeg bord. **Chef zegt**: *Die groenten zijn niet op tijd klaar, jij moet nog veel oefenen om zo goed als mij te worden.* **CTA:** *Begin maar opnieuw.*
