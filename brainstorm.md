@@ -90,3 +90,5 @@ Uitdagend maar ook educatief gehalte, zo leren kinderen welke groenten erin een 
 
   4. Einde
     - Hoe kunnen we dit plezant maken? (Geen droog einde)
+
+    - IDEA: Bij het eindigen & behalen van het gerecht. Kan je een foto trekken die dan op een leaderbord komt met score. Na het trekken van de foto is er een confetti animatie
