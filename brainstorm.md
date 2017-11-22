@@ -87,3 +87,6 @@ Uitdagend maar ook educatief gehalte, zo leren kinderen welke groenten erin een 
     Heb je alle groenten gesneden, komt de chef af met een mooi bord spaghetti.
 
     Zoniet, is de chef boos en komt hij met een leeg bord. **Chef zegt**: *Die groenten zijn niet op tijd klaar, jij moet nog veel oefenen om zo goed als mij te worden.* **CTA:** *Begin maar opnieuw.*
+
+  4. Einde
+    - Hoe kunnen we dit plezant maken? (Geen droog einde)
