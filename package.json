@@ -5,8 +5,9 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "development": "npm run clean && electron . && NODE_ENV=development webpack-dev-server --open",
-    "clean": "rimraf ./dist"
+    "development": "yarn run clean && electron .",
+    "clean": "rimraf ./dist",
+    "production": "yarn run clean && NODE_ENV=production webpack -p"
   },
   "repository": "https://github.com/vgesteljasper/experimental-installations-group-7/",
   "keywords": [
