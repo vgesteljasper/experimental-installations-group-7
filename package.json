@@ -17,8 +17,13 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
+    "copy-webpack-plugin": "^4.2.3",
     "electron": "~1.7.8",
-    "electron-rebuild": "^1.6.0"
+    "electron-rebuild": "^1.6.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "webpack": "^3.9.1",
+    "webpack-config-htmls": "^1.0.1",
+    "webpack-config-utils": "^2.3.0"
   },
   "dependencies": {
     "johnny-five": "^0.11.7"
