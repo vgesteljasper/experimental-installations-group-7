@@ -1,43 +1,5 @@
 {
-
   "presets": [
-    [
-      "env", {
-        "targets": {
-          
-          "browsers": ["last 2 versions", "ie >= 10"]
-        },
-        "modules": false,
-        "loose": true
-      }
-    ],
-    "react"
-  ],
-
-  "plugins": [
-    "transform-decorators-legacy",
-    "transform-class-properties",
-    "transform-object-rest-spread"
-  ],
-
-  "env": {
-
-    "development": {
-      "plugins": [
-        "transform-react-jsx-source",
-        "transform-react-stateless-component-name"
-      ]
-    },
-
-    
-
-    "production": {
-      "plugins": [
-        "lodash",
-        "transform-react-remove-prop-types"
-      ]
-    }
-
-  }
-
+    ["es2015"]
+  ]
 }
