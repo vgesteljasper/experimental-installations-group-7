@@ -32,7 +32,7 @@ De kunst is om de groeten in zo veel mogelijk stukken te hakken. 1 schijf is 1 p
     - Ajuinen Bril
     - Handschoen
 
-3. Interactieve Onboarding    
+3. Interactieve Onboarding
   - Hierin worden de uitzonderingen voorgesteld
   - Je moet elke actie vervoledigen om door te gaan naar volgende uitzondering/instructie.
   - Na completen start game in 3, 2, 1
