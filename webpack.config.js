@@ -16,8 +16,6 @@ const extractCSS = new ExtractTextWebpackPlugin(`css/style.css`);
 // change for production build on different server path
 const publicPath = `/`;
 
-const port = 3000;
-
 const copy = new CopyWebpackPlugin([{
   from: `./src/assets`,
   to: `assets`
@@ -50,21 +48,6 @@ const config = {
   },
 
   devtool: `source-map`,
-
-  devServer: {
-
-    contentBase: `./src`,
-    historyApiFallback: true, // react-router
-    hot: true,
-
-    overlay: {
-      errors: true,
-      warnings: true
-    },
-
-    port
-
-  },
 
   module: {
 

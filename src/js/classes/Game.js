@@ -7,7 +7,7 @@ import End from './states/End';
 
 export default class Game extends Phaser.Game {
   constructor() {
-    super(1050, 750, Phaser.AUTO, `content`);
+    super(1440, 900, Phaser.AUTO, `content`);
     this.state.add(`Boot`, Boot);
     this.state.add(`Preload`, Preload);
     this.state.add(`Menu`, Menu);
