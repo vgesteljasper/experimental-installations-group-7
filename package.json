@@ -1,12 +1,12 @@
 {
-  "name": "electron-quick-start",
+  "name": "chop-chop-exi",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "a project created by Jasper Van Gestel & Francis De Clercq for a Youth Film Festival (https://www.jeugdfilm.be/)",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/vgesteljasper/experimental-installations-group-7/",
   "keywords": [
     "Electron",
     "quick",
