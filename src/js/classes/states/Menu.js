@@ -43,13 +43,11 @@ export default class Menu extends Phaser.State {
     //img
     this.spaghetti = this.add.image(this.world.centerX, this.world.centerY + 185, `spaghetti`);
     this.spaghetti.anchor.setTo(0.5, 0.5);
-
     //mask
     this.mask = this.game.add.graphics(0, 0);
     this.mask.beginFill(0xffffff);
     this.mask.drawCircle(this.world.centerX, this.world.centerY + 190, 144);
     this.spaghetti.mask = this.mask;
-
   }
 
   createButton() {
@@ -58,8 +56,8 @@ export default class Menu extends Phaser.State {
     this.add.existing(buttonPlay);
   }
 
-  handleStart() {
+  buttonPlayClicked() {
     console.log(`[Menu] — handleStart()`);
-    this.state.start(`Game`);
+    this.state.start(`Instructions`);
   }
 }
