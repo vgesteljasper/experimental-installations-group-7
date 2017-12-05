@@ -6,6 +6,7 @@ export default class Preload extends Phaser.State {
   preload() {
     console.log(`[Preload] — preload()`);
     // preload all assets for in the game
+    this.load.image(`title`, `assets/img/logo.png`);
   }
   create() {
     this.state.start(`Menu`);
