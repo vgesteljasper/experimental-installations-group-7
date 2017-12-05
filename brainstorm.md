@@ -97,3 +97,7 @@ Uitdagend maar ook educatief gehalte, zo leren kinderen welke groenten erin een 
 
 1. Belgisch Kampioenschap spaghetti groenten snijden.
 Strijd tegen de klok. Om ter t snelst alle groenten in aantal opgegeven stukken choppen. Bij het snijden van groenten die niet thuis horen: strafpunten. Bij het gebruiken van de hendel: bonuspunten.
+
+Het visueel brengen van in hoeveel stukken de groenten moet worden gesneden is heel moeilijk.
+-> Eventueel aan de hand van geluid. Als luidop wordt gezegd in hoeveel stukken het moet verdeeld worden?
+    minpunt: in ruimte vol met kinderen zal dit alleszins niet lukken.
