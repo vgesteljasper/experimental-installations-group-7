@@ -15,6 +15,6 @@ export default class Preload extends Phaser.State {
     this.load.atlasJSONHash(`button-comp`, `assets/img/components/button-comp.png`, `assets/img/components/button-comp.json`);
   }
   create() {
-    this.state.start(`Instructions`);
+    this.state.start(`Play`);
   }
 }

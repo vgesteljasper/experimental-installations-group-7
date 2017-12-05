@@ -26,7 +26,7 @@ export default class Instructions extends Phaser.State {
     //text-bg
     this.textBackground = this.game.add.graphics(0,0);
     this.textBackground.beginFill(0xffffff, 1);
-    this.textBackground.drawRect(550, 230, 1300, 280);
+    this.textBackground.drawRoundedRect(550, 230, 1300, 280, 5);
     this.textBackground.anchor.setTo(0.5, 0.5);
 
     //highlighter
