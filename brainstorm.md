@@ -92,3 +92,8 @@ Uitdagend maar ook educatief gehalte, zo leren kinderen welke groenten erin een 
     - Hoe kunnen we dit plezant maken? (Geen droog einde)
 
     - IDEA: Bij het eindigen & behalen van het gerecht. Kan je een foto trekken die dan op een leaderbord komt met score. Na het trekken van de foto is er een confetti animatie
+
+## Refinements
+
+1. Belgisch Kampioenschap spaghetti groenten snijden.
+Strijd tegen de klok. Om ter t snelst alle groenten in aantal opgegeven stukken choppen. Bij het snijden van groenten die niet thuis horen: strafpunten. Bij het gebruiken van de hendel: bonuspunten.
