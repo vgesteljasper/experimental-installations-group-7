@@ -1,0 +1,28 @@
+﻿{
+  "frames": {
+    "button-normal":
+    {
+    	"frame": {"x":0,"y":0,"w":355,"h":79},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":355,"h":79},
+    	"sourceSize": {"w":355,"h":79}
+    },
+    "button-down":
+    {
+    	"frame": {"x":355,"y":0,"w":355,"h":79},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":355,"h":79},
+    	"sourceSize": {"w":355,"h":79}
+    }
+  },
+  "meta": {
+  	"app": "Adobe Animate",
+  	"version": "15.2.1.95",
+  	"image": "button-comp.png",
+  	"format": "RGBA8888",
+  	"size": {"w":715,"h":79},
+  	"scale": "1"
+  }
+}
