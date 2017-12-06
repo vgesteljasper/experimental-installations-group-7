@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Chop Chop — EXI</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script type="text/javascript">
-      WebFontConfig = {
-        custom: {
-          families: ['circular', 'circular-medium'],
-          urls: ['assets/fonts/circular/circular.css']
-        }
-      };
-      (function(d) {
-          var wf = d.createElement('script'), s = d.scripts[0];
-          wf.async = true;
-          wf.src = 'js/vendors/webfontloader.js';
-          s.parentNode.insertBefore(wf, s);
-       })(document);
-    </script>
-    <style>
-      html, body {
-        margin: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <canvas id="content"></canvas>
 
-    <script src="renderer.js"></script>
-    <script src="js/vendors/phaser.min.js"></script>
-    <script src="js/script.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Chop Chop — EXI</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    html,
+    body {
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <script type="text/javascript" src="js/vendors/phaser.min.js"></script>
+  <script>
+
+    // font loading stuff
+    require(`webfontloader`).load({
+      custom: {
+        families: ['circular', 'circular-medium'],
+        urls: ['assets/fonts/circular/circular.css']
+      }
+    });
+
+    // johnny five stuff
+    require('./js/vendors/renderer.js');
+
+    // game stuff
+    require('./js/script.js');
+
+  </script>
+</body>
+
 </html>

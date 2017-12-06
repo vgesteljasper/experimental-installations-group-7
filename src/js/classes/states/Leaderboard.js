@@ -1,5 +1,5 @@
-export default class Leaderboard extends Phaser.State {
+module.exports = class Leaderboard extends Phaser.State {
   create() {
-    console.log(`[Leaderboard] — create()`);
+    console.log('[Leaderboard] — create()');
   }
-}
+};

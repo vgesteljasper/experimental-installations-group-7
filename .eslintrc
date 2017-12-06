@@ -1,6 +1,20 @@
 {
-  "extends": "devine",
+  "extends": "airbnb-base",
+  "rules": {
+    "import/no-dynamic-require": "off",
+    "import/no-extraneous-dependencies": "off",
+    "no-console": "off",
+    "global-require": "off",
+    "no-new": "off",
+    "prefer-destructuring": "off",
+    "no-param-reassign": "off",
+    "class-methods-use-this": "off"
+  },
   "globals": {
     "Phaser": true
+  },
+  "env": {
+    "browser": true,
+    "node": true
   }
 }

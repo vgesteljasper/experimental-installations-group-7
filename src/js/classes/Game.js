@@ -1,21 +1,21 @@
-import Boot from './states/Boot';
-import Preload from './states/Preload';
-import Menu from './states/Menu';
-import Instructions from './states/Instructions';
-import Leaderboard from './states/Leaderboard';
-import Play from './states/Play';
-import End from './states/End';
+const Boot = require('./states/Boot');
+const Preload = require('./states/Preload');
+const Menu = require('./states/Menu');
+const Instructions = require('./states/Instructions');
+const Leaderboard = require('./states/Leaderboard');
+const Play = require('./states/Play');
+const End = require('./states/End');
 
-export default class Game extends Phaser.Game {
+module.exports = class Game extends Phaser.Game {
   constructor() {
-    super(1920, 1080, Phaser.AUTO, `content`);
-    this.state.add(`Boot`, Boot);
-    this.state.add(`Preload`, Preload);
-    this.state.add(`Menu`, Menu);
-    this.state.add(`Instructions`, Instructions);
-    this.state.add(`Leaderboard`, Leaderboard);
-    this.state.add(`Play`, Play);
-    this.state.add(`End`, End);
-    this.state.start(`Boot`);
+    super(1920, 1080, Phaser.AUTO);
+    this.state.add('Boot', Boot);
+    this.state.add('Preload', Preload);
+    this.state.add('Menu', Menu);
+    this.state.add('Instructions', Instructions);
+    this.state.add('Leaderboard', Leaderboard);
+    this.state.add('Play', Play);
+    this.state.add('End', End);
+    this.state.start('Boot');
   }
-}
+};

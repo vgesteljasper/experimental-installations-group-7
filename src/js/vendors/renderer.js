@@ -2,8 +2,9 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
-//Make a workaround for Johnny 5
-const Readable = require(`stream`).Readable;
+// Make a workaround for Johnny 5
+const Readable = require('stream').Readable;
+
 class MyStream extends Readable {
   constructor(opts) {
     super(opts);
@@ -12,7 +13,7 @@ class MyStream extends Readable {
 }
 
 // hook in our stream
-process.__defineGetter__(`stdin`, () => {
+process.__defineGetter__('stdin', () => {
   if (process.__stdin) return process.__stdin;
   process.__stdin = new MyStream();
   return process.__stdin;
