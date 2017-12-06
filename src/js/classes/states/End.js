@@ -17,6 +17,18 @@ export default class End extends Phaser.State {
 
   createChef() {
     this.chef = this.add.image(20, 105, `chef`);
+
+    // create smileyface
+    this.smile = this.add.graphics(0, 0);
+
+    this.smile.lineStyle(4, 0x8c6846, 1);
+    //happy
+    this.smile.arc(320, 640, 35, this.game.math.degToRad(0), this.game.math.degToRad(180), false);
+
+    //sad
+    // this.smile.arc(320, 660, 35, this.game.math.degToRad(0), this.game.math.degToRad(180), true);
+
+    console.log(`[createChef()]`, this.smile);
   }
 
   createInstructions() {

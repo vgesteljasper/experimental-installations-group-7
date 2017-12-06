@@ -14,32 +14,32 @@ export default class Play extends Phaser.State {
     //rounded background for the indicators
     this.VegetableIndicatorBackground = this.game.add.graphics(0,0);
     this.VegetableIndicatorBackground.beginFill(0xFFFFFF, 1);
-    this.VegetableIndicatorBackground.drawRoundedRect(1435, 40, 425, 120, 70);
+    this.VegetableIndicatorBackground.drawRoundedRect(1310, 15, 575, 170, 95);
 
     // left dish
     this.dishCircle = this.game.add.graphics(0,0);
     this.dishCircle.beginFill(0xededed, 1);
     this.dishCircle.lineStyle(5, 0x69d7a1, 1);
-    this.dishCircle.drawCircle(1500, 100, 100);
+    this.dishCircle.drawCircle(1400, 100, 144);
 
     // right dish
     this.dishCircle = this.game.add.graphics(0,0);
     this.dishCircle.beginFill(0xededed, 1);
     this.dishCircle.lineStyle(5, 0xFFFFFF, 1);
-    this.dishCircle.drawCircle(1500 + 300, 100, 100);
+    this.dishCircle.drawCircle(1500 + 300, 100, 144);
 
     //cirlce-active
     this.dishCircle = this.game.add.graphics(0,0);
     this.dishCircle.lineStyle(10, 0xFFFFFF, 1);
-    this.dishCircle.drawCircle(1500 + 150, 100, 100);
+    this.dishCircle.drawCircle(1605, 100, 144);
 
     //img
-    this.spaghetti = this.add.image(1500 + 150, 100, `spaghetti`);
+    this.spaghetti = this.add.image(1605, 100, `spaghetti`);
     this.spaghetti.anchor.setTo(0.5, 0.5);
     //mask
     this.mask = this.game.add.graphics(0, 0);
     this.mask.beginFill(0xffffff);
-    this.mask.drawCircle(1500 + 150, 100, 100);
+    this.mask.drawCircle(1605, 100, 144);
     this.spaghetti.mask = this.mask;
   }
   createTimer() {
