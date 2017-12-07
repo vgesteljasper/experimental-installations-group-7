@@ -1,10 +1,13 @@
 const Button = require('../objects/Button');
 
+let COUNTDOWN = 4;
+
 module.exports = class OnboardingEnd extends Phaser.State {
   create() {
     console.log('[Menu] — create()');
     this.createaBackground();
     this.createFeedback();
+    this.setupCountdownText();
     this.createButton();
   }
 
@@ -44,6 +47,19 @@ module.exports = class OnboardingEnd extends Phaser.State {
 
   buttonPlayClicked() {
     console.log('[OnboardingEnd] — handleStart()');
-    this.state.start('Play');
+    this.time.events.repeat(Phaser.Timer.SECOND, 4, this.handleCountdown, this);
+  }
+
+  setupCountdownText() {
+    this.countdownText = this.add.text(this.world.centerX, this.world.centerY, '', { font: '150px circular-medium', fill: '#fff' });
+    this.countdownText.anchor.setTo(0.5, 0.5);
+  }
+
+  handleCountdown() {
+    COUNTDOWN -= 1;
+
+    this.countdownText.text = `${COUNTDOWN}`;
+
+    if (COUNTDOWN <= 0) this.state.start('Play');
   }
 };

@@ -89,6 +89,6 @@ module.exports = class Nearby extends Phaser.State {
 
   buttonPlayClicked() {
     console.log('[Menu] — handleStart()');
-    this.state.start('OnboardingEnd');
+    this.state.start('Instructions');
   }
 };

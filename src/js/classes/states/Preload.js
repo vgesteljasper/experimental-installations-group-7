@@ -31,6 +31,6 @@ module.exports = class Preload extends Phaser.State {
     this.load.atlasJSONHash('plate-animation', 'assets/img/components/plate-animation.png', 'assets/img/components/plate-animation.json');
   }
   create() {
-    this.state.start('Menu');
+    this.state.start('Instructions');
   }
 };
