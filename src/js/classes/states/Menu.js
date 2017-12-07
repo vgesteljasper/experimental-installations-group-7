@@ -15,19 +15,32 @@ module.exports = class Menu extends Phaser.State {
 
   createLogo() {
     console.log('[Menu] — createLogo()');
-    this.vegetables = this.add.image(this.world.centerX, this.world.centerY, 'vegetables');
-    this.vegetables.anchor.setTo(0.5, 0.5);
+
+    // Tomato
+    this.tomato = this.add.image(this.world.centerX - 110, this.world.centerY - 50, 'tomato');
+    this.tomato.anchor.setTo(0.5, 0.5);
+    this.tomato.scale.setTo(2, 2);
+
+    // Carrot
+    this.carrot = this.add.image(this.world.centerX - 230, this.world.centerY, 'carrot');
+    this.carrot.anchor.setTo(0.5, 0.5);
+    this.carrot.angle = -17;
+    this.carrot.scale.setTo(-3, 3);
+
+    // Top half of the cucumber
+    this.choppedTopCucumber = this.add.image(this.world.centerX + 75, this.world.centerY + 18, 'choppedTopCucumber');
+    this.choppedTopCucumber.anchor.setTo(0.5, 0.5);
+    this.choppedTopCucumber.scale.setTo(2.5, 2.5);
 
     this.knife = this.add.sprite(this.world.centerX + 200, this.world.centerY - 90, 'cutting-animation', 'knife/chop/0001');
     this.knife.anchor.setTo(0.5, 0.5);
     this.knife.animations.add('chop', Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4), 5, true, false);
     this.knife.animations.play('chop', 10, true);
 
-    this.choppedVegetables = this.add.image(this.world.centerX, this.world.centerY, 'choppedVegetables');
-    this.choppedVegetables.anchor.setTo(0.5, 0.5);
-
-    // this.choppedVegetables = this.add.image(this.world.centerX, this.world.centerY, 'knife');
-    // this.choppedVegetables.anchor.setTo(0.5, 0.5);
+    // Bottom half of the cucumber
+    this.choppedBottomCucumber = this.add.image(this.world.centerX + 78, this.world.centerY + 18, 'choppedBottomCucumber');
+    this.choppedBottomCucumber.anchor.setTo(0.5, 0.5);
+    this.choppedBottomCucumber.scale.setTo(2.5, 2.5);
 
     this.logoFill = this.add.image(this.world.centerX, this.world.centerY, 'logoFill');
     this.logoFill.anchor.setTo(0.5, 0.5);

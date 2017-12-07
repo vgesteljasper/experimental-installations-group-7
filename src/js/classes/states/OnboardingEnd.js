@@ -29,7 +29,7 @@ module.exports = class OnboardingEnd extends Phaser.State {
     this.thumbsUp.anchor.setTo(0.5, 0.5);
     this.thumbsUp.scale.setTo(0.6, 0.6);
     this.game.add.tween(this.thumbsUp)
-      .to({ angle: 0 }, 450, Phaser.Easing.Cubic.EaseOut, true, 400);
+      .to({ angle: 0 }, 450, Phaser.Easing.Cubic.EaseOut, true, 600);
 
     this.cumcum = this.add.image(this.world.centerX, this.world.centerY + 80, 'cucumber');
     this.cumcum.anchor.setTo(0.5, 0.5);

@@ -26,15 +26,33 @@ module.exports = class Nearby extends Phaser.State {
     this.logoBorder.anchor.setTo(0.5, 0.5);
     this.game.add.tween(this.logoBorder).to({ y: 400 }, 250, Phaser.Easing.Cubic.EaseIn, true);
 
-    // fade vegetable
-    this.vegetables = this.add.image(this.world.centerX, this.world.centerY, 'vegetables');
-    this.vegetables.anchor.setTo(0.5, 0.5);
-    this.game.add.tween(this.vegetables).to({ alpha: 0 }, 150, Phaser.Easing.Cubic.EaseOut, true);
+    // Tomato
+    this.tomato = this.add.image(this.world.centerX - 110, this.world.centerY - 50, 'tomato');
+    this.tomato.anchor.setTo(0.5, 0.5);
+    this.tomato.scale.setTo(2, 2);
+    this.game.add.tween(this.tomato)
+      .to({ alpha: 0 }, 150, Phaser.Easing.Cubic.EaseOut, true);
 
-    // fade vegetable
-    this.choppedVegetables = this.add.image(this.world.centerX, this.world.centerY, 'choppedVegetables');
-    this.choppedVegetables.anchor.setTo(0.5, 0.5);
-    this.game.add.tween(this.choppedVegetables)
+    // Carrot
+    this.carrot = this.add.image(this.world.centerX - 230, this.world.centerY, 'carrot');
+    this.carrot.anchor.setTo(0.5, 0.5);
+    this.carrot.angle = -17;
+    this.carrot.scale.setTo(-3, 3);
+    this.game.add.tween(this.carrot)
+      .to({ alpha: 0 }, 150, Phaser.Easing.Cubic.EaseOut, true);
+
+    // Top half of the cucumber
+    this.choppedTopCucumber = this.add.image(this.world.centerX + 75, this.world.centerY + 18, 'choppedTopCucumber');
+    this.choppedTopCucumber.anchor.setTo(0.5, 0.5);
+    this.choppedTopCucumber.scale.setTo(2.5, 2.5);
+    this.game.add.tween(this.choppedTopCucumber)
+      .to({ alpha: 0 }, 150, Phaser.Easing.Cubic.EaseOut, true);
+
+    // Bottom half of the cucumber
+    this.choppedBottomCucumber = this.add.image(this.world.centerX + 78, this.world.centerY + 18, 'choppedBottomCucumber');
+    this.choppedBottomCucumber.anchor.setTo(0.5, 0.5);
+    this.choppedBottomCucumber.scale.setTo(2.5, 2.5);
+    this.game.add.tween(this.choppedBottomCucumber)
       .to({ alpha: 0 }, 150, Phaser.Easing.Cubic.EaseOut, true);
 
     this.plate = this.add.sprite(this.world.centerX + 15, this.world.centerY + 55, 'plate-animation', 'plate/0001');
