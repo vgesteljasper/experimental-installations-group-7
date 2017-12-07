@@ -1,13 +1,14 @@
 const Button = require('../objects/Button');
 
-// const CHOPCOUNT = 6;
+let TOTALCHOPCOUNT;
+let COUNTER = 1;
 
 module.exports = class Instructions extends Phaser.State {
   create() {
     console.log('[Instructions] — Create()');
     this.createaBackground();
     this.createVegetableIndicators();
-    this.createVegetableToChop();
+    this.createVegetableToChop(COUNTER, COUNTER + 1);
     this.createChoppingAnimation();
     this.createTimer();
     this.createButton();
@@ -50,14 +51,13 @@ module.exports = class Instructions extends Phaser.State {
     this.spaghetti.mask = this.mask;
   }
 
-  createVegetableToChop() {
-    console.log('[vegtochop]');
-  }
-
-  createChoppingAnimation() {
-    this.knife = this.add.sprite(this.world.centerX + 200, this.world.centerY + 90, 'cutting-animation', 'knife/chop/0001');
-    this.knife.anchor.setTo(0.5, 0.5);
-    this.knife.animations.add('chop', Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4), 5, true, true);
+  createVegetableToChop(frameStart, frameStartFrame) {
+    console.log('[createVegetableToChop]', frameStart, frameStartFrame);
+    this.cucumberChop = this.add.sprite(this.world.centerX, this.world.centerY + 300, 'cucumber-cutting-animation', `cucumber/chop/000${frameStart}`);
+    this.cucumberChop.anchor.setTo(0.5, 0.5);
+    this.cucumberChop.animations.add('chop', Phaser.Animation.generateFrameNames('cucumber/chop/', `${frameStart}`, `${frameStartFrame}`, '', 4), 10, true, false);
+    this.cucumberChop.scale.setTo(0.3, 0.3);
+    console.log('[PlayChopAnimation]', this.cucumberChop.animations);
   }
 
   createTimer() {
@@ -68,18 +68,42 @@ module.exports = class Instructions extends Phaser.State {
   }
 
   createButton() {
-    const buttonPlay = new Button(this.game, this.world.centerX, this.world.height - 150, this.PlayChopAnimation, this, 'button', 'Start');
+    const buttonPlay = new Button(this.game, this.world.centerX, this.world.height - 150, this.PlayChopAnimation, this, 'button', 'Hit');
     buttonPlay.anchor.setTo(0.5, 0.5);
     this.add.existing(buttonPlay);
   }
 
   PlayChopAnimation() {
+    console.log('[PlayChopAnimation]', this.cucumberChop.animations);
+
+    // LENGTH OF THE TOTAL AMOUNT OF FRAMES
+    TOTALCHOPCOUNT = this.cucumberChop.animations.frameTotal;
+    console.log('[PlayChopAnimation]', TOTALCHOPCOUNT);
+
+    COUNTER += 1;
+    if (COUNTER === TOTALCHOPCOUNT + 1) {
+      console.log('[NEXT VEGETABLE]');
+      return COUNTER === TOTALCHOPCOUNT;
+    }
+
+
+    this.cucumberChop.animations.play('chop', 10, false);
+    this.cucumberChop.events.onAnimationComplete.add((e) => {
+      e.kill();
+      this.createVegetableToChop(COUNTER, COUNTER + 1);
+    }, this);
+
     this.knife.animations.play('chop', 10, false);
     this.knife.events.onAnimationComplete.add((e) => {
-      // console.log('[complete]', e._frame.name);
       e.kill();
       this.createChoppingAnimation();
     }, this);
+  }
+
+  createChoppingAnimation() {
+    this.knife = this.add.sprite(this.world.centerX + 200, this.world.centerY + 90, 'cutting-animation', 'knife/chop/0001');
+    this.knife.anchor.setTo(0.5, 0.5);
+    this.knife.animations.add('chop', Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4), 5, true, true);
   }
 
   update() {
