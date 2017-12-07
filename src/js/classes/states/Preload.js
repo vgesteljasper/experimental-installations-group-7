@@ -15,9 +15,13 @@ module.exports = class Preload extends Phaser.State {
     this.load.image('knife', 'assets/img/knife-05.png');
     this.load.image('kitchenBackground', 'assets/img/kitchen-background-03.jpg');
     this.load.image('spaghetti', 'assets/img/spaghetti.jpg');
+    this.load.image('cucumber', 'assets/img/cucumber.png');
+    this.load.image('ok', 'assets/img/ok.png');
+    this.load.image('thumbsUp', 'assets/img/thumbs-up.png');
 
     this.load.atlasJSONHash('button-comp', 'assets/img/components/button-comp.png', 'assets/img/components/button-comp.json');
     this.load.atlasJSONHash('cutting-animation', 'assets/img/components/cutting-animation.png', 'assets/img/components/cutting-animation.json');
+    this.load.atlasJSONHash('plate-animation', 'assets/img/components/plate-animation.png', 'assets/img/components/plate-animation.json');
   }
   create() {
     this.state.start('Menu');

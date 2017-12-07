@@ -43,13 +43,13 @@ module.exports = class End extends Phaser.State {
     this.textBackground.anchor.setTo(0.5, 0.5);
 
     this.instructionText = this.add.text(
-this.world.centerX + 200, 380,
+      this.world.centerX + 200, 380,
       `
       Je behaalde 105 punten. Neem een foto van jezelf
       voor op het scorebord.
       `,
-      { font: '50px circular', fill: '#ff780f' }
-);
+      { font: '50px circular', fill: '#ff780f' },
+    );
     this.instructionText.lineSpacing = 15;
     this.instructionText.anchor.setTo(0.5, 0.5);
   }

@@ -44,6 +44,6 @@ module.exports = class Menu extends Phaser.State {
 
   buttonPlayClicked() {
     console.log('[Menu] — handleStart()');
-    this.state.start('Instructions');
+    this.state.start('Nearby');
   }
 };
