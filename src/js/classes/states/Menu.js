@@ -5,49 +5,35 @@ module.exports = class Menu extends Phaser.State {
     console.log('[Menu] — create()');
     this.createaBackground();
     this.createLogo();
-    this.createDishSelection();
     this.createButton();
   }
 
   createaBackground() {
-    console.log('[Menu] — createLogo()');
-    this.background = this.add.image(0, 0, 'background');
+    console.log('[Menu] — createaBackground()');
+    this.game.stage.backgroundColor = '#FF780F';
   }
 
   createLogo() {
     console.log('[Menu] — createLogo()');
-    this.logo = this.add.image(this.world.centerX, 270, 'logo');
-    this.logo.anchor.setTo(0.5, 0.5);
-  }
+    this.vegetables = this.add.image(this.world.centerX, this.world.centerY, 'vegetables');
+    this.vegetables.anchor.setTo(0.5, 0.5);
 
-  createDishSelection() {
-    this.dishText = this.add.text(this.world.centerX, this.world.centerY + 50, 'Kies een gerecht', { font: '50px circular', fill: '#fff' });
-    this.dishText.anchor.setTo(0.5, 0.5);
+    this.knife = this.add.sprite(this.world.centerX + 200, this.world.centerY - 90, 'cutting-animation', 'knife/chop/0001');
+    this.knife.anchor.setTo(0.5, 0.5);
+    this.knife.animations.add('chop', Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4), 5, true, false);
+    this.knife.animations.play('chop', 10, true);
 
-    // left dish
-    this.dishCircle = this.game.add.graphics(0, 0);
-    this.dishCircle.beginFill(0xffaa71, 1);
-    this.dishCircle.drawCircle(this.world.centerX - 200, this.world.centerY + 190, 144);
+    this.choppedVegetables = this.add.image(this.world.centerX, this.world.centerY, 'choppedVegetables');
+    this.choppedVegetables.anchor.setTo(0.5, 0.5);
 
-    // right dish
-    this.dishCircle = this.game.add.graphics(0, 0);
-    this.dishCircle.beginFill(0xffaa71, 1);
-    this.dishCircle.drawCircle(this.world.centerX + 200, this.world.centerY + 190, 144);
+    // this.choppedVegetables = this.add.image(this.world.centerX, this.world.centerY, 'knife');
+    // this.choppedVegetables.anchor.setTo(0.5, 0.5);
 
-    // cirlce-active
-    this.dishCircle = this.game.add.graphics(0, 0);
-    this.dishCircle.beginFill(0xffaa71, 1);
-    this.dishCircle.lineStyle(10, 0xFFFFFF, 1);
-    this.dishCircle.drawCircle(this.world.centerX, this.world.centerY + 190, 144);
+    this.logoFill = this.add.image(this.world.centerX, this.world.centerY, 'logoFill');
+    this.logoFill.anchor.setTo(0.5, 0.5);
 
-    // img
-    this.spaghetti = this.add.image(this.world.centerX, this.world.centerY + 185, 'spaghetti');
-    this.spaghetti.anchor.setTo(0.5, 0.5);
-    // mask
-    this.mask = this.game.add.graphics(0, 0);
-    this.mask.beginFill(0xffffff);
-    this.mask.drawCircle(this.world.centerX, this.world.centerY + 190, 144);
-    this.spaghetti.mask = this.mask;
+    this.logoBorder = this.add.image(this.world.centerX, this.world.centerY, 'logoBorder');
+    this.logoBorder.anchor.setTo(0.5, 0.5);
   }
 
   createButton() {
