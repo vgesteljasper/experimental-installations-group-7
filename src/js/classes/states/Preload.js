@@ -30,6 +30,7 @@ module.exports = class Preload extends Phaser.State {
     this.load.atlasJSONHash('cutting-animation', 'assets/img/components/cutting-animation.png', 'assets/img/components/cutting-animation.json');
     this.load.atlasJSONHash('cucumber-cutting-animation', 'assets/img/components/cucumber-cutting-animation.png', 'assets/img/components/cucumber-cutting-animation.json');
     this.load.atlasJSONHash('eggplant-cutting-animation', 'assets/img/components/eggplant-cutting-animation.png', 'assets/img/components/eggplant-cutting-animation.json');
+    this.load.atlasJSONHash('carrot-cutting-animation', 'assets/img/components/carrot-cutting-animation.png', 'assets/img/components/carrot-cutting-animation.json');
     this.load.atlasJSONHash('plate-animation', 'assets/img/components/plate-animation.png', 'assets/img/components/plate-animation.json');
   }
   create() {

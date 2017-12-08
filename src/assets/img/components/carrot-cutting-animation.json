@@ -1,0 +1,84 @@
+﻿{
+  "frames": {
+    "carrot/chop/0001":
+    {
+    	"frame": {"x":0,"y":0,"w":4572,"h":1034},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":3444,"h":1034},
+    	"sourceSize": {"w":3444,"h":1034}
+    },
+    "carrot/chop/0002":
+    {
+    	"frame": {"x":0,"y":1034,"w":4572,"h":1034},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":4572,"h":1034},
+    	"sourceSize": {"w":4572,"h":1034}
+    },
+    "carrot/chop/0003":
+    {
+    	"frame": {"x":0,"y":2068,"w":4572,"h":1034},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":4572,"h":1034},
+    	"sourceSize": {"w":4572,"h":1034}
+    },
+    "carrot/chop/0004":
+    {
+    	"frame": {"x":0,"y":3102,"w":4572,"h":1034},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":4572,"h":1034},
+    	"sourceSize": {"w":4572,"h":1034}
+    },
+    "carrot/chop/0005":
+    {
+    	"frame": {"x":0,"y":4134 ,"w":4572,"h":1034},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":4572,"h":1034},
+    	"sourceSize": {"w":4572,"h":1034}
+    },
+    "carrot/chop/0006":
+    {
+    	"frame": {"x":0,"y":5167,"w":4572,"h":1034},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":4572,"h":1034},
+    	"sourceSize": {"w":4572,"h":1034}
+    },
+    "carrot/chop/0007":
+    {
+    	"frame": {"x":0,"y":6199,"w":4572,"h":1034},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":4572,"h":1034},
+    	"sourceSize": {"w":4572,"h":1034}
+    },
+    "carrot/chop/0008":
+    {
+    	"frame": {"x":0,"y":7233,"w":4572,"h":1034},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":4572,"h":1034},
+    	"sourceSize": {"w":4572,"h":1034}
+    },
+    "carrot/chop/0009":
+    {
+    	"frame": {"x":0,"y":8267,"w":4572,"h":1034},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":4572,"h":1034},
+    	"sourceSize": {"w":4572,"h":1034}
+    }
+  },
+  "meta": {
+  	"app": "Adobe Animate",
+  	"version": "15.2.1.95",
+  	"image": "carrot-cutting-animation.png",
+  	"format": "RGBA8888",
+  	"size": {"w":4572,"h":9302},
+  	"scale": "1"
+  }
+}

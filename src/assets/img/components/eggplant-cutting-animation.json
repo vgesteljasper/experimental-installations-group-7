@@ -5,8 +5,8 @@
     	"frame": {"x":0,"y":0,"w":3356,"h":1393},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":3444,"h":961},
-    	"sourceSize": {"w":3444,"h":961}
+    	"spriteSourceSize": {"x":0,"y":0,"w":3356,"h":1393},
+    	"sourceSize": {"w":3356,"h":1393}
     },
     "eggplant/chop/0002":
     {
@@ -30,7 +30,7 @@
     	"rotated": false,
     	"trimmed": false,
     	"spriteSourceSize": {"x":0,"y":0,"w":3356,"h":1393},
-    	"sourceSize": {"w":3356,"h":961}
+    	"sourceSize": {"w":3356,"h":1393}
     }
   },
   "meta": {
