@@ -1,0 +1,44 @@
+﻿{
+  "frames": {
+    "eggplant/chop/0001":
+    {
+    	"frame": {"x":0,"y":0,"w":3356,"h":1393},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":3444,"h":961},
+    	"sourceSize": {"w":3444,"h":961}
+    },
+    "eggplant/chop/0002":
+    {
+    	"frame": {"x":0,"y":1396,"w":3356,"h":1393},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":3356,"h":1393},
+    	"sourceSize": {"w":3356,"h":1393}
+    },
+    "eggplant/chop/0003":
+    {
+    	"frame": {"x":0,"y":2794,"w":3356,"h":1393},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":3356,"h":1393},
+    	"sourceSize": {"w":3356,"h":1393}
+    },
+    "eggplant/chop/0004":
+    {
+    	"frame": {"x":0,"y":4196,"w":3356,"h":1393},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":3356,"h":1393},
+    	"sourceSize": {"w":3356,"h":961}
+    }
+  },
+  "meta": {
+  	"app": "Adobe Animate",
+  	"version": "15.2.1.95",
+  	"image": "eggplant-cutting-animation.png",
+  	"format": "RGBA8888",
+  	"size": {"w":3356,"h":5597},
+  	"scale": "1"
+  }
+}

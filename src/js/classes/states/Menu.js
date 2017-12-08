@@ -32,9 +32,15 @@ module.exports = class Menu extends Phaser.State {
     this.choppedTopCucumber.anchor.setTo(0.5, 0.5);
     this.choppedTopCucumber.scale.setTo(2.5, 2.5);
 
-    this.knife = this.add.sprite(this.world.centerX + 200, this.world.centerY - 90, 'cutting-animation', 'knife/chop/0001');
+    // this.knife = this.add.sprite(this.world.centerX + 200, this.world.centerY - 90, 'cutting-animation', 'knife/chop/0001');
+    // this.knife.anchor.setTo(0.5, 0.5);
+    // this.knife.animations.add('chop', Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4), 5, true, false);
+    // this.knife.animations.play('chop', 10, true);
+
+    this.knife = this.add.sprite(this.world.centerX + 200, this.world.centerY - 90, 'eggplant-cutting-animation', 'eggplant/chop/0001');
     this.knife.anchor.setTo(0.5, 0.5);
-    this.knife.animations.add('chop', Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4), 5, true, false);
+    this.knife.scale.setTo(0.25, 0.25);
+    this.knife.animations.add('chop', Phaser.Animation.generateFrameNames('eggplant/chop/', 1, 5, '', 4), 5, true, false);
     this.knife.animations.play('chop', 10, true);
 
     // Bottom half of the cucumber

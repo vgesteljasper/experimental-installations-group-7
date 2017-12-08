@@ -83,6 +83,7 @@ module.exports = class Instructions extends Phaser.State {
     COUNTER += 1;
     if (COUNTER === TOTALCHOPCOUNT + 1) {
       console.log('[NEXT VEGETABLE]');
+      this.state.start('OnboardingEnd');
       return COUNTER === TOTALCHOPCOUNT;
     }
 
