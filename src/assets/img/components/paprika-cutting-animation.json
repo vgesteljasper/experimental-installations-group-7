@@ -1,0 +1,60 @@
+﻿{
+  "frames": {
+    "paprika/chop/0001":
+    {
+    	"frame": {"x":0,"y":0,"w":2420,"h":1488},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":2420,"h":1488},
+    	"sourceSize": {"w":2420,"h":1488}
+    },
+    "paprika/chop/0002":
+    {
+    	"frame": {"x":0,"y":1487,"w":2420,"h":1488},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":2420,"h":1488},
+    	"sourceSize": {"w":2420,"h":1488}
+    },
+    "paprika/chop/0003":
+    {
+    	"frame": {"x":0,"y":2975,"w":2420,"h":1488},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":2420,"h":1488},
+    	"sourceSize": {"w":2420,"h":1488}
+    },
+    "paprika/chop/0004":
+    {
+    	"frame": {"x":0,"y":4462,"w":2420,"h":1488},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":2420,"h":1488},
+    	"sourceSize": {"w":2420,"h":1488}
+    },
+    "paprika/chop/0005":
+    {
+    	"frame": {"x":0,"y":5950,"w":2420,"h":1488},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":2420,"h":1488},
+    	"sourceSize": {"w":2420,"h":1488}
+    },
+    "paprika/chop/0006":
+    {
+    	"frame": {"x":0,"y":7437,"w":2420,"h":1488},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":2420,"h":1488},
+    	"sourceSize": {"w":2420,"h":1488}
+    }
+  },
+  "meta": {
+  	"app": "Adobe Animate",
+  	"version": "15.2.1.95",
+  	"image": "paprika-cutting-animation.png",
+  	"format": "RGBA8888",
+  	"size": {"w":1200,"h":8925},
+  	"scale": "1"
+  }
+}
