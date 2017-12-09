@@ -4,6 +4,7 @@ module.exports = class Play extends Phaser.State {
     this.createaBackground();
     this.createVegetableIndicators();
     this.createTimer();
+    // this.createBlur();
   }
   createaBackground() {
     console.log('[Play] — createLogo()');
@@ -48,6 +49,17 @@ module.exports = class Play extends Phaser.State {
     this.timerBackground.lineStyle(5, 0xc1c1c1, 1);
     this.timerBackground.drawRoundedRect(120, 218, 530, 248, 5);
   }
+
+  createBlur() {
+    const blurX = this.game.add.filter('BlurX');
+    const blurY = this.game.add.filter('BlurY');
+
+    blurX.blur = 10;
+    blurY.blur = 10;
+
+    this.background.filters = [blurX, blurY];
+  }
+
   update() {
     console.log('[Play] — Update()');
   }
