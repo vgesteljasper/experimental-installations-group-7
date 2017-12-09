@@ -1,0 +1,60 @@
+﻿{
+  "frames": {
+    "tomato/chop/0001":
+    {
+    	"frame": {"x":0,"y":0,"w":2280,"h":2170},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":2280,"h":2170},
+    	"sourceSize": {"w":2280,"h":2170}
+    },
+    "tomato/chop/0002":
+    {
+    	"frame": {"x":0,"y":2170,"w":2280,"h":2170},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":2280,"h":2170},
+    	"sourceSize": {"w":2280,"h":2170}
+    },
+    "tomato/chop/0003":
+    {
+    	"frame": {"x":0,"y":4340,"w":2280,"h":2170},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":2280,"h":2170},
+    	"sourceSize": {"w":2280,"h":2170}
+    },
+    "tomato/chop/0004":
+    {
+    	"frame": {"x":0,"y":6510,"w":2280,"h":2170},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":2280,"h":2170},
+    	"sourceSize": {"w":2280,"h":2170}
+    },
+    "tomato/chop/0005":
+    {
+    	"frame": {"x":0,"y":8679,"w":2280,"h":2170},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":2280,"h":2170},
+    	"sourceSize": {"w":2280,"h":2170}
+    },
+    "tomato/chop/0006":
+    {
+    	"frame": {"x":0,"y":10848,"w":2280,"h":2170},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":2280,"h":2170},
+    	"sourceSize": {"w":2280,"h":2170}
+    }
+  },
+  "meta": {
+  	"app": "Adobe Animate",
+  	"version": "15.2.1.95",
+  	"image": "tomato-cutting-animation.png",
+  	"format": "RGBA8888",
+  	"size": {"w":2280,"h":13018},
+  	"scale": "1"
+  }
+}
