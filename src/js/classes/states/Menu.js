@@ -55,11 +55,11 @@ module.exports = class Menu extends Phaser.State {
     // this.onionAnimation.animations.add('chop', Phaser.Animation.generateFrameNames('onion/chop/', 1, 5, '', 4), 5, true, false);
     // this.onionAnimation.animations.play('chop', 10, true);
 
-    this.tomatoAnimation = this.add.sprite(this.world.centerX + 200, this.world.centerY - 90, 'tomato-cutting-animation', 'tomato/chop/0001');
-    this.tomatoAnimation.anchor.setTo(0.5, 0.5);
-    this.tomatoAnimation.scale.setTo(0.25, 0.25);
-    this.tomatoAnimation.animations.add('chop', Phaser.Animation.generateFrameNames('tomato/chop/', 1, 6, '', 4), 5, true, false);
-    this.tomatoAnimation.animations.play('chop', 10, true);
+    // this.tomatoAnimation = this.add.sprite(this.world.centerX + 200, this.world.centerY - 90, 'tomato-cutting-animation', 'tomato/chop/0001');
+    // this.tomatoAnimation.anchor.setTo(0.5, 0.5);
+    // this.tomatoAnimation.scale.setTo(0.25, 0.25);
+    // this.tomatoAnimation.animations.add('chop', Phaser.Animation.generateFrameNames('tomato/chop/', 1, 6, '', 4), 5, true, false);
+    // this.tomatoAnimation.animations.play('chop', 10, true);
 
     // Bottom half of the cucumber
     this.choppedBottomCucumber = this.add.image(this.world.centerX + 78, this.world.centerY + 18, 'choppedBottomCucumber');
