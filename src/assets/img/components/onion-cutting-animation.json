@@ -1,0 +1,52 @@
+﻿{
+  "frames": {
+    "onion/chop/0001":
+    {
+    	"frame": {"x":0,"y":0,"w":2141,"h":2966},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":2141,"h":2966},
+    	"sourceSize": {"w":2141,"h":2966}
+    },
+    "onion/chop/0002":
+    {
+    	"frame": {"x":0,"y":2966,"w":2141,"h":2966},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":2141,"h":2966},
+    	"sourceSize": {"w":2141,"h":2966}
+    },
+    "onion/chop/0003":
+    {
+    	"frame": {"x":0,"y":5928,"w":2141,"h":2966},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":2141,"h":2966},
+    	"sourceSize": {"w":2141,"h":2966}
+    },
+    "onion/chop/0004":
+    {
+    	"frame": {"x":0,"y":8892,"w":2141,"h":2966},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":2141,"h":2966},
+    	"sourceSize": {"w":2141,"h":2966}
+    },
+    "onion/chop/0005":
+    {
+    	"frame": {"x":0,"y":11855,"w":2141,"h":2966},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":2141,"h":2966},
+    	"sourceSize": {"w":2141,"h":2966}
+    }
+  },
+  "meta": {
+  	"app": "Adobe Animate",
+  	"version": "15.2.1.95",
+  	"image": "onion-cutting-animation.png",
+  	"format": "RGBA8888",
+  	"size": {"w":2141,"h":14820},
+  	"scale": "1"
+  }
+}
