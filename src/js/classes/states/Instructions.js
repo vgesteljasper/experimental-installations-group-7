@@ -8,7 +8,7 @@ module.exports = class Instructions extends Phaser.State {
     console.log('[Instructions] — Create()');
     this.createaBackground();
     this.createVegetableIndicators();
-    this.createVegetableToChop(COUNTER, COUNTER + 1);
+    this.setupVegetableToChop('cucumber', COUNTER, COUNTER + 1);
     this.createChoppingAnimation();
     this.createTimer();
     this.createButton();
@@ -51,11 +51,11 @@ module.exports = class Instructions extends Phaser.State {
     this.spaghetti.mask = this.mask;
   }
 
-  createVegetableToChop(frameStart, frameStartFrame) {
-    console.log('[createVegetableToChop]', frameStart, frameStartFrame);
-    this.cucumberChop = this.add.sprite(this.world.centerX, this.world.centerY + 300, 'cucumber-cutting-animation', `cucumber/chop/000${frameStart}`);
+  setupVegetableToChop(veggie, frameStart, frameStartFrame) {
+    console.log('[setupVegetableToChop]', veggie, frameStart, frameStartFrame);
+    this.cucumberChop = this.add.sprite(this.world.centerX, this.world.centerY + 300, `${veggie}-cutting-animation`, `${veggie}/chop/000${frameStart}`);
     this.cucumberChop.anchor.setTo(0.5, 0.5);
-    this.cucumberChop.animations.add('chop', Phaser.Animation.generateFrameNames('cucumber/chop/', `${frameStart}`, `${frameStartFrame}`, '', 4), 10, true, false);
+    this.cucumberChop.animations.add('chop', Phaser.Animation.generateFrameNames(`${veggie}/chop/`, `${frameStart}`, `${frameStartFrame}`, '', 4), 10, true, false);
     this.cucumberChop.scale.setTo(0.3, 0.3);
     console.log('[PlayChopAnimation]', this.cucumberChop.animations);
   }
@@ -84,14 +84,14 @@ module.exports = class Instructions extends Phaser.State {
     if (COUNTER === TOTALCHOPCOUNT + 1) {
       console.log('[NEXT VEGETABLE]');
       this.state.start('OnboardingEnd');
-      return COUNTER === TOTALCHOPCOUNT;
+      COUNTER = TOTALCHOPCOUNT;
     }
 
 
     this.cucumberChop.animations.play('chop', 10, false);
     this.cucumberChop.events.onAnimationComplete.add((e) => {
       e.kill();
-      this.createVegetableToChop(COUNTER, COUNTER + 1);
+      this.setupVegetableToChop('cucumber', COUNTER, COUNTER + 1);
     }, this);
 
     this.knife.animations.play('chop', 10, false);

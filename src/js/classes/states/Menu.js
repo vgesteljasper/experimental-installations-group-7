@@ -37,36 +37,6 @@ module.exports = class Menu extends Phaser.State {
     this.knife.animations.add('chop', Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4), 5, true, false);
     this.knife.animations.play('chop', 10, true);
 
-    // this.eggplantAnimation = this.add.sprite(this.world.centerX + 200, this.world.centerY - 90, 'eggplant-cutting-animation', 'eggplant/chop/0001');
-    // this.eggplantAnimation.anchor.setTo(0.5, 0.5);
-    // this.eggplantAnimation.scale.setTo(0.25, 0.25);
-    // this.eggplantAnimation.animations.add('chop', Phaser.Animation.generateFrameNames('eggplant/chop/', 1, 5, '', 4), 5, true, false);
-    // this.eggplantAnimation.animations.play('chop', 10, true);
-
-    // this.carrotAnimation = this.add.sprite(this.world.centerX + 200, this.world.centerY - 90, 'carrot-cutting-animation', 'carrot/chop/0001');
-    // this.carrotAnimation.anchor.setTo(0.5, 0.5);
-    // this.carrotAnimation.scale.setTo(0.25, 0.25);
-    // this.carrotAnimation.animations.add('chop', Phaser.Animation.generateFrameNames('carrot/chop/', 1, 9, '', 4), 5, true, false);
-    // this.carrotAnimation.animations.play('chop', 10, true);
-
-    // this.onionAnimation = this.add.sprite(this.world.centerX + 200, this.world.centerY - 90, 'onion-cutting-animation', 'onion/chop/0001');
-    // this.onionAnimation.anchor.setTo(0.5, 0.5);
-    // this.onionAnimation.scale.setTo(0.25, 0.25);
-    // this.onionAnimation.animations.add('chop', Phaser.Animation.generateFrameNames('onion/chop/', 1, 5, '', 4), 5, true, false);
-    // this.onionAnimation.animations.play('chop', 10, true);
-
-    // this.tomatoAnimation = this.add.sprite(this.world.centerX + 200, this.world.centerY - 90, 'tomato-cutting-animation', 'tomato/chop/0001');
-    // this.tomatoAnimation.anchor.setTo(0.5, 0.5);
-    // this.tomatoAnimation.scale.setTo(0.25, 0.25);
-    // this.tomatoAnimation.animations.add('chop', Phaser.Animation.generateFrameNames('tomato/chop/', 1, 6, '', 4), 5, true, false);
-    // this.tomatoAnimation.animations.play('chop', 10, true);
-
-    // this.paprikaAnimation = this.add.sprite(this.world.centerX + 200, this.world.centerY - 90, 'paprika-cutting-animation', 'paprika/chop/0001');
-    // this.paprikaAnimation.anchor.setTo(0.5, 0.5);
-    // this.paprikaAnimation.scale.setTo(0.5, 0.5);
-    // this.paprikaAnimation.animations.add('chop', Phaser.Animation.generateFrameNames('paprika/chop/', 1, 6, '', 4), 5, true, false);
-    // this.paprikaAnimation.animations.play('chop', 10, true);
-
     // Bottom half of the cucumber
     this.choppedBottomCucumber = this.add.image(this.world.centerX + 78, this.world.centerY + 18, 'choppedBottomCucumber');
     this.choppedBottomCucumber.anchor.setTo(0.5, 0.5);
