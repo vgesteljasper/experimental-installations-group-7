@@ -247,8 +247,12 @@ module.exports = class Play extends Phaser.State {
   shutdown() {
     console.log('[shutdown] playstate shuts down');
     const TIME_PLAYED = new Date() - TIME_START;
-    const seconds = Math.floor((TIME_PLAYED / 1000));
-    const minutes = Math.floor(seconds / 60);
+    const TOTAL_TIME = new Date(TIME_PLAYED);
+    const minutes = TOTAL_TIME.getMinutes();
+    const seconds = TOTAL_TIME.getSeconds();
+
+    // minutes = Math.floor(TIME_PLAYED / 60);
+    // seconds = TIME_PLAYED % 60;
     const TIME_FORMAT = `0${minutes}:${seconds}`;
     localStorage.setItem('timePlayed', TIME_FORMAT);
     console.log('[shutdown]', TIME_FORMAT);
