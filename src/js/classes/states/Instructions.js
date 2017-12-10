@@ -4,6 +4,9 @@ let TOTALCHOPCOUNT;
 let COUNTER = 1;
 
 module.exports = class Instructions extends Phaser.State {
+  init() {
+    this.gameEnded = false;
+  }
   create() {
     console.log('[Instructions] — Create()');
     this.createaBackground();
@@ -40,7 +43,6 @@ module.exports = class Instructions extends Phaser.State {
 
     COUNTER += 1;
     if (COUNTER === TOTALCHOPCOUNT + 1) {
-      console.log('[NEXT VEGETABLE]');
       this.state.start('OnboardingEnd');
       COUNTER = TOTALCHOPCOUNT;
     }
@@ -65,7 +67,8 @@ module.exports = class Instructions extends Phaser.State {
     this.knife.animations.add('chop', Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4), 5, true, true);
   }
 
-  update() {
-    console.log('[Instructions] — Update()');
+  shutdown() {
+    this.gameEnded = true;
+    COUNTER = 1;
   }
 };

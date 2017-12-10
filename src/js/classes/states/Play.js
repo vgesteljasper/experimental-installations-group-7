@@ -12,12 +12,12 @@ let VEGGIE_YPOS = '';
 let VEGGIE_SCALE = '';
 
 let BLUR_COUNTER = 0;
-
 let TIME_START = '';
 
 module.exports = class Play extends Phaser.State {
   init() {
-    console.log('[init] TIME_PLAYED STARTED');
+    this.gameEnded = false;
+    localStorage.clear();
     TIME_START = new Date();
   }
   create() {
@@ -32,15 +32,6 @@ module.exports = class Play extends Phaser.State {
 
     // visaualisation of the timer
     // this.createTimer();
-
-    // create blur when cutting the onion
-    // this.createBlur();
-
-    // collected all veggies on the plate
-    // this.setupVegetables();
-
-    // CHOPPING AND VEGGIE RELATED
-    // this.setupVegetableToChop('onion', COUNTER, COUNTER + 1);
     this.createButton();
   }
   createaBackground() {
@@ -62,6 +53,9 @@ module.exports = class Play extends Phaser.State {
   }
 
   createRandomOrder() {
+    if (this.gameEnded) {
+      return;
+    }
     const veggies = ['eggplant', 'carrot', 'onion', 'cucumber', 'paprika', 'tomato'];
     randomVeggies = this.shuffle(veggies);
     VEGGIE_BEING_CUT = randomVeggies[VEGGIES_COUNTER];
@@ -70,6 +64,9 @@ module.exports = class Play extends Phaser.State {
   }
 
   setupVeggie(veggie) {
+    if (this.gameEnded) {
+      return;
+    }
     console.log('[setupVeggie]', veggie);
     if (veggie === 'eggplant') {
       VEGGIE_NAME = 'eggplant';
@@ -152,6 +149,9 @@ module.exports = class Play extends Phaser.State {
   }
 
   setupBlur() {
+    if (this.gameEnded) {
+      return;
+    }
     const blurX = this.game.add.filter('BlurX');
     const blurY = this.game.add.filter('BlurY');
     console.log('[setupBlur]', BLUR_COUNTER);
@@ -166,6 +166,9 @@ module.exports = class Play extends Phaser.State {
   }
 
   setupVegetableToChop(name, posX, posY, scale, frameStart, frameStartFrame) {
+    if (this.gameEnded) {
+      return;
+    }
     console.log('[setupVegetableToChop]', name, posX, posY, scale, frameStart, frameStartFrame);
     this.currentVeggie = this.add.sprite(posX, posY, `${name}-cutting-animation`, `${name}/chop/000${frameStart}`);
     this.currentVeggie.anchor.setTo(0.5, 0.5);
@@ -190,7 +193,9 @@ module.exports = class Play extends Phaser.State {
   }
 
   PlayChopAnimation() {
-    // console.log('[PlayChopAnimation]', this.currentVeggie.animations);
+    if (this.gameEnded) {
+      return;
+    }
 
     // LENGTH OF THE TOTAL AMOUNT OF FRAMES
     TOTAL_CHOP_COUNT = this.currentVeggie.animations.frameTotal;
@@ -224,8 +229,10 @@ module.exports = class Play extends Phaser.State {
 
   setupNextVeggie() {
     console.log('[Play] — setupNextVeggie()');
-    // global counter die elke keer 1tje omhoog gaat bij next veggie,
-    // -> als  global counter === arr.length dan is spel gedaan
+
+    if (this.gameEnded) {
+      return;
+    }
 
     // Add counter to get the next veggie in the array
     VEGGIES_COUNTER += 1;
@@ -235,8 +242,17 @@ module.exports = class Play extends Phaser.State {
       console.log('[setupNextVeggie]', VEGGIES_COUNTER, randomVeggies.length);
       this.setupVeggie(randomVeggies[VEGGIES_COUNTER]);
     } else {
+      this.gameEnded = true;
+
+      const TIME_PLAYED = new Date() - TIME_START;
+      console.log('[init] TIME_PLAYED ENDED', TIME_PLAYED);
+      const TOTAL_TIME = new Date(TIME_PLAYED);
+      const minutes = TOTAL_TIME.getMinutes();
+      const seconds = TOTAL_TIME.getSeconds();
+      const TIME_FORMAT = `0${minutes}:${seconds}`;
+      localStorage.setItem('timePlayed', TIME_FORMAT);
+
       this.state.start('End');
-      console.log('[setupNextVeggie]', 'END GAME');
     }
   }
 
@@ -245,16 +261,18 @@ module.exports = class Play extends Phaser.State {
   }
 
   shutdown() {
-    console.log('[shutdown] playstate shuts down');
-    const TIME_PLAYED = new Date() - TIME_START;
-    const TOTAL_TIME = new Date(TIME_PLAYED);
-    const minutes = TOTAL_TIME.getMinutes();
-    const seconds = TOTAL_TIME.getSeconds();
+    COUNTER = 1;
+    VEGGIES_COUNTER = 0;
 
-    // minutes = Math.floor(TIME_PLAYED / 60);
-    // seconds = TIME_PLAYED % 60;
-    const TIME_FORMAT = `0${minutes}:${seconds}`;
-    localStorage.setItem('timePlayed', TIME_FORMAT);
-    console.log('[shutdown]', TIME_FORMAT);
+    randomVeggies = [];
+    VEGGIE_BEING_CUT = '';
+    VEGGIE_NAME = '';
+    VEGGIE_XPOS = '';
+    VEGGIE_YPOS = '';
+    VEGGIE_SCALE = '';
+
+    BLUR_COUNTER = 0;
+
+    TIME_START = '';
   }
 };
