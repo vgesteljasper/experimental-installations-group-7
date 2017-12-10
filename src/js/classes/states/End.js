@@ -39,7 +39,7 @@ module.exports = class End extends Phaser.State {
   }
 
   createButton() {
-    const buttonPlay = new Button(this.game, this.world.centerX, this.world.height - 150, this.buttonPlayClicked, this, 'button', 'Start');
+    const buttonPlay = new Button(this.game, this.world.centerX, this.world.height - 150, this.buttonPlayClicked, this, 'button', 'Naar het begin');
     buttonPlay.anchor.setTo(0.5, 0.5);
     this.add.existing(buttonPlay);
   }

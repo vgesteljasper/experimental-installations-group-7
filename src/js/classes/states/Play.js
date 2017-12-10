@@ -24,7 +24,6 @@ module.exports = class Play extends Phaser.State {
     console.log('[Play] — Create()');
     this.createaBackground();
 
-    // shuffle array
     this.createRandomOrder();
 
     // indicator of what to chop and what already chopped

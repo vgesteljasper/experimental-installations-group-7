@@ -62,4 +62,8 @@ module.exports = class OnboardingEnd extends Phaser.State {
 
     if (COUNTDOWN <= 0) this.state.start('Play');
   }
+
+  shutdown() {
+    COUNTDOWN = 4;
+  }
 };
