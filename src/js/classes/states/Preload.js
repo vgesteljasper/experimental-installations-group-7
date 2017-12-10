@@ -19,6 +19,7 @@ module.exports = class Preload extends Phaser.State {
     this.load.image('ok', 'assets/img/ok.png');
     this.load.image('thumbsUp', 'assets/img/thumbs-up.png');
     this.load.image('medal', 'assets/img/medal.png');
+    this.load.image('rotten-eggplant', 'assets/img/rotten-eggplant.png');
 
     this.load.image('choppedTopCucumber', 'assets/img/cucumber-chopped-top.png');
     this.load.image('choppedBottomCucumber', 'assets/img/cucumber-chopped-bottom.png');
@@ -42,6 +43,6 @@ module.exports = class Preload extends Phaser.State {
     this.load.script('BlurY', 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/BlurY.js');
   }
   create() {
-    this.state.start('Menu');
+    this.state.start('Play');
   }
 };
