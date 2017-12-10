@@ -22,6 +22,7 @@ module.exports = class Play extends Phaser.State {
   }
   create() {
     console.log('[Play] — Create()');
+    this.loadSounds();
     this.createaBackground();
 
     this.createRandomOrder();
@@ -32,6 +33,9 @@ module.exports = class Play extends Phaser.State {
     // visaualisation of the timer
     // this.createTimer();
     this.createButton();
+  }
+  loadSounds() {
+    this.chop = this.game.add.audio('chop');
   }
   createaBackground() {
     console.log('[Play] — createLogo()');
@@ -195,6 +199,8 @@ module.exports = class Play extends Phaser.State {
     if (this.gameEnded) {
       return;
     }
+
+    this.chop.play();
 
     // LENGTH OF THE TOTAL AMOUNT OF FRAMES
     TOTAL_CHOP_COUNT = this.currentVeggie.animations.frameTotal;

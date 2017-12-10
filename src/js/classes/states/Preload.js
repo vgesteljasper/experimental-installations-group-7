@@ -35,11 +35,13 @@ module.exports = class Preload extends Phaser.State {
     this.load.atlasJSONHash('paprika-cutting-animation', 'assets/img/components/paprika-cutting-animation-min-01.png', 'assets/img/components/paprika-cutting-animation.json');
     this.load.atlasJSONHash('plate-animation', 'assets/img/components/plate-animation.png', 'assets/img/components/plate-animation.json');
 
+    this.load.audio('chop', 'assets/sound/chop.mp3');
+
     // blur script
     this.load.script('BlurX', 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/BlurX.js');
     this.load.script('BlurY', 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/BlurY.js');
   }
   create() {
-    this.state.start('End');
+    this.state.start('Menu');
   }
 };

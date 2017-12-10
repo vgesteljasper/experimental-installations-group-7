@@ -9,10 +9,14 @@ module.exports = class Instructions extends Phaser.State {
   }
   create() {
     console.log('[Instructions] — Create()');
+    this.loadSounds();
     this.createaBackground();
     this.setupVegetableToChop('cucumber', COUNTER, COUNTER + 1);
     this.createChoppingAnimation();
     this.createButton();
+  }
+  loadSounds() {
+    this.chop = this.game.add.audio('chop');
   }
   createaBackground() {
     console.log('[Instructions] — createLogo()');
@@ -46,6 +50,8 @@ module.exports = class Instructions extends Phaser.State {
       this.state.start('OnboardingEnd');
       COUNTER = TOTALCHOPCOUNT;
     }
+
+    this.chop.play();
 
 
     this.cucumberChop.animations.play('chop', 10, false);
