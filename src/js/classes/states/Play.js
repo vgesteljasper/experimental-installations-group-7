@@ -11,6 +11,8 @@ let VEGGIEXPOS = '';
 let VEGGIEYPOS = '';
 let VEGGIESCALE = '';
 
+let BLURCOUNTER = 0;
+
 module.exports = class Play extends Phaser.State {
   create() {
     console.log('[Play] — Create()');
@@ -66,7 +68,7 @@ module.exports = class Play extends Phaser.State {
     if (veggie === 'eggplant') {
       VEGGIENAME = 'eggplant';
       VEGGIEXPOS = this.world.centerX + 50;
-      VEGGIEYPOS = this.world.height - 350;
+      VEGGIEYPOS = this.world.height - 300;
       VEGGIESCALE = 0.25;
       this.setupVegetableToChop(VEGGIENAME, VEGGIEXPOS, VEGGIEYPOS, VEGGIESCALE, 1, 2);
     } else if (veggie === 'carrot') {
@@ -84,13 +86,13 @@ module.exports = class Play extends Phaser.State {
     } else if (veggie === 'cucumber') {
       VEGGIENAME = 'cucumber';
       VEGGIEXPOS = this.world.centerX;
-      VEGGIEYPOS = this.world.centerY + 300;
+      VEGGIEYPOS = this.world.height - 300;
       VEGGIESCALE = 0.3;
       this.setupVegetableToChop(VEGGIENAME, VEGGIEXPOS, VEGGIEYPOS, VEGGIESCALE, 1, 2);
     } else if (veggie === 'paprika') {
       VEGGIENAME = 'paprika';
       VEGGIEXPOS = this.world.centerX + 180;
-      VEGGIEYPOS = this.world.height - 300;
+      VEGGIEYPOS = this.world.height - 380;
       VEGGIESCALE = 0.3;
       this.setupVegetableToChop(VEGGIENAME, VEGGIEXPOS, VEGGIEYPOS, VEGGIESCALE, 1, 2);
     } else if (veggie === 'tomato') {
@@ -102,6 +104,7 @@ module.exports = class Play extends Phaser.State {
     }
   }
 
+  // veggies indicators
   createVeggiesToChop() {
     // rounded background for the indicators
     this.VegetableIndicatorBackground = this.game.add.graphics(0, 0);
@@ -142,14 +145,18 @@ module.exports = class Play extends Phaser.State {
     this.timerBackground.drawRoundedRect(120, 218, 530, 248, 5);
   }
 
-  createBlur() {
+  setupBlur() {
     const blurX = this.game.add.filter('BlurX');
     const blurY = this.game.add.filter('BlurY');
-
-    blurX.blur = 10;
-    blurY.blur = 10;
-
+    console.log('[setupBlur]', BLURCOUNTER);
+    blurX.blur = BLURCOUNTER * 6.5;
+    blurY.blur = BLURCOUNTER * 6.5;
     this.background.filters = [blurX, blurY];
+    this.currentVeggie.filters = [blurX, blurY];
+
+    if (VEGGIENAME !== 'onion') {
+      this.background.filters = [0, 0];
+    }
   }
 
   setupVegetableToChop(name, posX, posY, scale, frameStart, frameStartFrame) {
@@ -159,10 +166,15 @@ module.exports = class Play extends Phaser.State {
     this.currentVeggie.animations.add('chop', Phaser.Animation.generateFrameNames(`${name}/chop/`, `${frameStart}`, `${frameStartFrame}`, '', 4), 10, true, false);
     this.currentVeggie.scale.setTo(scale, scale);
 
-    // if (veggie === 'onion') {
-    //   console.log('[PlayChopAnimation]', 'yes, ONION');
-    // }
-    // console.log('[PlayChopAnimation]', this.currentVeggie.animations);
+    if (name === 'onion') {
+      this.setupBlur();
+    } else {
+      const blurX = this.game.add.filter('BlurX');
+      const blurY = this.game.add.filter('BlurY');
+      blurX.blur = 0;
+      blurY.blur = 0;
+      this.background.filters = [blurX, blurY];
+    }
   }
 
   createButton() {
@@ -195,6 +207,11 @@ module.exports = class Play extends Phaser.State {
       } else {
         this.setupNextVeggie();
         COUNTER = 1;
+      }
+
+      // increase blur
+      if (VEGGIENAME === 'onion') {
+        BLURCOUNTER += 1;
       }
     }, this);
   }
