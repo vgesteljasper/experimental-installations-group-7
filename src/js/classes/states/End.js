@@ -2,73 +2,50 @@ const Button = require('../objects/Button');
 
 module.exports = class End extends Phaser.State {
   create() {
-    console.log('[Instructions] — create()');
+    console.log('[Menu] — create()');
     this.createaBackground();
-    this.createChef();
-    this.createInstructions();
-    this.createWebcam();
+    this.createFeedback();
     this.createButton();
   }
 
   createaBackground() {
-    console.log('[Menu] — createLogo()');
-    this.background = this.add.image(0, 0, 'background');
+    console.log('[Menu] — createaBackground()');
+    this.game.stage.backgroundColor = '#FF780F';
   }
 
-  createChef() {
-    this.chef = this.add.image(20, 105, 'chef');
+  createFeedback() {
+    this.medal = this.add.image(this.world.centerX, -420, 'medal');
+    this.medal.anchor.setTo(0.5, 0.5);
+    this.medal.scale.setTo(0.7, 0.7);
+    this.game.add.tween(this.medal)
+      .to({ y: 350 }, 400, Phaser.Easing.Cubic.EaseIn, true);
 
-    // create smileyface
-    this.smile = this.add.graphics(0, 0);
+    this.pageTitleShadow = this.add.text(this.world.centerX - 245, 85, 'Proficiat!', { font: '120px circular-medium', fill: '#fff' });
+    this.pageTitleShadow.tint = 0x000000;
+    this.pageTitleShadow.alpha = 0.6;
 
-    this.smile.lineStyle(4, 0x8c6846, 1);
-    // happy
-    this.smile.arc(320, 640, 35, this.game.math.degToRad(0), this.game.math.degToRad(180), false);
-
-    // sad
-    // this.smile.arc(320, 660, 35, this.game.math.degToRad(0), this.game.math.degToRad(180), true);
-
-    console.log('[createChef()]', this.smile);
-  }
-
-  createInstructions() {
-    // page title
-    this.pageTitle = this.add.text(this.world.centerX + 238, 120, 'Hoera!', { font: '90px circular-medium', fill: '#fff' });
+    this.pageTitle = this.add.text(this.world.centerX, 150, 'Proficiat!', { font: '120px circular-medium', fill: '#fff' });
     this.pageTitle.anchor.setTo(0.5, 0.5);
 
-    // text-bg
-    this.textBackground = this.game.add.graphics(0, 0);
-    this.textBackground.beginFill(0xffffff, 1);
-    this.textBackground.drawRoundedRect(550, 230, 1300, 280, 5);
-    this.textBackground.anchor.setTo(0.5, 0.5);
+    const timePlayed = localStorage.getItem('timePlayed');
 
-    this.instructionText = this.add.text(
-      this.world.centerX + 200, 380,
-      `
-      Je behaalde 105 punten. Neem een foto van jezelf
-      voor op het scorebord.
-      `,
-      { font: '50px circular', fill: '#ff780f' },
-    );
-    this.instructionText.lineSpacing = 15;
-    this.instructionText.anchor.setTo(0.5, 0.5);
-  }
+    const SCORE = timePlayed;
 
-  createWebcam() {
-    this.webcam = this.game.add.graphics(0, 0);
-    this.webcam.beginFill(0xffaa71, 1);
-    this.webcam.lineStyle(5, 0xFFFFFF, 1);
-    this.webcam.drawRoundedRect(870, 550, 650, 300, 5);
+    this.score = this.add.text(this.world.centerX, this.world.centerY + 25, `${SCORE}`, { font: '160px circular-medium', fill: '#fff' });
+    this.score.anchor.setTo(0.5, 0.5);
+    this.score.alpha = 0;
+    this.game.add.tween(this.score)
+      .to({ alpha: 1 }, 400, Phaser.Easing.Cubic.EaseIn, true, 400);
   }
 
   createButton() {
-    const buttonPlay = new Button(this.game, this.world.centerX + 244, this.world.height - 150, this.buttonPlayClicked, this, 'button', 'Say Cheese');
+    const buttonPlay = new Button(this.game, this.world.centerX, this.world.height - 150, this.buttonPlayClicked, this, 'button', 'Start');
     buttonPlay.anchor.setTo(0.5, 0.5);
     this.add.existing(buttonPlay);
   }
 
   buttonPlayClicked() {
-    console.log('[Instructions] — handleStart()');
-    this.state.start('Play');
+    console.log('[OnboardingEnd] — handleStart()');
+    this.state.start('Menu');
   }
 };

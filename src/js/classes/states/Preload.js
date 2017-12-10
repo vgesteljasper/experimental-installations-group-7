@@ -18,12 +18,11 @@ module.exports = class Preload extends Phaser.State {
     this.load.image('cucumber', 'assets/img/cucumber.png');
     this.load.image('ok', 'assets/img/ok.png');
     this.load.image('thumbsUp', 'assets/img/thumbs-up.png');
+    this.load.image('medal', 'assets/img/medal.png');
 
     this.load.image('choppedTopCucumber', 'assets/img/cucumber-chopped-top.png');
     this.load.image('choppedBottomCucumber', 'assets/img/cucumber-chopped-bottom.png');
-
     this.load.image('carrot', 'assets/img/carrot.png');
-
     this.load.image('tomato', 'assets/img/tomato.png');
 
     this.load.atlasJSONHash('button-comp', 'assets/img/components/button-comp.png', 'assets/img/components/button-comp.json');
@@ -41,6 +40,6 @@ module.exports = class Preload extends Phaser.State {
     this.load.script('BlurY', 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/BlurY.js');
   }
   create() {
-    this.state.start('End');
+    this.state.start('Play');
   }
 };
