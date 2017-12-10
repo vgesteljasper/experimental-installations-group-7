@@ -1,10 +1,15 @@
 const Button = require('../objects/Button');
 
 let TOTALCHOPCOUNT;
-// const COUNTER = 1;
-const VEGGIESCOUNTER = 0;
+let COUNTER = 1;
+let VEGGIESCOUNTER = 0;
 
 let randomVeggies = [];
+let VEGGIEBEINGCUT = '';
+let VEGGIENAME = '';
+let VEGGIEXPOS = '';
+let VEGGIEYPOS = '';
+let VEGGIESCALE = '';
 
 module.exports = class Play extends Phaser.State {
   create() {
@@ -51,47 +56,49 @@ module.exports = class Play extends Phaser.State {
   createRandomOrder() {
     const veggies = ['eggplant', 'carrot', 'onion', 'cucumber', 'paprika', 'tomato'];
     randomVeggies = this.shuffle(veggies);
-    this.setupVeggie(randomVeggies[VEGGIESCOUNTER]);
+    VEGGIEBEINGCUT = randomVeggies[VEGGIESCOUNTER];
+    console.log('[createRandomOrder]', randomVeggies);
+    this.setupVeggie(VEGGIEBEINGCUT);
   }
 
   setupVeggie(veggie) {
     console.log('[setupVeggie]', veggie);
     if (veggie === 'eggplant') {
-      this.eggplantAnimation = this.add.sprite(this.world.centerX + 50, this.world.height - 350, 'eggplant-cutting-animation', 'eggplant/chop/0001');
-      this.eggplantAnimation.anchor.setTo(0.5, 0.5);
-      this.eggplantAnimation.scale.setTo(0.25, 0.25);
-      this.eggplantAnimation.animations.add('chop', Phaser.Animation.generateFrameNames('eggplant/chop/', 1, 5, '', 4), 5, true, false);
-      this.eggplantAnimation.animations.play('chop', 10, true);
+      VEGGIENAME = 'eggplant';
+      VEGGIEXPOS = this.world.centerX + 50;
+      VEGGIEYPOS = this.world.height - 350;
+      VEGGIESCALE = 0.25;
+      this.setupVegetableToChop(VEGGIENAME, VEGGIEXPOS, VEGGIEYPOS, VEGGIESCALE, 1, 2);
     } else if (veggie === 'carrot') {
-      this.carrotAnimation = this.add.sprite(this.world.centerX + 50, this.world.height - 300, 'carrot-cutting-animation', 'carrot/chop/0001');
-      this.carrotAnimation.anchor.setTo(0.5, 0.5);
-      this.carrotAnimation.scale.setTo(0.25, 0.25);
-      this.carrotAnimation.animations.add('chop', Phaser.Animation.generateFrameNames('carrot/chop/', 1, 9, '', 4), 5, true, false);
-      this.carrotAnimation.animations.play('chop', 10, true);
+      VEGGIENAME = 'carrot';
+      VEGGIEXPOS = this.world.centerX + 50;
+      VEGGIEYPOS = this.world.height - 300;
+      VEGGIESCALE = 0.25;
+      this.setupVegetableToChop(VEGGIENAME, VEGGIEXPOS, VEGGIEYPOS, VEGGIESCALE, 1, 2);
     } else if (veggie === 'onion') {
-      this.onionAnimation = this.add.sprite(this.world.centerX, this.world.height - 400, 'onion-cutting-animation', 'onion/chop/0001');
-      this.onionAnimation.anchor.setTo(0.5, 0.5);
-      this.onionAnimation.scale.setTo(0.2, 0.2);
-      this.onionAnimation.animations.add('chop', Phaser.Animation.generateFrameNames('onion/chop/', 1, 5, '', 4), 5, true, false);
-      this.onionAnimation.animations.play('chop', 10, true);
+      VEGGIENAME = 'onion';
+      VEGGIEXPOS = this.world.centerX;
+      VEGGIEYPOS = this.world.height - 400;
+      VEGGIESCALE = 0.2;
+      this.setupVegetableToChop(VEGGIENAME, VEGGIEXPOS, VEGGIEYPOS, VEGGIESCALE, 1, 2);
     } else if (veggie === 'cucumber') {
-      this.cucumberAnimation = this.add.sprite(this.world.centerX, this.world.centerY + 300, 'cucumber-cutting-animation', 'cucumber/chop/0001');
-      this.cucumberAnimation.anchor.setTo(0.5, 0.5);
-      this.cucumberAnimation.animations.add('chop', Phaser.Animation.generateFrameNames('cucumber/chop/', '1', '5', '', 4), 10, true, false);
-      this.cucumberAnimation.scale.setTo(0.3, 0.3);
-      this.cucumberAnimation.animations.play('chop', 10, true);
+      VEGGIENAME = 'cucumber';
+      VEGGIEXPOS = this.world.centerX;
+      VEGGIEYPOS = this.world.centerY + 300;
+      VEGGIESCALE = 0.3;
+      this.setupVegetableToChop(VEGGIENAME, VEGGIEXPOS, VEGGIEYPOS, VEGGIESCALE, 1, 2);
     } else if (veggie === 'paprika') {
-      this.paprikaAnimation = this.add.sprite(this.world.centerX + 180, this.world.height - 380, 'paprika-cutting-animation', 'paprika/chop/0001');
-      this.paprikaAnimation.anchor.setTo(0.5, 0.5);
-      this.paprikaAnimation.scale.setTo(0.3, 0.3);
-      this.paprikaAnimation.animations.add('chop', Phaser.Animation.generateFrameNames('paprika/chop/', 1, 6, '', 4), 5, true, false);
-      this.paprikaAnimation.animations.play('chop', 10, true);
+      VEGGIENAME = 'paprika';
+      VEGGIEXPOS = this.world.centerX + 180;
+      VEGGIEYPOS = this.world.height - 300;
+      VEGGIESCALE = 0.3;
+      this.setupVegetableToChop(VEGGIENAME, VEGGIEXPOS, VEGGIEYPOS, VEGGIESCALE, 1, 2);
     } else if (veggie === 'tomato') {
-      this.tomatoAnimation = this.add.sprite(this.world.centerX, this.world.height - 380, 'tomato-cutting-animation', 'tomato/chop/0001');
-      this.tomatoAnimation.anchor.setTo(0.5, 0.5);
-      this.tomatoAnimation.scale.setTo(0.2, 0.2);
-      this.tomatoAnimation.animations.add('chop', Phaser.Animation.generateFrameNames('tomato/chop/', 1, 6, '', 4), 5, true, false);
-      this.tomatoAnimation.animations.play('chop', 10, true);
+      VEGGIENAME = 'tomato';
+      VEGGIEXPOS = this.world.centerX;
+      VEGGIEYPOS = this.world.height - 380;
+      VEGGIESCALE = 0.2;
+      this.setupVegetableToChop(VEGGIENAME, VEGGIEXPOS, VEGGIEYPOS, VEGGIESCALE, 1, 2);
     }
   }
 
@@ -145,20 +152,12 @@ module.exports = class Play extends Phaser.State {
     this.background.filters = [blurX, blurY];
   }
 
-  setupVegetables() {
-    this.paprikaAnimation = this.add.sprite(this.world.centerX + 180, this.world.height - 380, 'paprika-cutting-animation', 'paprika/chop/0001');
-    this.paprikaAnimation.anchor.setTo(0.5, 0.5);
-    this.paprikaAnimation.scale.setTo(0.3, 0.3);
-    this.paprikaAnimation.animations.add('chop', Phaser.Animation.generateFrameNames('paprika/chop/', 1, 6, '', 4), 5, true, false);
-    this.paprikaAnimation.animations.play('chop', 10, true);
-  }
-
-  setupVegetableToChop(veggie, frameStart, frameStartFrame) {
-    console.log('[setupVegetableToChop]', veggie, frameStart, frameStartFrame);
-    this.currentVeggie = this.add.sprite(this.world.centerX, this.world.height - 400, `${veggie}-cutting-animation`, `${veggie}/chop/000${frameStart}`);
+  setupVegetableToChop(name, posX, posY, scale, frameStart, frameStartFrame) {
+    console.log('[setupVegetableToChop]', name, posX, posY, scale, frameStart, frameStartFrame);
+    this.currentVeggie = this.add.sprite(posX, posY, `${name}-cutting-animation`, `${name}/chop/000${frameStart}`);
     this.currentVeggie.anchor.setTo(0.5, 0.5);
-    this.currentVeggie.animations.add('chop', Phaser.Animation.generateFrameNames(`${veggie}/chop/`, `${frameStart}`, `${frameStartFrame}`, '', 4), 10, true, false);
-    this.currentVeggie.scale.setTo(0.2, 0.2);
+    this.currentVeggie.animations.add('chop', Phaser.Animation.generateFrameNames(`${name}/chop/`, `${frameStart}`, `${frameStartFrame}`, '', 4), 10, true, false);
+    this.currentVeggie.scale.setTo(scale, scale);
 
     // if (veggie === 'onion') {
     //   console.log('[PlayChopAnimation]', 'yes, ONION');
@@ -172,10 +171,50 @@ module.exports = class Play extends Phaser.State {
     this.add.existing(buttonPlay);
   }
 
+  PlayChopAnimation() {
+    // console.log('[PlayChopAnimation]', this.currentVeggie.animations);
+
+    // LENGTH OF THE TOTAL AMOUNT OF FRAMES
+    TOTALCHOPCOUNT = this.currentVeggie.animations.frameTotal;
+    // console.log('[PlayChopAnimation]', TOTALCHOPCOUNT);
+
+    COUNTER += 1;
+
+    this.currentVeggie.animations.play('chop', 10, false);
+    this.currentVeggie.events.onAnimationComplete.add((e) => {
+      e.kill();
+      if (COUNTER <= TOTALCHOPCOUNT) {
+        this.setupVegetableToChop(
+          VEGGIENAME,
+          VEGGIEXPOS,
+          VEGGIEYPOS,
+          VEGGIESCALE,
+          COUNTER,
+          COUNTER + 1,
+        );
+      } else {
+        this.setupNextVeggie();
+        COUNTER = 1;
+      }
+    }, this);
+  }
+
   setupNextVeggie() {
     console.log('[Play] — setupNextVeggie()');
     // global counter die elke keer 1tje omhoog gaat bij next veggie,
     // -> als  global counter === arr.length dan is spel gedaan
+
+    // Add counter to get the next veggie in the array
+    VEGGIESCOUNTER += 1;
+    console.log('[setupNextVeggie]', randomVeggies[VEGGIESCOUNTER]);
+
+    if (VEGGIESCOUNTER < randomVeggies.length) {
+      console.log('[setupNextVeggie]', VEGGIESCOUNTER, randomVeggies.length);
+      this.setupVeggie(randomVeggies[VEGGIESCOUNTER]);
+    } else {
+      this.state.start('End');
+      console.log('[setupNextVeggie]', 'END GAME');
+    }
   }
 
   update() {
