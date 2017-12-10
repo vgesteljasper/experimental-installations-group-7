@@ -11,6 +11,7 @@ module.exports = class Instructions extends Phaser.State {
     console.log('[Instructions] — Create()');
     this.loadSounds();
     this.createaBackground();
+    this.createInstructions();
     this.setupVegetableToChop('cucumber', COUNTER, COUNTER + 1);
     this.createChoppingAnimation();
     this.createButton();
@@ -22,7 +23,15 @@ module.exports = class Instructions extends Phaser.State {
     console.log('[Instructions] — createLogo()');
     this.background = this.add.image(0, 0, 'kitchenBackground');
   }
-
+  createInstructions() {
+    this.subTitle = this.add.text(
+      this.world.centerX, 300,
+      `Sla op de plank om
+      de groente in stukken te slaan`,
+      { font: '50px circular-medium', fill: '#000', align: 'center' },
+    );
+    this.subTitle.anchor.setTo(0.5, 0.5);
+  }
   setupVegetableToChop(veggie, frameStart, frameStartFrame) {
     console.log('[setupVegetableToChop]', veggie, frameStart, frameStartFrame);
     this.cucumberChop = this.add.sprite(this.world.centerX, this.world.centerY + 300, `${veggie}-cutting-animation`, `${veggie}/chop/000${frameStart}`);
@@ -36,6 +45,12 @@ module.exports = class Instructions extends Phaser.State {
     const buttonPlay = new Button(this.game, this.world.centerX, this.world.height - 150, this.PlayChopAnimation, this, 'button', 'Hit');
     buttonPlay.anchor.setTo(0.5, 0.5);
     this.add.existing(buttonPlay);
+  }
+
+  createChoppingAnimation() {
+    this.knife = this.add.sprite(this.world.centerX + 200, this.world.centerY + 90, 'cutting-animation', 'knife/chop/0001');
+    this.knife.anchor.setTo(0.5, 0.5);
+    this.knife.animations.add('chop', Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4), 5, true, true);
   }
 
   PlayChopAnimation() {
@@ -65,12 +80,6 @@ module.exports = class Instructions extends Phaser.State {
       e.kill();
       this.createChoppingAnimation();
     }, this);
-  }
-
-  createChoppingAnimation() {
-    this.knife = this.add.sprite(this.world.centerX + 200, this.world.centerY + 90, 'cutting-animation', 'knife/chop/0001');
-    this.knife.anchor.setTo(0.5, 0.5);
-    this.knife.animations.add('chop', Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4), 5, true, true);
   }
 
   shutdown() {
