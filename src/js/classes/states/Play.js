@@ -181,6 +181,8 @@ module.exports = class Play extends Phaser.State {
       return;
     }
 
+    // extra check: is er al een currentVeggie?
+
     this.currentVeggie = this.add.sprite(posX, posY, `${name}-cutting-animation`, `${name}/chop/000${frameStart}`);
     this.currentVeggie.anchor.setTo(0.5, 0.5);
     this.currentVeggie.animations.add('chop', Phaser.Animation.generateFrameNames(`${name}/chop/`, `${frameStart}`, `${frameStartFrame}`, '', 4), 10, true, false);
@@ -230,6 +232,7 @@ module.exports = class Play extends Phaser.State {
     this.currentVeggie.animations.play('chop', 10, false);
     this.currentVeggie.events.onAnimationComplete.add((e) => {
       e.kill();
+      // currentVeggie instellen op false
       if (COUNTER <= TOTAL_CHOP_COUNT) {
         this.setupVegetableToChop(
           VEGGIE_NAME,
