@@ -6,7 +6,6 @@ module.exports = class Nearby extends Phaser.State {
     this.createaBackground();
     this.createLogo();
     this.createButton();
-    this.createInstruction();
   }
 
   createaBackground() {
@@ -74,17 +73,6 @@ module.exports = class Nearby extends Phaser.State {
     // ADD WHEN HAVING ARDUINO
     // this.game.add.tween(buttonPlay)
     //   .to({ y: this.world.height + 150 }, 200, Phaser.Easing.Cubic.EaseOut, true);
-  }
-
-  createInstruction() {
-    this.instruction = this.add.text(this.world.centerX, this.world.height + 150, 'Sla op de plaat om te beginnen', {
-      font: '50px circular',
-      fill: '#fff',
-    });
-    this.instruction.anchor.setTo(0.5, 0.5);
-
-    this.game.add.tween(this.instruction)
-      .to({ y: this.world.height - 150 }, 400, Phaser.Easing.Cubic.EaseIn, true);
   }
 
   buttonPlayClicked() {

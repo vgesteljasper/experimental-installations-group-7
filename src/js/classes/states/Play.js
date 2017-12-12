@@ -182,11 +182,17 @@ module.exports = class Play extends Phaser.State {
     }
 
     // extra check: is er al een currentVeggie?
+    if (name !== 'rotten-eggplant') {
+      this.currentVeggie = this.add.sprite(posX, posY, `${name}-cutting-animation`, `${name}/chop/000${frameStart}`);
+      this.currentVeggie.anchor.setTo(0.5, 0.5);
+      this.currentVeggie.animations.add('chop', Phaser.Animation.generateFrameNames(`${name}/chop/`, `${frameStart}`, `${frameStartFrame}`, '', 4), 10, true, false);
+      this.currentVeggie.scale.setTo(scale, scale);
+    } else {
+      this.rottenEggplant = this.add.sprite(posX, posY, name);
+      this.rottenEggplant.anchor.setTo(0.5, 0.5);
+      this.rottenEggplant.scale.setTo(scale, scale);
+    }
 
-    this.currentVeggie = this.add.sprite(posX, posY, `${name}-cutting-animation`, `${name}/chop/000${frameStart}`);
-    this.currentVeggie.anchor.setTo(0.5, 0.5);
-    this.currentVeggie.animations.add('chop', Phaser.Animation.generateFrameNames(`${name}/chop/`, `${frameStart}`, `${frameStartFrame}`, '', 4), 10, true, false);
-    this.currentVeggie.scale.setTo(scale, scale);
 
     if (name === 'onion') {
       this.setupBlur();
@@ -210,6 +216,7 @@ module.exports = class Play extends Phaser.State {
     // onanimationend, next veggie
     this.eggplantAnimation.events.onAnimationComplete.add((item) => {
       item.kill();
+      this.rottenEggplant.kill();
       this.setupNextVeggie();
     }, this);
   }

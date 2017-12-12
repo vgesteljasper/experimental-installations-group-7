@@ -6,6 +6,7 @@ module.exports = class Menu extends Phaser.State {
     this.createaBackground();
     this.createLogo();
     this.createButton();
+    this.createInstructions();
   }
 
   createaBackground() {
@@ -53,6 +54,20 @@ module.exports = class Menu extends Phaser.State {
     const buttonPlay = new Button(this.game, this.world.centerX, this.world.height - 150, this.buttonPlayClicked, this, 'button', 'Start');
     buttonPlay.anchor.setTo(0.5, 0.5);
     this.add.existing(buttonPlay);
+  }
+
+  createInstructions() {
+    this.instruction = this.add.text(this.world.centerX, this.world.height - 150, 'Sta op de plaat om te beginnen', {
+      font: '50px circular',
+      fill: '#fff',
+    });
+    this.instruction.anchor.setTo(0.5, 0.5);
+
+
+    // => yPOS of this.instruction ~> this.world.height + 150
+    // ADD WHEN HAVING ARDUINO
+    // this.game.add.tween(this.instruction)
+    //   .to({ y: this.world.height - 150 }, 400, Phaser.Easing.Cubic.EaseIn, true);
   }
 
   buttonPlayClicked() {
