@@ -43,6 +43,6 @@ module.exports = class Preload extends Phaser.State {
     this.load.script('BlurY', 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/BlurY.js');
   }
   create() {
-    this.state.start('Menu');
+    this.state.start('Play');
   }
 };

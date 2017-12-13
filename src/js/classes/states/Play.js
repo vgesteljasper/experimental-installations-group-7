@@ -194,17 +194,18 @@ module.exports = class Play extends Phaser.State {
     }
 
 
-    if (name === 'onion') {
-      this.setupBlur();
-    } else {
-      this.removeBlur();
-    }
+    // if (name === 'onion') {
+    //   this.setupBlur();
+    // } else {
+    //   this.removeBlur();
+    // }
   }
 
   createButton() {
-    const buttonPlay = new Button(this.game, this.world.centerX, this.world.height - 150, this.playChopAnimation, this, 'button', 'Hit');
-    buttonPlay.anchor.setTo(0.5, 0.5);
-    this.add.existing(buttonPlay);
+    console.log('[createButton()]', 'load please');
+    this.buttonPlay = new Button(this.game, this.world.centerX, this.world.height - 150, this.playChopAnimation, this, 'button', 'Hit');
+    this.buttonPlay.anchor.setTo(0.5, 0.5);
+    this.add.existing(this.buttonPlay);
   }
 
   playSplashAnimation() {
@@ -222,6 +223,7 @@ module.exports = class Play extends Phaser.State {
   }
 
   playChopAnimation() {
+    this.buttonPlay.kill();
     if (this.gameEnded) {
       return;
     }
@@ -234,12 +236,9 @@ module.exports = class Play extends Phaser.State {
     // LENGTH OF THE TOTAL AMOUNT OF FRAMES
     TOTAL_CHOP_COUNT = this.currentVeggie.animations.frameTotal;
 
-    COUNTER += 1;
-
     this.currentVeggie.animations.play('chop', 10, false);
     this.currentVeggie.events.onAnimationComplete.add((e) => {
       e.kill();
-      // currentVeggie instellen op false
       if (COUNTER <= TOTAL_CHOP_COUNT) {
         this.setupVegetableToChop(
           VEGGIE_NAME,
@@ -258,11 +257,18 @@ module.exports = class Play extends Phaser.State {
       if (VEGGIE_NAME === 'onion') {
         BLUR_COUNTER += 1;
       } else if (VEGGIE_NAME === 'rotten-eggplant') {
-        console.log('[playChopAnimation]', 'PLAY ANIMATION');
+        console.log('[playChopAnimation]', 'rotten-eggplant');
+        // only play splashAnimation when hitting veggie
         this.playSplashAnimation();
         COUNTER = 1;
       }
+
+      if (!e.animations.currentAnim.isPlaying) {
+        this.createButton();
+      }
     }, this);
+
+    COUNTER += 1;
   }
 
   setupNextVeggie() {
