@@ -2,47 +2,47 @@
   "frames": {
     "cucumber/chop/0001":
     {
-    	"frame": {"x":0,"y":0,"w":3444,"h":961},
+    	"frame": {"x":0,"y":0,"w":1000,"h":279},
     	"rotated": false,
     	"trimmed": false,
       "knifePos": {"x":597},
-    	"spriteSourceSize": {"x":0,"y":0,"w":3444,"h":961},
-    	"sourceSize": {"w":3444,"h":961}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":279},
+    	"sourceSize": {"w":1000,"h":279}
     },
     "cucumber/chop/0002":
     {
-    	"frame": {"x":0,"y":960,"w":3444,"h":961},
+    	"frame": {"x":0,"y":279,"w":1000,"h":279},
     	"rotated": false,
     	"trimmed": false,
       "knifePos": {"x":1172},
-    	"spriteSourceSize": {"x":0,"y":0,"w":3444,"h":961},
-    	"sourceSize": {"w":3444,"h":961}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":279},
+    	"sourceSize": {"w":1000,"h":279}
     },
     "cucumber/chop/0003":
     {
-    	"frame": {"x":0,"y":1920,"w":3444,"h":961},
+    	"frame": {"x":0,"y":558,"w":1000,"h":279},
     	"rotated": false,
     	"trimmed": false,
       "knifePos": {"x":2154},
-    	"spriteSourceSize": {"x":0,"y":0,"w":3444,"h":961},
-    	"sourceSize": {"w":3444,"h":961}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":279},
+    	"sourceSize": {"w":1000,"h":279}
     },
     "cucumber/chop/0004":
     {
-    	"frame": {"x":0,"y":2875,"w":3444,"h":961},
+    	"frame": {"x":0,"y":834,"w":1000,"h":279},
     	"rotated": false,
     	"trimmed": false,
       "knifePos": {"x":2903},
-    	"spriteSourceSize": {"x":0,"y":0,"w":3444,"h":961},
-    	"sourceSize": {"w":3444,"h":961}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":279},
+    	"sourceSize": {"w":1000,"h":279}
     },
     "cucumber/chop/0005":
     {
-    	"frame": {"x":0,"y":3836,"w":3444,"h":961},
+    	"frame": {"x":0,"y":1114,"w":1000,"h":279},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":3444,"h":961},
-    	"sourceSize": {"w":3444,"h":961}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":279},
+    	"sourceSize": {"w":1000,"h":279}
     }
   },
   "meta": {
@@ -50,7 +50,7 @@
   	"version": "15.2.1.95",
   	"image": "cucumber-cutting-animation-min-01.png",
   	"format": "RGBA8888",
-  	"size": {"w":3444,"h":4799},
+  	"size": {"w":1000,"h":1393},
   	"scale": "1"
   }
 }

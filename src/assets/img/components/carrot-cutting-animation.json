@@ -2,75 +2,75 @@
   "frames": {
     "carrot/chop/0001":
     {
-    	"frame": {"x":0,"y":0,"w":4572,"h":1034},
+    	"frame": {"x":0,"y":0,"w":1000,"h":227},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":3444,"h":1034},
-    	"sourceSize": {"w":3444,"h":1034}
+    	"spriteSourceSize": {"x":0,"y":0,"w":3444,"h":227},
+    	"sourceSize": {"w":3444,"h":227}
     },
     "carrot/chop/0002":
     {
-    	"frame": {"x":0,"y":1034,"w":4572,"h":1034},
+    	"frame": {"x":0,"y":226,"w":1000,"h":227},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":4572,"h":1034},
-    	"sourceSize": {"w":4572,"h":1034}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":227},
+    	"sourceSize": {"w":1000,"h":227}
     },
     "carrot/chop/0003":
     {
-    	"frame": {"x":0,"y":2068,"w":4572,"h":1034},
+    	"frame": {"x":0,"y":452,"w":1000,"h":227},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":4572,"h":1034},
-    	"sourceSize": {"w":4572,"h":1034}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":227},
+    	"sourceSize": {"w":1000,"h":227}
     },
     "carrot/chop/0004":
     {
-    	"frame": {"x":0,"y":3102,"w":4572,"h":1034},
+    	"frame": {"x":0,"y":679,"w":1000,"h":227},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":4572,"h":1034},
-    	"sourceSize": {"w":4572,"h":1034}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":227},
+    	"sourceSize": {"w":1000,"h":227}
     },
     "carrot/chop/0005":
     {
-    	"frame": {"x":0,"y":4134 ,"w":4572,"h":1034},
+    	"frame": {"x":0,"y":904 ,"w":1000,"h":227},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":4572,"h":1034},
-    	"sourceSize": {"w":4572,"h":1034}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":227},
+    	"sourceSize": {"w":1000,"h":227}
     },
     "carrot/chop/0006":
     {
-    	"frame": {"x":0,"y":5167,"w":4572,"h":1034},
+    	"frame": {"x":0,"y":1130,"w":1000,"h":227},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":4572,"h":1034},
-    	"sourceSize": {"w":4572,"h":1034}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":227},
+    	"sourceSize": {"w":1000,"h":227}
     },
     "carrot/chop/0007":
     {
-    	"frame": {"x":0,"y":6199,"w":4572,"h":1034},
+    	"frame": {"x":0,"y":1356,"w":1000,"h":227},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":4572,"h":1034},
-    	"sourceSize": {"w":4572,"h":1034}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":227},
+    	"sourceSize": {"w":1000,"h":227}
     },
     "carrot/chop/0008":
     {
-    	"frame": {"x":0,"y":7233,"w":4572,"h":1034},
+    	"frame": {"x":0,"y":1582,"w":1000,"h":227},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":4572,"h":1034},
-    	"sourceSize": {"w":4572,"h":1034}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":227},
+    	"sourceSize": {"w":1000,"h":227}
     },
     "carrot/chop/0009":
     {
-    	"frame": {"x":0,"y":8267,"w":4572,"h":1034},
+    	"frame": {"x":0,"y":1809,"w":1000,"h":227},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":4572,"h":1034},
-    	"sourceSize": {"w":4572,"h":1034}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":227},
+    	"sourceSize": {"w":1000,"h":227}
     }
   },
   "meta": {
@@ -78,7 +78,7 @@
   	"version": "15.2.1.95",
   	"image": "carrot-cutting-animation-min.png",
   	"format": "RGBA8888",
-  	"size": {"w":4572,"h":9302},
+  	"size": {"w":1000,"h":2035},
   	"scale": "1"
   }
 }

@@ -2,43 +2,43 @@
   "frames": {
     "onion/chop/0001":
     {
-    	"frame": {"x":0,"y":0,"w":2141,"h":2966},
+    	"frame": {"x":0,"y":0,"w":1000,"h":1384},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":2141,"h":2966},
-    	"sourceSize": {"w":2141,"h":2966}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":1384},
+    	"sourceSize": {"w":1000,"h":1384}
     },
     "onion/chop/0002":
     {
-    	"frame": {"x":0,"y":2966,"w":2141,"h":2966},
+    	"frame": {"x":0,"y":2768,"w":1000,"h":1384},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":2141,"h":2966},
-    	"sourceSize": {"w":2141,"h":2966}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":1384},
+    	"sourceSize": {"w":1000,"h":1384}
     },
     "onion/chop/0003":
     {
-    	"frame": {"x":0,"y":5928,"w":2141,"h":2966},
+    	"frame": {"x":0,"y":4151,"w":1000,"h":1384},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":2141,"h":2966},
-    	"sourceSize": {"w":2141,"h":2966}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":1384},
+    	"sourceSize": {"w":1000,"h":1384}
     },
     "onion/chop/0004":
     {
-    	"frame": {"x":0,"y":8892,"w":2141,"h":2966},
+    	"frame": {"x":0,"y":5535,"w":1000,"h":1384},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":2141,"h":2966},
-    	"sourceSize": {"w":2141,"h":2966}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":1384},
+    	"sourceSize": {"w":1000,"h":1384}
     },
     "onion/chop/0005":
     {
-    	"frame": {"x":0,"y":11855,"w":2141,"h":2966},
+    	"frame": {"x":0,"y":11855,"w":1000,"h":1384},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":2141,"h":2966},
-    	"sourceSize": {"w":2141,"h":2966}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":1384},
+    	"sourceSize": {"w":1000,"h":1384}
     }
   },
   "meta": {
@@ -46,7 +46,7 @@
   	"version": "15.2.1.95",
   	"image": "onion-cutting-animation-min.png",
   	"format": "RGBA8888",
-  	"size": {"w":2141,"h":14820},
+  	"size": {"w":1000,"h":6919},
   	"scale": "1"
   }
 }

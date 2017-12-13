@@ -80,19 +80,19 @@ module.exports = class Play extends Phaser.State {
       VEGGIE_NAME = 'carrot';
       VEGGIE_XPOS = this.world.centerX + 50;
       VEGGIE_YPOS = this.world.height - 300;
-      VEGGIE_SCALE = 0.25;
+      VEGGIE_SCALE = 1.1;
       this.setupVegetableToChop(VEGGIE_NAME, VEGGIE_XPOS, VEGGIE_YPOS, VEGGIE_SCALE, 1, 2);
     } else if (veggie === 'onion') {
       VEGGIE_NAME = 'onion';
       VEGGIE_XPOS = this.world.centerX;
       VEGGIE_YPOS = this.world.height - 400;
-      VEGGIE_SCALE = 0.2;
+      VEGGIE_SCALE = 0.5;
       this.setupVegetableToChop(VEGGIE_NAME, VEGGIE_XPOS, VEGGIE_YPOS, VEGGIE_SCALE, 1, 2);
     } else if (veggie === 'cucumber') {
       VEGGIE_NAME = 'cucumber';
       VEGGIE_XPOS = this.world.centerX;
       VEGGIE_YPOS = this.world.height - 300;
-      VEGGIE_SCALE = 0.3;
+      VEGGIE_SCALE = 1.1;
       this.setupVegetableToChop(VEGGIE_NAME, VEGGIE_XPOS, VEGGIE_YPOS, VEGGIE_SCALE, 1, 2);
     } else if (veggie === 'paprika') {
       VEGGIE_NAME = 'paprika';
@@ -104,7 +104,7 @@ module.exports = class Play extends Phaser.State {
       VEGGIE_NAME = 'tomato';
       VEGGIE_XPOS = this.world.centerX;
       VEGGIE_YPOS = this.world.height - 380;
-      VEGGIE_SCALE = 0.2;
+      VEGGIE_SCALE = 1;
       this.setupVegetableToChop(VEGGIE_NAME, VEGGIE_XPOS, VEGGIE_YPOS, VEGGIE_SCALE, 1, 2);
     } else if (veggie === 'rotten-eggplant') {
       VEGGIE_NAME = 'rotten-eggplant';
@@ -194,11 +194,11 @@ module.exports = class Play extends Phaser.State {
     }
 
 
-    // if (name === 'onion') {
-    //   this.setupBlur();
-    // } else {
-    //   this.removeBlur();
-    // }
+    if (name === 'onion') {
+      this.setupBlur();
+    } else {
+      this.removeBlur();
+    }
   }
 
   createButton() {
