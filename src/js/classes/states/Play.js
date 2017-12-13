@@ -59,7 +59,7 @@ module.exports = class Play extends Phaser.State {
     if (this.gameEnded) {
       return;
     }
-    const veggies = ['eggplant', 'carrot', 'onion', 'cucumber', 'paprika', 'tomato', 'rotten-eggplant'];
+    const veggies = ['eggplant', 'carrot', 'onion', 'cucumber', 'rotten-eggplant', 'paprika', 'tomato'];
     randomVeggies = this.shuffle(veggies);
     VEGGIE_BEING_CUT = randomVeggies[VEGGIES_COUNTER];
     console.log('[createRandomOrder]', randomVeggies);
@@ -112,6 +112,7 @@ module.exports = class Play extends Phaser.State {
       VEGGIE_YPOS = this.world.height - 380;
       VEGGIE_SCALE = 0.7;
       this.setupVegetableToChop(VEGGIE_NAME, VEGGIE_XPOS, VEGGIE_YPOS, VEGGIE_SCALE);
+      this.createLever();
     }
   }
 
@@ -181,6 +182,8 @@ module.exports = class Play extends Phaser.State {
       return;
     }
 
+    this.removeBlur();
+
     if (name !== 'rotten-eggplant') {
       this.currentVeggie = this.add.sprite(posX, posY, `${name}-cutting-animation`, `${name}/chop/000${frameStart}`);
       this.currentVeggie.anchor.setTo(0.5, 0.5);
@@ -190,20 +193,6 @@ module.exports = class Play extends Phaser.State {
       this.rottenEggplant.anchor.setTo(0.5, 0.5);
       this.rottenEggplant.scale.setTo(scale, scale);
     }
-
-    if (name === 'onion') {
-      console.log('[setupVegetableToChop] — ONION');
-      console.log('[setupVegetableToChop]', VEGGIE_NAME);
-      this.setupBlur();
-    } else {
-      this.removeBlur();
-    }
-  }
-
-  createButton() {
-    this.buttonPlay = new Button(this.game, this.world.centerX, this.world.height - 150, this.playChopAnimation, this, 'button', 'Hit');
-    this.buttonPlay.anchor.setTo(0.5, 0.5);
-    this.add.existing(this.buttonPlay);
   }
 
   playSplashAnimation() {
@@ -212,10 +201,12 @@ module.exports = class Play extends Phaser.State {
     this.splash.scale.setTo(1.8, 1.8);
     this.splash.animations.add('splash', Phaser.Animation.generateFrameNames('splash/', 1, 6, '', 4), 25, true, false);
     this.splash.animations.play('splash', 25, false);
-    // onanimationend, next veggie
-    this.splash.events.onAnimationComplete.add((e) => {
+
+
+    // REVERSE SPLASHEFFECT. CHECK IF ANIMATION IS BACK AT FRAME 1 & THEN GO TO NEXT VEGGIE
+    this.splash.events.onAnimationComplete.add(() => {
       this.rottenEggplant.kill();
-      this.setupNextVeggie();
+      // this.setupNextVeggie();
     }, this);
   }
 
@@ -225,15 +216,13 @@ module.exports = class Play extends Phaser.State {
     }
 
     COUNTER += 1;
-
-    // chop sound
     this.chop.play();
 
-    // LENGTH OF THE TOTAL AMOUNT OF FRAMES
-    TOTAL_CHOP_COUNT = this.currentVeggie.animations.frameTotal;
+    if (VEGGIE_NAME !== 'rotten-eggplant') {
+      // LENGTH OF THE TOTAL AMOUNT OF FRAMES
+      TOTAL_CHOP_COUNT = this.currentVeggie.animations.frameTotal;
+      this.currentVeggie.kill();
 
-    this.currentVeggie.kill();
-    if(VEGGIE_NAME !== 'onion' || 'rotten-eggplant'){
       if (COUNTER <= TOTAL_CHOP_COUNT) {
         this.setupVegetableToChop(
           VEGGIE_NAME,
@@ -246,24 +235,48 @@ module.exports = class Play extends Phaser.State {
         this.setupNextVeggie();
         COUNTER = 1;
       }
-    }else {
-      if (VEGGIE_NAME === 'onion') {
-        console.log(`[ONION]`);
-        BLUR_COUNTER += 1;
-      } else if(VEGGIE_NAME === 'rotten-eggplant') {
-        console.log(`[ROTTEN EGGP]`);
-        console.log('[playChopAnimation]', 'oepsie ive chopped');
-        // only play splashAnimation when hitting veggie
-        // check if you've clicked the button
-        this.playSplashAnimation();
-        COUNTER = 1;
-      }
+    } else if (VEGGIE_NAME === 'rotten-eggplant') {
+      this.createLever();
     }
+
+    if (VEGGIE_NAME === 'onion') {
+      console.log('[VEGGIE_NAME === onion]');
+      console.log('[BLUR_COINTER]', BLUR_COUNTER);
+      this.setupBlur();
+      BLUR_COUNTER += 1;
+    }
+
+    if (VEGGIE_NAME === 'rotten-eggplant' && COUNTER === 2) {
+      console.log('[playChopAnimation]', 'oepsie ive chopped');
+      this.buttonLever.kill();
+      this.playSplashAnimation();
+    }
+  }
+
+  createButton() {
+    this.buttonPlay = new Button(this.game, this.world.centerX, this.world.height - 150, this.playChopAnimation, this, 'button', 'Hit');
+    this.buttonPlay.anchor.setTo(0.5, 0.5);
+    this.add.existing(this.buttonPlay);
+  }
+
+  leverVeggieAway() {
+    this.rottenEggplant.kill();
+    this.setupNextVeggie();
+  }
+
+  createLever() {
+    this.buttonLever = new Button(this.game, this.world.centerX + 550, this.world.height - 150, this.leverVeggieAway, this, 'button', 'Lever');
+    this.buttonLever.anchor.setTo(0.5, 0.5);
+    this.add.existing(this.buttonLever);
   }
 
   setupNextVeggie() {
     if (this.gameEnded) {
       return;
+    }
+
+    if (this.buttonLever) {
+      this.buttonLever.kill();
     }
 
     // Add counter to get the next veggie in the array
@@ -277,14 +290,21 @@ module.exports = class Play extends Phaser.State {
       const TIME_PLAYED = new Date() - TIME_START;
       const TOTAL_TIME = new Date(TIME_PLAYED);
       const minutes = TOTAL_TIME.getMinutes();
-      const seconds = TOTAL_TIME.getSeconds();
+      let seconds = TOTAL_TIME.getSeconds();
+
+      // seconds < 10 ? seconds = `0${seconds}` : seconds = `${seconds}`;
+      if (seconds < 10) {
+        seconds = `0${seconds}`;
+      } else {
+        seconds = `${seconds}`;
+      }
       const TIME_FORMAT = `0${minutes}:${seconds}`;
       localStorage.setItem('timePlayed', TIME_FORMAT);
 
       this.state.start('End');
     }
   }
-  
+
   shutdown() {
     COUNTER = 1;
     VEGGIES_COUNTER = 0;
