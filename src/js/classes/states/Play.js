@@ -74,7 +74,7 @@ module.exports = class Play extends Phaser.State {
       VEGGIE_NAME = 'eggplant';
       VEGGIE_XPOS = this.world.centerX + 50;
       VEGGIE_YPOS = this.world.height - 300;
-      VEGGIE_SCALE = 0.25;
+      VEGGIE_SCALE = 0.9;
       this.setupVegetableToChop(VEGGIE_NAME, VEGGIE_XPOS, VEGGIE_YPOS, VEGGIE_SCALE, 1, 2);
     } else if (veggie === 'carrot') {
       VEGGIE_NAME = 'carrot';
@@ -96,9 +96,9 @@ module.exports = class Play extends Phaser.State {
       this.setupVegetableToChop(VEGGIE_NAME, VEGGIE_XPOS, VEGGIE_YPOS, VEGGIE_SCALE, 1, 2);
     } else if (veggie === 'paprika') {
       VEGGIE_NAME = 'paprika';
-      VEGGIE_XPOS = this.world.centerX + 180;
-      VEGGIE_YPOS = this.world.height - 380;
-      VEGGIE_SCALE = 0.3;
+      VEGGIE_XPOS = this.world.centerX;
+      VEGGIE_YPOS = this.world.height - 400;
+      VEGGIE_SCALE = 1;
       this.setupVegetableToChop(VEGGIE_NAME, VEGGIE_XPOS, VEGGIE_YPOS, VEGGIE_SCALE, 1, 2);
     } else if (veggie === 'tomato') {
       VEGGIE_NAME = 'tomato';
@@ -181,11 +181,10 @@ module.exports = class Play extends Phaser.State {
       return;
     }
 
-    // extra check: is er al een currentVeggie?
     if (name !== 'rotten-eggplant') {
       this.currentVeggie = this.add.sprite(posX, posY, `${name}-cutting-animation`, `${name}/chop/000${frameStart}`);
       this.currentVeggie.anchor.setTo(0.5, 0.5);
-      this.currentVeggie.animations.add('chop', Phaser.Animation.generateFrameNames(`${name}/chop/`, `${frameStart}`, `${frameStartFrame}`, '', 4), 10, true, false);
+      this.currentVeggie.animations.add('chop', Phaser.Animation.generateFrameNames(`${name}/chop/`, `${frameStart}`, `${frameStartFrame}`, '', 4), 1, true, false);
       this.currentVeggie.scale.setTo(scale, scale);
     } else {
       this.rottenEggplant = this.add.sprite(posX, posY, name);
@@ -211,7 +210,6 @@ module.exports = class Play extends Phaser.State {
   playSplashAnimation() {
     this.eggplantAnimation = this.add.sprite(this.world.centerX, this.world.centerY, 'eggplant-cutting-animation', 'eggplant/chop/0001');
     this.eggplantAnimation.anchor.setTo(0.5, 0.5);
-    this.eggplantAnimation.scale.setTo(0.25, 0.25);
     this.eggplantAnimation.animations.add('chop', Phaser.Animation.generateFrameNames('eggplant/chop/', 1, 5, '', 4), 5, true, false);
     this.eggplantAnimation.animations.play('chop', 10, false);
     // onanimationend, next veggie

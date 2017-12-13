@@ -2,35 +2,35 @@
   "frames": {
     "eggplant/chop/0001":
     {
-    	"frame": {"x":0,"y":0,"w":3356,"h":1393},
+    	"frame": {"x":0,"y":0,"w":1000,"h":417},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":3356,"h":1393},
-    	"sourceSize": {"w":3356,"h":1393}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":417},
+    	"sourceSize": {"w":1000,"h":417}
     },
     "eggplant/chop/0002":
     {
-    	"frame": {"x":0,"y":1396,"w":3356,"h":1393},
+    	"frame": {"x":0,"y":417,"w":1000,"h":417},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":3356,"h":1393},
-    	"sourceSize": {"w":3356,"h":1393}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":417},
+    	"sourceSize": {"w":1000,"h":417}
     },
     "eggplant/chop/0003":
     {
-    	"frame": {"x":0,"y":2794,"w":3356,"h":1393},
+    	"frame": {"x":0,"y":833,"w":1000,"h":417},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":3356,"h":1393},
-    	"sourceSize": {"w":3356,"h":1393}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":417},
+    	"sourceSize": {"w":1000,"h":417}
     },
     "eggplant/chop/0004":
     {
-    	"frame": {"x":0,"y":4196,"w":3356,"h":1393},
+    	"frame": {"x":0,"y":1250,"w":1000,"h":417},
     	"rotated": false,
     	"trimmed": false,
-    	"spriteSourceSize": {"x":0,"y":0,"w":3356,"h":1393},
-    	"sourceSize": {"w":3356,"h":1393}
+    	"spriteSourceSize": {"x":0,"y":0,"w":1000,"h":417},
+    	"sourceSize": {"w":1000,"h":417}
     }
   },
   "meta": {
@@ -38,7 +38,7 @@
   	"version": "15.2.1.95",
   	"image": "eggplant-cutting-animation-min-01.png",
   	"format": "RGBA8888",
-  	"size": {"w":3356,"h":5597},
+  	"size": {"w":1000,"h":1668},
   	"scale": "1"
   }
 }

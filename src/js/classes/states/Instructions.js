@@ -37,7 +37,6 @@ module.exports = class Instructions extends Phaser.State {
     this.cucumberChop = this.add.sprite(this.world.centerX, this.world.centerY + 300, `${veggie}-cutting-animation`, `${veggie}/chop/000${frameStart}`);
     this.cucumberChop.anchor.setTo(0.5, 0.5);
     this.cucumberChop.animations.add('chop', Phaser.Animation.generateFrameNames(`${veggie}/chop/`, `${frameStart}`, `${frameStartFrame}`, '', 4), 10, true, false);
-    this.cucumberChop.scale.setTo(0.3, 0.3);
     console.log('[PlayChopAnimation]', this.cucumberChop.animations);
   }
 
