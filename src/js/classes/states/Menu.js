@@ -63,7 +63,6 @@ module.exports = class Menu extends Phaser.State {
     });
     this.instruction.anchor.setTo(0.5, 0.5);
 
-
     // => yPOS of this.instruction ~> this.world.height + 150
     // ADD WHEN HAVING ARDUINO
     // this.game.add.tween(this.instruction)

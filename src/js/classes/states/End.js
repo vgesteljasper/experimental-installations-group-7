@@ -4,7 +4,7 @@ module.exports = class End extends Phaser.State {
   create() {
     console.log('[Menu] — create()');
     this.createaBackground();
-    this.createFeedback();
+    this.createScore();
     this.createButton();
   }
 
@@ -13,7 +13,7 @@ module.exports = class End extends Phaser.State {
     this.game.stage.backgroundColor = '#FF780F';
   }
 
-  createFeedback() {
+  createScore() {
     this.medal = this.add.image(this.world.centerX, -420, 'medal');
     this.medal.anchor.setTo(0.5, 0.5);
     this.medal.scale.setTo(0.7, 0.7);

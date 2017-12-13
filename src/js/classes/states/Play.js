@@ -190,7 +190,10 @@ module.exports = class Play extends Phaser.State {
       this.rottenEggplant.anchor.setTo(0.5, 0.5);
       this.rottenEggplant.scale.setTo(scale, scale);
     }
+
     if (name === 'onion') {
+      console.log('[setupVegetableToChop] — ONION');
+      console.log('[setupVegetableToChop]', VEGGIE_NAME);
       this.setupBlur();
     } else {
       this.removeBlur();
@@ -204,13 +207,13 @@ module.exports = class Play extends Phaser.State {
   }
 
   playSplashAnimation() {
-    this.eggplantAnimation = this.add.sprite(this.world.centerX, this.world.centerY, 'eggplant-cutting-animation', 'eggplant/chop/0001');
-    this.eggplantAnimation.anchor.setTo(0.5, 0.5);
-    this.eggplantAnimation.animations.add('chop', Phaser.Animation.generateFrameNames('eggplant/chop/', 1, 5, '', 4), 5, true, false);
-    this.eggplantAnimation.animations.play('chop', 10, false);
+    this.splash = this.add.sprite(this.world.centerX, this.world.centerY - 20, 'splash-animation', 'splash/0001');
+    this.splash.anchor.setTo(0.5, 0.5);
+    this.splash.scale.setTo(1.8, 1.8);
+    this.splash.animations.add('splash', Phaser.Animation.generateFrameNames('splash/', 1, 6, '', 4), 25, true, false);
+    this.splash.animations.play('splash', 25, false);
     // onanimationend, next veggie
-    this.eggplantAnimation.events.onAnimationComplete.add((item) => {
-      item.kill();
+    this.splash.events.onAnimationComplete.add((e) => {
       this.rottenEggplant.kill();
       this.setupNextVeggie();
     }, this);
@@ -228,30 +231,33 @@ module.exports = class Play extends Phaser.State {
 
     // LENGTH OF THE TOTAL AMOUNT OF FRAMES
     TOTAL_CHOP_COUNT = this.currentVeggie.animations.frameTotal;
-    console.log(TOTAL_CHOP_COUNT);
 
     this.currentVeggie.kill();
-    if (COUNTER <= TOTAL_CHOP_COUNT) {
-      this.setupVegetableToChop(
-        VEGGIE_NAME,
-        VEGGIE_XPOS,
-        VEGGIE_YPOS,
-        VEGGIE_SCALE,
-        COUNTER,
-      );
-    } else {
-      this.setupNextVeggie();
-      COUNTER = 1;
-    }
-
-    // increase blur
-    if (VEGGIE_NAME === 'onion') {
-      BLUR_COUNTER += 1;
-    } else if (VEGGIE_NAME === 'rotten-eggplant') {
-      console.log('[playChopAnimation]', 'rotten-eggplant');
-      // only play splashAnimation when hitting veggie
-      this.playSplashAnimation();
-      COUNTER = 1;
+    if(VEGGIE_NAME !== 'onion' || 'rotten-eggplant'){
+      if (COUNTER <= TOTAL_CHOP_COUNT) {
+        this.setupVegetableToChop(
+          VEGGIE_NAME,
+          VEGGIE_XPOS,
+          VEGGIE_YPOS,
+          VEGGIE_SCALE,
+          COUNTER,
+        );
+      } else {
+        this.setupNextVeggie();
+        COUNTER = 1;
+      }
+    }else {
+      if (VEGGIE_NAME === 'onion') {
+        console.log(`[ONION]`);
+        BLUR_COUNTER += 1;
+      } else if(VEGGIE_NAME === 'rotten-eggplant') {
+        console.log(`[ROTTEN EGGP]`);
+        console.log('[playChopAnimation]', 'oepsie ive chopped');
+        // only play splashAnimation when hitting veggie
+        // check if you've clicked the button
+        this.playSplashAnimation();
+        COUNTER = 1;
+      }
     }
   }
 
@@ -269,7 +275,6 @@ module.exports = class Play extends Phaser.State {
       this.gameEnded = true;
 
       const TIME_PLAYED = new Date() - TIME_START;
-      console.log('[init] TIME_PLAYED ENDED', TIME_PLAYED);
       const TOTAL_TIME = new Date(TIME_PLAYED);
       const minutes = TOTAL_TIME.getMinutes();
       const seconds = TOTAL_TIME.getSeconds();
@@ -279,6 +284,7 @@ module.exports = class Play extends Phaser.State {
       this.state.start('End');
     }
   }
+  
   shutdown() {
     COUNTER = 1;
     VEGGIES_COUNTER = 0;

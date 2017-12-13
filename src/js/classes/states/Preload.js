@@ -6,8 +6,6 @@ module.exports = class Preload extends Phaser.State {
     this.loader.anchor.setTo(0.5, 0.5);
   }
   preload() {
-    console.log('[Preload] — preload()');
-    // preload all game assets
     this.load.image('logoFill', 'assets/img/logo-fill-05.png');
     this.load.image('logoBorder', 'assets/img/logo-border-05.png');
     this.load.image('vegetables', 'assets/img/vegetables-05.png');
@@ -34,15 +32,15 @@ module.exports = class Preload extends Phaser.State {
     this.load.atlasJSONHash('onion-cutting-animation', 'assets/img/components/onion-cutting-animation-downsize.png', 'assets/img/components/onion-cutting-animation.json');
     this.load.atlasJSONHash('tomato-cutting-animation', 'assets/img/components/tomato-cutting-animation-downsize.png', 'assets/img/components/tomato-cutting-animation.json');
     this.load.atlasJSONHash('paprika-cutting-animation', 'assets/img/components/paprika-cutting-animation-downsize.png', 'assets/img/components/paprika-cutting-animation.json');
+    this.load.atlasJSONHash('splash-animation', 'assets/img/components/splash-animation.png', 'assets/img/components/splash-animation.json');
     this.load.atlasJSONHash('plate-animation', 'assets/img/components/plate-animation.png', 'assets/img/components/plate-animation.json');
 
     this.load.audio('chop', 'assets/sound/chop.mp3');
 
-    // blur script
     this.load.script('BlurX', 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/BlurX.js');
     this.load.script('BlurY', 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/BlurY.js');
   }
   create() {
-    this.state.start('Instructions');
+    this.state.start('Play');
   }
 };
