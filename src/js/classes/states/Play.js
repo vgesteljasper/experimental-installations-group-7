@@ -14,6 +14,8 @@ let VEGGIE_SCALE = '';
 let BLUR_COUNTER = 0;
 let TIME_START = '';
 
+let COUNTDOWN = 6;
+
 module.exports = class Play extends Phaser.State {
   init() {
     this.gameEnded = false;
@@ -157,32 +159,32 @@ module.exports = class Play extends Phaser.State {
     this.timerBackground.drawRoundedRect(120, 218, 530, 248, 5);
   }
 
-  setupBlur() {
-    if (this.gameEnded) {
-      return;
-    }
-    const blurX = this.game.add.filter('BlurX');
-    const blurY = this.game.add.filter('BlurY');
-    blurX.blur = BLUR_COUNTER * 6.5;
-    blurY.blur = BLUR_COUNTER * 6.5;
-    this.background.filters = [blurX, blurY];
-    this.currentVeggie.filters = [blurX, blurY];
-  }
+  // setupBlur() {
+  //   if (this.gameEnded) {
+  //     return;
+  //   }
+  //   const blurX = this.game.add.filter('BlurX');
+  //   const blurY = this.game.add.filter('BlurY');
+  //   blurX.blur = BLUR_COUNTER * 6.5;
+  //   blurY.blur = BLUR_COUNTER * 6.5;
+  //   this.background.filters = [blurX, blurY];
+  //   this.currentVeggie.filters = [blurX, blurY];
+  // }
 
-  removeBlur() {
-    const blurX = this.game.add.filter('BlurX');
-    const blurY = this.game.add.filter('BlurY');
-    blurX.blur = 0;
-    blurY.blur = 0;
-    this.background.filters = [blurX, blurY];
-  }
+  // removeBlur() {
+  //   const blurX = this.game.add.filter('BlurX');
+  //   const blurY = this.game.add.filter('BlurY');
+  //   blurX.blur = 0;
+  //   blurY.blur = 0;
+  //   this.background.filters = [blurX, blurY];
+  // }
 
   setupVegetableToChop(name, posX, posY, scale, frameStart = 1) {
     if (this.gameEnded) {
       return;
     }
 
-    this.removeBlur();
+    // this.removeBlur();
 
     if (name !== 'rotten-eggplant') {
       this.currentVeggie = this.add.sprite(posX, posY, `${name}-cutting-animation`, `${name}/chop/000${frameStart}`);
@@ -195,6 +197,32 @@ module.exports = class Play extends Phaser.State {
     }
   }
 
+  slideAwayExplosion() {
+    COUNTDOWN -= 1;
+    console.log('[slideAwayExplosion()]', COUNTDOWN)
+    this.splash.kill();
+    this.splash = this.add.sprite(this.world.centerX, this.world.centerY - 20, 'splash-animation', `splash/000${COUNTDOWN}`);
+    this.splash.anchor.setTo(0.5, 0.5);
+    this.splash.scale.setTo(1.8, 1.8);
+
+    if(COUNTDOWN === 1) {
+      console.log('[setupReverseAnimation()] — COUNTDOWN is 1');
+      this.splash.kill();
+      this.buttonSlider.kill();
+      this.buttonLever.kill();
+      this.rottenEggplant.kill();
+      this.setupNextVeggie();
+      COUNTDOWN = 6;
+    }
+  }
+
+  setupReverseAnimation() {
+    console.log('[setupReverseAnimation]', 'setup new sprite on FRAME 06')
+    this.splash = this.add.sprite(this.world.centerX, this.world.centerY - 20, 'splash-animation', `splash/000${COUNTDOWN}`);
+    this.splash.anchor.setTo(0.5, 0.5);
+    this.splash.scale.setTo(1.8, 1.8);
+  }
+
   playSplashAnimation() {
     this.splash = this.add.sprite(this.world.centerX, this.world.centerY - 20, 'splash-animation', 'splash/0001');
     this.splash.anchor.setTo(0.5, 0.5);
@@ -202,11 +230,11 @@ module.exports = class Play extends Phaser.State {
     this.splash.animations.add('splash', Phaser.Animation.generateFrameNames('splash/', 1, 6, '', 4), 25, true, false);
     this.splash.animations.play('splash', 25, false);
 
-
     // REVERSE SPLASHEFFECT. CHECK IF ANIMATION IS BACK AT FRAME 1 & THEN GO TO NEXT VEGGIE
-    this.splash.events.onAnimationComplete.add(() => {
-      this.rottenEggplant.kill();
-      // this.setupNextVeggie();
+    this.splash.events.onAnimationComplete.add((e) => {
+      e.kill();
+      this.setupReverseAnimation();
+      this.createSlider();
     }, this);
   }
 
@@ -241,8 +269,7 @@ module.exports = class Play extends Phaser.State {
 
     if (VEGGIE_NAME === 'onion') {
       console.log('[VEGGIE_NAME === onion]');
-      console.log('[BLUR_COINTER]', BLUR_COUNTER);
-      this.setupBlur();
+      // this.setupBlur();
       BLUR_COUNTER += 1;
     }
 
@@ -262,6 +289,12 @@ module.exports = class Play extends Phaser.State {
   leverVeggieAway() {
     this.rottenEggplant.kill();
     this.setupNextVeggie();
+  }
+
+  createSlider() {
+    this.buttonSlider = new Button(this.game, this.world.centerX - 550, this.world.height - 150, this.slideAwayExplosion, this, 'button', 'Slider');
+    this.buttonSlider.anchor.setTo(0.5, 0.5);
+    this.add.existing(this.buttonSlider);
   }
 
   createLever() {
