@@ -16,6 +16,9 @@ let TIME_START = '';
 
 let COUNTDOWN = 6;
 
+let DISABLE_LEVER = false;
+let DISABLE_HIT = false;
+
 module.exports = class Play extends Phaser.State {
   init() {
     this.gameEnded = false;
@@ -31,9 +34,6 @@ module.exports = class Play extends Phaser.State {
 
     // indicator of what to chop and what already chopped
     // this.createVeggiesToChop();
-
-    // visaualisation of the timer
-    // this.createTimer();
     this.createButton();
   }
   loadSounds() {
@@ -64,7 +64,6 @@ module.exports = class Play extends Phaser.State {
     const veggies = ['eggplant', 'carrot', 'onion', 'cucumber', 'rotten-eggplant', 'paprika', 'tomato'];
     randomVeggies = this.shuffle(veggies);
     VEGGIE_BEING_CUT = randomVeggies[VEGGIES_COUNTER];
-    console.log('[createRandomOrder]', randomVeggies);
     this.setupVeggie(VEGGIE_BEING_CUT);
   }
 
@@ -199,14 +198,17 @@ module.exports = class Play extends Phaser.State {
 
   slideAwayExplosion() {
     COUNTDOWN -= 1;
-    console.log('[slideAwayExplosion()]', COUNTDOWN);
     this.splash.kill();
     this.splash = this.add.sprite(this.world.centerX, this.world.centerY - 20, 'splash-animation', `splash/000${COUNTDOWN}`);
     this.splash.anchor.setTo(0.5, 0.5);
     this.splash.scale.setTo(1.8, 1.8);
 
     if (COUNTDOWN === 1) {
-      console.log('[setupReverseAnimation()] — COUNTDOWN is 1');
+      console.log('[slideAwayExplosion]', 'COUNTDOWN is ONE');
+      console.log('[slideAwayExplosion()]', this.buttonLever);
+      DISABLE_LEVER = false;
+      DISABLE_HIT = false;
+      this.buttonLever.kill();
       this.splash.kill();
       this.buttonSlider.kill();
       this.buttonLever.kill();
@@ -223,6 +225,9 @@ module.exports = class Play extends Phaser.State {
   }
 
   playSplashAnimation() {
+    DISABLE_HIT = true;
+    DISABLE_LEVER = true;
+
     this.splash = this.add.sprite(this.world.centerX, this.world.centerY - 20, 'splash-animation', 'splash/0001');
     this.splash.anchor.setTo(0.5, 0.5);
     this.splash.scale.setTo(1.8, 1.8);
@@ -239,6 +244,10 @@ module.exports = class Play extends Phaser.State {
 
   playChopAnimation() {
     if (this.gameEnded) {
+      return;
+    }
+
+    if (DISABLE_HIT && DISABLE_LEVER) {
       return;
     }
 
@@ -267,14 +276,11 @@ module.exports = class Play extends Phaser.State {
     }
 
     if (VEGGIE_NAME === 'onion') {
-      console.log('[VEGGIE_NAME === onion]');
       this.setupBlur();
       BLUR_COUNTER += 1;
     }
 
     if (VEGGIE_NAME === 'rotten-eggplant' && COUNTER === 2) {
-      console.log('[playChopAnimation]', 'oepsie ive chopped');
-      this.buttonLever.kill();
       this.playSplashAnimation();
     }
   }
@@ -286,7 +292,13 @@ module.exports = class Play extends Phaser.State {
   }
 
   leverVeggieAway() {
+    if (DISABLE_LEVER) {
+      return;
+    }
     this.rottenEggplant.kill();
+    if (this.buttonSlider) {
+      this.buttonSlider.kill();
+    }
     this.setupNextVeggie();
   }
 

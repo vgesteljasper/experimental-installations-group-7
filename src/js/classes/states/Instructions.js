@@ -50,17 +50,14 @@ module.exports = class Instructions extends Phaser.State {
   }
 
   PlayChopAnimation() {
-    console.log('[PlayChopAnimation]', this.cucumberChop.animations);
-
     this.cucumberChop.kill();
 
     COUNTER += 1;
 
     // LENGTH OF THE TOTAL AMOUNT OF FRAMES
     TOTAL_CHOP_COUNT = this.cucumberChop.animations.frameTotal;
-    console.log('[PlayChopAnimation]', TOTAL_CHOP_COUNT);
 
-    if (COUNTER !== TOTAL_CHOP_COUNT + 1) {
+    if (COUNTER <= TOTAL_CHOP_COUNT) {
       this.setupVegetableToChop(
         'cucumber',
         COUNTER,
