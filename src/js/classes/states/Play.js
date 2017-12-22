@@ -159,32 +159,32 @@ module.exports = class Play extends Phaser.State {
     this.timerBackground.drawRoundedRect(120, 218, 530, 248, 5);
   }
 
-  // setupBlur() {
-  //   if (this.gameEnded) {
-  //     return;
-  //   }
-  //   const blurX = this.game.add.filter('BlurX');
-  //   const blurY = this.game.add.filter('BlurY');
-  //   blurX.blur = BLUR_COUNTER * 6.5;
-  //   blurY.blur = BLUR_COUNTER * 6.5;
-  //   this.background.filters = [blurX, blurY];
-  //   this.currentVeggie.filters = [blurX, blurY];
-  // }
+  setupBlur() {
+    if (this.gameEnded) {
+      return;
+    }
+    const blurX = this.game.add.filter('BlurX');
+    const blurY = this.game.add.filter('BlurY');
+    blurX.blur = BLUR_COUNTER * 6.5;
+    blurY.blur = BLUR_COUNTER * 6.5;
+    this.background.filters = [blurX, blurY];
+    this.currentVeggie.filters = [blurX, blurY];
+  }
 
-  // removeBlur() {
-  //   const blurX = this.game.add.filter('BlurX');
-  //   const blurY = this.game.add.filter('BlurY');
-  //   blurX.blur = 0;
-  //   blurY.blur = 0;
-  //   this.background.filters = [blurX, blurY];
-  // }
+  removeBlur() {
+    const blurX = this.game.add.filter('BlurX');
+    const blurY = this.game.add.filter('BlurY');
+    blurX.blur = 0;
+    blurY.blur = 0;
+    this.background.filters = [blurX, blurY];
+  }
 
   setupVegetableToChop(name, posX, posY, scale, frameStart = 1) {
     if (this.gameEnded) {
       return;
     }
 
-    // this.removeBlur();
+    this.removeBlur();
 
     if (name !== 'rotten-eggplant') {
       this.currentVeggie = this.add.sprite(posX, posY, `${name}-cutting-animation`, `${name}/chop/000${frameStart}`);
@@ -199,13 +199,13 @@ module.exports = class Play extends Phaser.State {
 
   slideAwayExplosion() {
     COUNTDOWN -= 1;
-    console.log('[slideAwayExplosion()]', COUNTDOWN)
+    console.log('[slideAwayExplosion()]', COUNTDOWN);
     this.splash.kill();
     this.splash = this.add.sprite(this.world.centerX, this.world.centerY - 20, 'splash-animation', `splash/000${COUNTDOWN}`);
     this.splash.anchor.setTo(0.5, 0.5);
     this.splash.scale.setTo(1.8, 1.8);
 
-    if(COUNTDOWN === 1) {
+    if (COUNTDOWN === 1) {
       console.log('[setupReverseAnimation()] — COUNTDOWN is 1');
       this.splash.kill();
       this.buttonSlider.kill();
@@ -217,7 +217,6 @@ module.exports = class Play extends Phaser.State {
   }
 
   setupReverseAnimation() {
-    console.log('[setupReverseAnimation]', 'setup new sprite on FRAME 06')
     this.splash = this.add.sprite(this.world.centerX, this.world.centerY - 20, 'splash-animation', `splash/000${COUNTDOWN}`);
     this.splash.anchor.setTo(0.5, 0.5);
     this.splash.scale.setTo(1.8, 1.8);
@@ -269,7 +268,7 @@ module.exports = class Play extends Phaser.State {
 
     if (VEGGIE_NAME === 'onion') {
       console.log('[VEGGIE_NAME === onion]');
-      // this.setupBlur();
+      this.setupBlur();
       BLUR_COUNTER += 1;
     }
 
@@ -325,7 +324,6 @@ module.exports = class Play extends Phaser.State {
       const minutes = TOTAL_TIME.getMinutes();
       let seconds = TOTAL_TIME.getSeconds();
 
-      // seconds < 10 ? seconds = `0${seconds}` : seconds = `${seconds}`;
       if (seconds < 10) {
         seconds = `0${seconds}`;
       } else {

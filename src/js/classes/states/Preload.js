@@ -37,8 +37,8 @@ module.exports = class Preload extends Phaser.State {
 
     this.load.audio('chop', 'assets/sound/chop.mp3');
 
-    // this.load.script('BlurX', 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/BlurX.js');
-    // this.load.script('BlurY', 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/BlurY.js');
+    this.load.script('BlurX', 'js/vendors/filter/blurX.js');
+    this.load.script('BlurY', 'js/vendors/filter/blurY.js');
   }
   create() {
     this.state.start('Play');
