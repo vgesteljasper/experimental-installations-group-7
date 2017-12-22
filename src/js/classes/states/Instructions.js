@@ -8,7 +8,6 @@ module.exports = class Instructions extends Phaser.State {
     this.gameEnded = false;
   }
   create() {
-    console.log('[Instructions] — Create()');
     this.loadSounds();
     this.createaBackground();
     this.createInstructions();
@@ -20,7 +19,6 @@ module.exports = class Instructions extends Phaser.State {
     this.chop = this.game.add.audio('chop');
   }
   createaBackground() {
-    console.log('[Instructions] — createLogo()');
     this.background = this.add.image(0, 0, 'kitchenBackground');
   }
   createInstructions() {

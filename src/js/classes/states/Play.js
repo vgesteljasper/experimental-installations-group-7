@@ -19,6 +19,8 @@ let COUNTDOWN = 6;
 let DISABLE_LEVER = false;
 let DISABLE_HIT = false;
 
+const VEGGIE_GUTTER = 60;
+
 module.exports = class Play extends Phaser.State {
   init() {
     this.gameEnded = false;
@@ -33,7 +35,7 @@ module.exports = class Play extends Phaser.State {
     this.createRandomOrder();
 
     // indicator of what to chop and what already chopped
-    // this.createVeggiesToChop();
+    this.createVeggiesToChop();
     this.createButton();
   }
   loadSounds() {
@@ -61,8 +63,8 @@ module.exports = class Play extends Phaser.State {
     if (this.gameEnded) {
       return;
     }
-    const veggies = ['eggplant', 'carrot', 'onion', 'cucumber', 'rotten-eggplant', 'paprika', 'tomato'];
-    randomVeggies = this.shuffle(veggies);
+    this.veggies = ['eggplant', 'carrot', 'onion', 'cucumber', 'rotten-eggplant', 'paprika', 'tomato'];
+    randomVeggies = this.shuffle(this.veggies);
     VEGGIE_BEING_CUT = randomVeggies[VEGGIES_COUNTER];
     this.setupVeggie(VEGGIE_BEING_CUT);
   }
@@ -122,40 +124,18 @@ module.exports = class Play extends Phaser.State {
     // rounded background for the indicators
     this.VegetableIndicatorBackground = this.game.add.graphics(0, 0);
     this.VegetableIndicatorBackground.beginFill(0xFFFFFF, 1);
-    this.VegetableIndicatorBackground.drawRoundedRect(1310, 15, 575, 170, 95);
+    this.VegetableIndicatorBackground.drawRoundedRect(1450, 15, 460, 100, 58);
 
-    // left dish
-    this.dishCircle = this.game.add.graphics(0, 0);
-    this.dishCircle.beginFill(0xededed, 1);
-    this.dishCircle.lineStyle(5, 0x69d7a1, 1);
-    this.dishCircle.drawCircle(1400, 100, 144);
+    this.veggieProgressArray = [];
 
-    // right dish
-    this.dishCircle = this.game.add.graphics(0, 0);
-    this.dishCircle.beginFill(0xededed, 1);
-    this.dishCircle.lineStyle(5, 0xFFFFFF, 1);
-    this.dishCircle.drawCircle(1500 + 300, 100, 144);
+    for (let i = 0; i < this.veggies.length; i += 1) {
+      const veggieProgress = this.game.add.graphics(0, 0);
+      veggieProgress.beginFill(0xededed, 1);
+      veggieProgress.lineStyle(2, 0xFF0000, 1);
+      veggieProgress.drawCircle(1500 + (i * VEGGIE_GUTTER), 65, 50);
 
-    // cirlce-active
-    this.dishCircle = this.game.add.graphics(0, 0);
-    this.dishCircle.lineStyle(10, 0xFFFFFF, 1);
-    this.dishCircle.drawCircle(1605, 100, 144);
-
-    // img
-    this.spaghetti = this.add.image(1605, 100, 'spaghetti');
-    this.spaghetti.anchor.setTo(0.5, 0.5);
-    // mask
-    this.mask = this.game.add.graphics(0, 0);
-    this.mask.beginFill(0xffffff);
-    this.mask.drawCircle(1605, 100, 144);
-    this.spaghetti.mask = this.mask;
-  }
-
-  createTimer() {
-    this.timerBackground = this.game.add.graphics(0, 0);
-    this.timerBackground.beginFill(0xFFFFFF, 1);
-    this.timerBackground.lineStyle(5, 0xc1c1c1, 1);
-    this.timerBackground.drawRoundedRect(120, 218, 530, 248, 5);
+      this.veggieProgressArray.push(veggieProgress);
+    }
   }
 
   setupBlur() {
@@ -314,10 +294,22 @@ module.exports = class Play extends Phaser.State {
     this.add.existing(this.buttonLever);
   }
 
+  updateProgressbar() {
+    this.veggieProgressArray[VEGGIES_COUNTER].kill();
+
+    const veggieChopped = this.game.add.graphics(0, 0);
+    veggieChopped.beginFill(0xededed, 1);
+    veggieChopped.lineStyle(2, 0x00FF00, 1);
+    veggieChopped.drawCircle(1500 + (VEGGIES_COUNTER * VEGGIE_GUTTER), 65, 50);
+  }
+
   setupNextVeggie() {
     if (this.gameEnded) {
       return;
     }
+
+    // this.veggieProgressArray[COUNTER - 1].graphicsData[0].lineColor = 65280;
+    this.updateProgressbar();
 
     if (this.buttonLever) {
       this.buttonLever.kill();
