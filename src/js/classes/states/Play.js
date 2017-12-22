@@ -308,7 +308,6 @@ module.exports = class Play extends Phaser.State {
       return;
     }
 
-    // this.veggieProgressArray[COUNTER - 1].graphicsData[0].lineColor = 65280;
     this.updateProgressbar();
 
     if (this.buttonLever) {
