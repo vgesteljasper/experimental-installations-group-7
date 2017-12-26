@@ -59,3 +59,5 @@ typings/
 
 # dist map
 dist/
+
+.vscode

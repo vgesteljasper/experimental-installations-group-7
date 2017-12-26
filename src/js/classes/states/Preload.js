@@ -35,7 +35,7 @@ module.exports = class Preload extends Phaser.State {
     this.load.atlasJSONHash('splash-animation', 'assets/img/components/splash-animation.png', 'assets/img/components/splash-animation.json');
     this.load.atlasJSONHash('plate-animation', 'assets/img/components/plate-animation.png', 'assets/img/components/plate-animation.json');
 
-    this.load.audio('chop', 'assets/sound/chop.mp3');
+    this.load.audio('chop', 'assets/audio/chop.mp3');
 
     this.load.script('BlurX', 'js/vendors/filter/blurX.js');
     this.load.script('BlurY', 'js/vendors/filter/blurY.js');
