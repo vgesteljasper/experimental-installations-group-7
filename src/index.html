@@ -9,10 +9,14 @@
   </style>
 </head>
 <body>
-  <script type="text/javascript" src="js/vendors/phaser.min.js"></script>
   <script>
 
-    // font loading stuff
+    // phaser
+    window.PIXI = require('phaser/build/custom/pixi');
+    window.p2 = require('phaser/build/custom/p2');
+    window.Phaser = require('phaser/build/custom/phaser-split');
+
+    // fontloader
     require(`webfontloader`).load({
       custom: {
         families: ['circular', 'circular-medium'],
@@ -20,10 +24,10 @@
       }
     });
 
-    // johnny five stuff
+    // johnnyfive
     require('./js/vendors/renderer.js');
 
-    // game stuff
+    // game
     require('./js/script.js');
 
   </script>
