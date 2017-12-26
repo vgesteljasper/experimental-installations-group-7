@@ -9,8 +9,13 @@ const Play = require('./states/Play');
 const End = require('./states/End');
 
 module.exports = class Game extends Phaser.Game {
-  constructor() {
+  constructor(arduino) {
     super(1920, 1080, Phaser.AUTO);
+
+    this.arduino = arduino;
+
+    this.arduino.addEventListener('drum-hit', this.logDrumHit);
+    this.arduino.addEventListener('spoon-pull', this.logSpoonPull);
 
     this.state.add('Boot', Boot);
     this.state.add('Preload', Preload);
@@ -23,5 +28,13 @@ module.exports = class Game extends Phaser.Game {
     this.state.add('End', End);
 
     this.state.start('Boot');
+  }
+
+  logDrumHit() {
+    console.log('drum-hit');
+  }
+
+  logSpoonPull() {
+    console.log('spoon-pull');
   }
 };

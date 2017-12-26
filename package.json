@@ -31,6 +31,7 @@
   ],
   "license": "CC0-1.0",
   "dependencies": {
+    "dotenv": "^4.0.0",
     "electron": "~1.7.8",
     "phaser": "^2.6.2",
     "serialport": "^6.0.4",
