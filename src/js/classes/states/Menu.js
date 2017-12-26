@@ -29,17 +29,36 @@ module.exports = class Menu extends Phaser.State {
     this.carrot.scale.setTo(-3, 3);
 
     // Top half of the cucumber
-    this.choppedTopCucumber = this.add.image(this.world.centerX + 75, this.world.centerY + 18, 'choppedTopCucumber');
+    this.choppedTopCucumber = this.add.image(
+      this.world.centerX + 75,
+      this.world.centerY + 18,
+      'choppedTopCucumber',
+    );
     this.choppedTopCucumber.anchor.setTo(0.5, 0.5);
     this.choppedTopCucumber.scale.setTo(2.5, 2.5);
 
-    this.knife = this.add.sprite(this.world.centerX + 200, this.world.centerY - 90, 'cutting-animation', 'knife/chop/0001');
+    this.knife = this.add.sprite(
+      this.world.centerX + 200,
+      this.world.centerY - 90,
+      'cutting-animation',
+      'knife/chop/0001',
+    );
     this.knife.anchor.setTo(0.5, 0.5);
-    this.knife.animations.add('chop', Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4), 5, true, false);
+    this.knife.animations.add(
+      'chop',
+      Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4),
+      5,
+      true,
+      false,
+    );
     this.knife.animations.play('chop', 10, true);
 
     // Bottom half of the cucumber
-    this.choppedBottomCucumber = this.add.image(this.world.centerX + 78, this.world.centerY + 18, 'choppedBottomCucumber');
+    this.choppedBottomCucumber = this.add.image(
+      this.world.centerX + 78,
+      this.world.centerY + 18,
+      'choppedBottomCucumber',
+    );
     this.choppedBottomCucumber.anchor.setTo(0.5, 0.5);
     this.choppedBottomCucumber.scale.setTo(2.5, 2.5);
 
@@ -51,16 +70,29 @@ module.exports = class Menu extends Phaser.State {
   }
 
   createButton() {
-    const buttonPlay = new Button(this.game, this.world.centerX, this.world.height - 150, this.buttonPlayClicked, this, 'button', 'Start');
+    const buttonPlay = new Button(
+      this.game,
+      this.world.centerX,
+      this.world.height - 150,
+      this.buttonPlayClicked,
+      this,
+      'button',
+      'Start',
+    );
     buttonPlay.anchor.setTo(0.5, 0.5);
     this.add.existing(buttonPlay);
   }
 
   createInstructions() {
-    this.instruction = this.add.text(this.world.centerX, this.world.height - 150, 'Sta op de plaat om te beginnen', {
-      font: '50px circular',
-      fill: '#fff',
-    });
+    this.instruction = this.add.text(
+      this.world.centerX,
+      this.world.height - 150,
+      'Sta op de plaat om te beginnen',
+      {
+        font: '50px circular',
+        fill: '#fff',
+      },
+    );
     this.instruction.anchor.setTo(0.5, 0.5);
 
     // => yPOS of this.instruction ~> this.world.height + 150

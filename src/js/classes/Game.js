@@ -11,6 +11,7 @@ const End = require('./states/End');
 module.exports = class Game extends Phaser.Game {
   constructor() {
     super(1920, 1080, Phaser.AUTO);
+
     this.state.add('Boot', Boot);
     this.state.add('Preload', Preload);
     this.state.add('Menu', Menu);
@@ -20,6 +21,7 @@ module.exports = class Game extends Phaser.Game {
     this.state.add('Leaderboard', Leaderboard);
     this.state.add('Play', Play);
     this.state.add('End', End);
+
     this.state.start('Boot');
   }
 };

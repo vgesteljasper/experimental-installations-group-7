@@ -23,7 +23,8 @@ module.exports = class Instructions extends Phaser.State {
   }
   createInstructions() {
     this.subTitle = this.add.text(
-      this.world.centerX, 300,
+      this.world.centerX,
+      300,
       `Sla op de plank om
       de groente in stukken te slaan`,
       { font: '50px circular-medium', fill: '#000', align: 'center' },
@@ -31,20 +32,44 @@ module.exports = class Instructions extends Phaser.State {
     this.subTitle.anchor.setTo(0.5, 0.5);
   }
   setupVegetableToChop(veggie) {
-    this.cucumberChop = this.add.sprite(this.world.centerX, this.world.centerY + 300, `${veggie}-cutting-animation`, `${veggie}/chop/000${COUNTER}`);
+    this.cucumberChop = this.add.sprite(
+      this.world.centerX,
+      this.world.centerY + 300,
+      `${veggie}-cutting-animation`,
+      `${veggie}/chop/000${COUNTER}`,
+    );
     this.cucumberChop.anchor.setTo(0.5, 0.5);
   }
 
   createButton() {
-    const buttonPlay = new Button(this.game, this.world.centerX, this.world.height - 150, this.PlayChopAnimation, this, 'button', 'Hit');
+    const buttonPlay = new Button(
+      this.game,
+      this.world.centerX,
+      this.world.height - 150,
+      this.PlayChopAnimation,
+      this,
+      'button',
+      'Hit',
+    );
     buttonPlay.anchor.setTo(0.5, 0.5);
     this.add.existing(buttonPlay);
   }
 
   createChoppingAnimation() {
-    this.knife = this.add.sprite(this.world.centerX + 200, this.world.centerY + 90, 'cutting-animation', 'knife/chop/0001');
+    this.knife = this.add.sprite(
+      this.world.centerX + 200,
+      this.world.centerY + 90,
+      'cutting-animation',
+      'knife/chop/0001',
+    );
     this.knife.anchor.setTo(0.5, 0.5);
-    this.knife.animations.add('chop', Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4), 100, true, false);
+    this.knife.animations.add(
+      'chop',
+      Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4),
+      100,
+      true,
+      false,
+    );
   }
 
   PlayChopAnimation() {
@@ -56,10 +81,7 @@ module.exports = class Instructions extends Phaser.State {
     TOTAL_CHOP_COUNT = this.cucumberChop.animations.frameTotal;
 
     if (COUNTER <= TOTAL_CHOP_COUNT) {
-      this.setupVegetableToChop(
-        'cucumber',
-        COUNTER,
-      );
+      this.setupVegetableToChop('cucumber', COUNTER);
     } else {
       this.state.start('OnboardingEnd');
       COUNTER = 1;
