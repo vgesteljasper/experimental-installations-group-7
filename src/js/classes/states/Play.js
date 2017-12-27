@@ -28,6 +28,7 @@ module.exports = class Play extends Phaser.State {
     window.localStorage.clear();
     TIME_START = new Date();
   }
+
   create() {
     console.log('[Play] — Create()');
 
@@ -51,18 +52,18 @@ module.exports = class Play extends Phaser.State {
     // indicator of what to chop and what already chopped
     this.generateChoppedIndicators();
 
-    this.registerKeys();
+    this.registerActionTriggers();
   }
 
-  registerKeys() {
-    this.chopKey = this.game.input.keyboard.addKey(Phaser.KeyCode.C);
-    this.chopKey.onUp.add(this.playChopAnimation, this);
+  registerActionTriggers() {
+    this.game.input.keyboard.addKey(Phaser.KeyCode.D).onUp.add(this.playChopAnimation, this);
+    this.game.input.keyboard.addKey(Phaser.KeyCode.L).onUp.add(this.leverVeggieAway, this);
+    this.game.input.keyboard.addKey(Phaser.KeyCode.S).onUp.add(this.slideAwayExplosion, this);
 
-    this.leverKey = this.game.input.keyboard.addKey(Phaser.KeyCode.L);
-    this.leverKey.onUp.add(this.leverVeggieAway, this);
-
-    this.sliderKey = this.game.input.keyboard.addKey(Phaser.KeyCode.S);
-    this.sliderKey.onUp.add(this.slideAwayExplosion, this);
+    this.playChopAnimation = this.playChopAnimation.bind(this);
+    this.leverVeggieAway = this.leverVeggieAway.bind(this);
+    Arduino.addEventListener('drum-hit', this.playChopAnimation);
+    Arduino.addEventListener('lever-pull', this.leverVeggieAway);
   }
 
   loadSounds() {
@@ -277,6 +278,7 @@ module.exports = class Play extends Phaser.State {
   }
 
   playChopAnimation() {
+    console.log('playChopAnimation()');
     if (this.gameEnded || DISABLE_HIT) {
       return;
     }
@@ -306,6 +308,7 @@ module.exports = class Play extends Phaser.State {
   }
 
   leverVeggieAway() {
+    console.log('leverVeggieAway()');
     if (!ENABLE_LEVER) {
       return;
     }
@@ -357,6 +360,9 @@ module.exports = class Play extends Phaser.State {
   }
 
   shutdown() {
+    Arduino.removeEventListener('drum-hit', this.playChopAnimation);
+    Arduino.removeEventListener('lever-pull', this.leverVeggieAway);
+
     COUNTER = 1;
     VEGGIES_COUNTER = 0;
 

@@ -25,14 +25,14 @@ module.exports = class Arduino extends EventTarget {
   onPortData(buffer) {
     const value = buffer.toString('ascii');
 
-    if (value === 'hit') {
+    if (value === 'drum-hit') {
       // emit event that the drumpad was hit
       this.dispatchEvent(new Event('drum-hit'));
     }
 
-    if (value === 'pull') {
+    if (value === 'lever-pull') {
       // emit event that the spoon was pulled
-      this.dispatchEvent(new Event('spoon-pull'));
+      this.dispatchEvent(new Event('lever-pull'));
     }
   }
 };

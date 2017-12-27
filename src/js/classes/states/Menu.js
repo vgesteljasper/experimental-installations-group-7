@@ -1,17 +1,17 @@
-const Button = require('../objects/Button');
-
 module.exports = class Menu extends Phaser.State {
   create() {
     console.log('[Menu] — create()');
     this.createaBackground();
     this.createLogo();
-    this.registerKeys();
     this.createInstructions();
+    this.registerActionTriggers();
   }
 
-  registerKeys() {
-    this.plateKey = this.game.input.keyboard.addKey(Phaser.KeyCode.P);
-    this.plateKey.onUp.add(this.goToNearbyState, this);
+  registerActionTriggers() {
+    this.game.input.keyboard.addKey(Phaser.KeyCode.P).onUp.add(this.goToNearbyState, this);
+
+    this.goToNearbyState = this.goToNearbyState.bind(this);
+    Arduino.addEventListener('plate-force', this.goToNearbyState);
   }
 
   createaBackground() {
@@ -87,7 +87,7 @@ module.exports = class Menu extends Phaser.State {
     this.instruction.anchor.setTo(0.5, 0.5);
 
     // => yPOS of this.instruction ~> this.world.height + 150
-    // ADD WHEN HAVING ARDUINO
+    // ADD WHEN HAVING Arduino
     // this.game.add.tween(this.instruction)
     //   .to({ y: this.world.height - 150 }, 400, Phaser.Easing.Cubic.EaseIn, true);
   }
@@ -95,5 +95,9 @@ module.exports = class Menu extends Phaser.State {
   goToNearbyState() {
     console.log('[Menu] — handleStart()');
     this.state.start('Nearby');
+  }
+
+  shutdown() {
+    Arduino.removeEventListener('plate-force', this.goToNearbyState);
   }
 };

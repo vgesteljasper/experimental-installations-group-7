@@ -3,12 +3,14 @@ module.exports = class End extends Phaser.State {
     console.log('[End] — create()');
     this.createaBackground();
     this.createScore();
-    this.registerKeys();
+    this.registerActionTriggers();
   }
 
-  registerKeys() {
-    this.chopKey = this.game.input.keyboard.addKey(Phaser.KeyCode.C);
-    this.chopKey.onUp.add(this.goToMenuState, this);
+  registerActionTriggers() {
+    this.game.input.keyboard.addKey(Phaser.KeyCode.D).onUp.add(this.goToMenuState, this);
+
+    this.goToMenuState = this.goToMenuState.bind(this);
+    Arduino.addEventListener('drum-hit', this.goToMenuState);
   }
 
   createaBackground() {
@@ -51,5 +53,9 @@ module.exports = class End extends Phaser.State {
   goToMenuState() {
     console.log('[End] — handleStart()');
     this.state.start('Menu');
+  }
+
+  shutdown() {
+    Arduino.removeEventListener('drum-hit', this.goToMenuState);
   }
 };

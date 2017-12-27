@@ -13,17 +13,16 @@ module.exports = class EventTarget {
   }
 
   removeEventListener(type, callback) {
-    if (!(type in this.listeners)) return;
+    if (!(type in this.listeners)) return this;
 
     const stack = this.listeners[type];
     for (let i = 0, l = stack.length; i < l; i += 1) {
       if (stack[i] === callback) {
         stack.splice(i, 1);
-        return;
+        break;
       }
     }
 
-    // eslint-disable-next-line consistent-return
     return this;
   }
 

@@ -11,7 +11,8 @@
     "class-methods-use-this": "off"
   },
   "globals": {
-    "Phaser": true
+    "Phaser": true,
+    "Arduino": true
   },
   "env": {
     "browser": true,

@@ -9,10 +9,8 @@ const Play = require('./states/Play');
 const End = require('./states/End');
 
 module.exports = class Game extends Phaser.Game {
-  constructor(arduino) {
+  constructor() {
     super(1920, 1080, Phaser.AUTO);
-
-    this.arduino = arduino;
 
     this.registerGameStates();
     this.startGame();

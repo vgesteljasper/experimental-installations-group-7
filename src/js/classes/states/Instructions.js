@@ -12,12 +12,14 @@ module.exports = class Instructions extends Phaser.State {
     this.createInstructions();
     this.setupVegetableToChop('cucumber');
     this.createChoppingAnimation();
-    this.registerKeys();
+    this.registerActionTriggers();
   }
 
-  registerKeys() {
-    this.chopKey = this.game.input.keyboard.addKey(Phaser.KeyCode.C);
-    this.chopKey.onUp.add(this.playChopAnimation, this);
+  registerActionTriggers() {
+    this.game.input.keyboard.addKey(Phaser.KeyCode.D).onUp.add(this.playChopAnimation, this);
+
+    this.playChopAnimation = this.playChopAnimation.bind(this);
+    Arduino.addEventListener('drum-hit', this.playChopAnimation);
   }
 
   loadSounds() {
@@ -91,6 +93,8 @@ module.exports = class Instructions extends Phaser.State {
   }
 
   shutdown() {
+    Arduino.removeEventListener('drum-hit', this.playChopAnimation);
+
     this.gameEnded = true;
     COUNTER = 1;
   }

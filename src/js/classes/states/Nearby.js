@@ -1,16 +1,16 @@
-const Button = require('../objects/Button');
-
 module.exports = class Nearby extends Phaser.State {
   create() {
     console.log('[Menu] — create()');
     this.createaBackground();
     this.createLogo();
-    this.registerKeys();
+    this.registerActionTriggers();
   }
 
-  registerKeys() {
-    this.chopKey = this.game.input.keyboard.addKey(Phaser.KeyCode.C);
-    this.chopKey.onUp.add(this.goToInstructionsState, this);
+  registerActionTriggers() {
+    this.game.input.keyboard.addKey(Phaser.KeyCode.D).onUp.add(this.goToInstructionsState, this);
+
+    this.goToInstructionsState = this.goToInstructionsState.bind(this);
+    Arduino.addEventListener('drum-hit', this.goToInstructionsState);
   }
 
   createaBackground() {
@@ -103,5 +103,9 @@ module.exports = class Nearby extends Phaser.State {
   goToInstructionsState() {
     console.log('[Nearby] — handleStart()');
     this.state.start('Instructions');
+  }
+
+  shutdown() {
+    Arduino.removeEventListener('drum-hit', this.goToInstructionsState);
   }
 };
