@@ -1,5 +1,3 @@
-const Button = require('../objects/Button');
-
 let TOTAL_CHOP_COUNT;
 let COUNTER = 1;
 
@@ -7,20 +5,29 @@ module.exports = class Instructions extends Phaser.State {
   init() {
     this.gameEnded = false;
   }
+
   create() {
     this.loadSounds();
     this.createaBackground();
     this.createInstructions();
     this.setupVegetableToChop('cucumber');
     this.createChoppingAnimation();
-    this.createButton();
+    this.registerKeys();
   }
+
+  registerKeys() {
+    this.chopKey = this.game.input.keyboard.addKey(Phaser.KeyCode.C);
+    this.chopKey.onUp.add(this.playChopAnimation, this);
+  }
+
   loadSounds() {
     this.chop = this.game.add.audio('chop');
   }
+
   createaBackground() {
     this.background = this.add.image(0, 0, 'kitchenBackground');
   }
+
   createInstructions() {
     this.subTitle = this.add.text(
       this.world.centerX,
@@ -31,6 +38,7 @@ module.exports = class Instructions extends Phaser.State {
     );
     this.subTitle.anchor.setTo(0.5, 0.5);
   }
+
   setupVegetableToChop(veggie) {
     this.cucumberChop = this.add.sprite(
       this.world.centerX,
@@ -39,20 +47,6 @@ module.exports = class Instructions extends Phaser.State {
       `${veggie}/chop/000${COUNTER}`,
     );
     this.cucumberChop.anchor.setTo(0.5, 0.5);
-  }
-
-  createButton() {
-    const buttonPlay = new Button(
-      this.game,
-      this.world.centerX,
-      this.world.height - 150,
-      this.PlayChopAnimation,
-      this,
-      'button',
-      'Hit',
-    );
-    buttonPlay.anchor.setTo(0.5, 0.5);
-    this.add.existing(buttonPlay);
   }
 
   createChoppingAnimation() {
@@ -72,7 +66,7 @@ module.exports = class Instructions extends Phaser.State {
     );
   }
 
-  PlayChopAnimation() {
+  playChopAnimation() {
     this.cucumberChop.kill();
 
     COUNTER += 1;

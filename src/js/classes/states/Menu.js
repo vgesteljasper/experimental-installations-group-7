@@ -5,8 +5,13 @@ module.exports = class Menu extends Phaser.State {
     console.log('[Menu] — create()');
     this.createaBackground();
     this.createLogo();
-    this.createButton();
+    this.registerKeys();
     this.createInstructions();
+  }
+
+  registerKeys() {
+    this.plateKey = this.game.input.keyboard.addKey(Phaser.KeyCode.P);
+    this.plateKey.onUp.add(this.goToNearbyState, this);
   }
 
   createaBackground() {
@@ -69,20 +74,6 @@ module.exports = class Menu extends Phaser.State {
     this.logoBorder.anchor.setTo(0.5, 0.5);
   }
 
-  createButton() {
-    const buttonPlay = new Button(
-      this.game,
-      this.world.centerX,
-      this.world.height - 150,
-      this.buttonPlayClicked,
-      this,
-      'button',
-      'Start',
-    );
-    buttonPlay.anchor.setTo(0.5, 0.5);
-    this.add.existing(buttonPlay);
-  }
-
   createInstructions() {
     this.instruction = this.add.text(
       this.world.centerX,
@@ -101,7 +92,7 @@ module.exports = class Menu extends Phaser.State {
     //   .to({ y: this.world.height - 150 }, 400, Phaser.Easing.Cubic.EaseIn, true);
   }
 
-  buttonPlayClicked() {
+  goToNearbyState() {
     console.log('[Menu] — handleStart()');
     this.state.start('Nearby');
   }

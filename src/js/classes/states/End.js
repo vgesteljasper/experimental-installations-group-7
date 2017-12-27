@@ -1,15 +1,18 @@
-const Button = require('../objects/Button');
-
 module.exports = class End extends Phaser.State {
   create() {
-    console.log('[Menu] — create()');
+    console.log('[End] — create()');
     this.createaBackground();
     this.createScore();
-    this.createButton();
+    this.registerKeys();
+  }
+
+  registerKeys() {
+    this.chopKey = this.game.input.keyboard.addKey(Phaser.KeyCode.C);
+    this.chopKey.onUp.add(this.goToMenuState, this);
   }
 
   createaBackground() {
-    console.log('[Menu] — createaBackground()');
+    console.log('[End] — createaBackground()');
     this.game.stage.backgroundColor = '#FF780F';
   }
 
@@ -45,22 +48,8 @@ module.exports = class End extends Phaser.State {
     this.game.add.tween(this.score).to({ alpha: 1 }, 400, Phaser.Easing.Cubic.EaseIn, true, 400);
   }
 
-  createButton() {
-    const buttonPlay = new Button(
-      this.game,
-      this.world.centerX,
-      this.world.height - 150,
-      this.buttonPlayClicked,
-      this,
-      'button',
-      'Naar het begin',
-    );
-    buttonPlay.anchor.setTo(0.5, 0.5);
-    this.add.existing(buttonPlay);
-  }
-
-  buttonPlayClicked() {
-    console.log('[OnboardingEnd] — handleStart()');
+  goToMenuState() {
+    console.log('[End] — handleStart()');
     this.state.start('Menu');
   }
 };

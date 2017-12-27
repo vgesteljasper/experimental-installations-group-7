@@ -1,18 +1,16 @@
-const Button = require('../objects/Button');
-
 let COUNTDOWN = 4;
 
 module.exports = class OnboardingEnd extends Phaser.State {
   create() {
-    console.log('[Menu] — create()');
+    console.log('[OnboardingEnd] — create()');
     this.createaBackground();
     this.createFeedback();
     this.setupCountdownText();
-    this.createButton();
+    this.goToPlayState();
   }
 
   createaBackground() {
-    console.log('[Menu] — createaBackground()');
+    console.log('[OnboardingEnd] — createaBackground()');
     this.game.stage.backgroundColor = '#FF780F';
   }
 
@@ -46,21 +44,7 @@ module.exports = class OnboardingEnd extends Phaser.State {
     this.cumcum.scale.setTo(2.5, 2.5);
   }
 
-  createButton() {
-    const buttonPlay = new Button(
-      this.game,
-      this.world.centerX,
-      this.world.height - 150,
-      this.buttonPlayClicked,
-      this,
-      'button',
-      'Start',
-    );
-    buttonPlay.anchor.setTo(0.5, 0.5);
-    this.add.existing(buttonPlay);
-  }
-
-  buttonPlayClicked() {
+  goToPlayState() {
     console.log('[OnboardingEnd] — handleStart()');
     this.time.events.repeat(Phaser.Timer.SECOND, 4, this.handleCountdown, this);
   }

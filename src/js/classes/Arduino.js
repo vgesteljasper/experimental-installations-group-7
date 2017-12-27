@@ -15,11 +15,11 @@ module.exports = class Arduino extends EventTarget {
   }
 
   onPortError(error) {
-    console.log(error.message);
+    console.error('%c Arduino ', 'background-color:#D97333;color:white;', error.message);
   }
 
   onPortOpened() {
-    console.log('port opened');
+    console.log('%c Arduino ', 'background-color:#D97333;color:white;', 'port opened');
   }
 
   onPortData(buffer) {

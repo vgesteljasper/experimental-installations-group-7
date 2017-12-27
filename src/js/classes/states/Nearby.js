@@ -5,16 +5,21 @@ module.exports = class Nearby extends Phaser.State {
     console.log('[Menu] — create()');
     this.createaBackground();
     this.createLogo();
-    this.createButton();
+    this.registerKeys();
+  }
+
+  registerKeys() {
+    this.chopKey = this.game.input.keyboard.addKey(Phaser.KeyCode.C);
+    this.chopKey.onUp.add(this.goToInstructionsState, this);
   }
 
   createaBackground() {
-    console.log('[Menu] — createaBackground()');
+    console.log('[Nearby] — createaBackground()');
     this.game.stage.backgroundColor = '#FF780F';
   }
 
   createLogo() {
-    console.log('[Menu] — createLogo()');
+    console.log('[Nearby] — createLogo()');
 
     // change position + move to background
     this.logoFill = this.add.image(this.world.centerX, this.world.centerY, 'logoFill');
@@ -95,26 +100,8 @@ module.exports = class Nearby extends Phaser.State {
     this.knife.animations.play('chop', 10, true);
   }
 
-  createButton() {
-    const buttonPlay = new Button(
-      this.game,
-      this.world.centerX,
-      this.world.height - 150,
-      this.buttonPlayClicked,
-      this,
-      'button',
-      'Start',
-    );
-    buttonPlay.anchor.setTo(0.5, 0.5);
-    this.add.existing(buttonPlay);
-
-    // ADD WHEN HAVING ARDUINO
-    // this.game.add.tween(buttonPlay)
-    //   .to({ y: this.world.height + 150 }, 200, Phaser.Easing.Cubic.EaseOut, true);
-  }
-
-  buttonPlayClicked() {
-    console.log('[Menu] — handleStart()');
+  goToInstructionsState() {
+    console.log('[Nearby] — handleStart()');
     this.state.start('Instructions');
   }
 };

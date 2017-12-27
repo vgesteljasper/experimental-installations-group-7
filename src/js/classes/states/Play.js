@@ -1,10 +1,10 @@
-const Button = require('../objects/Button');
+const ChoppedIndicator = require('./../objects/ChoppedIndicator');
 
 let TOTAL_CHOP_COUNT;
 let COUNTER = 1;
 let VEGGIES_COUNTER = 0;
 
-let randomVeggies = [];
+// let RANDOM_VEGGIES = [];
 let VEGGIE_BEING_CUT = '';
 let VEGGIE_NAME = '';
 let VEGGIE_XPOS = '';
@@ -16,7 +16,8 @@ let TIME_START = '';
 
 let COUNTDOWN = 6;
 
-let DISABLE_LEVER = false;
+let ENABLE_LEVER = false;
+let ENABLE_SLIDER = false;
 let DISABLE_HIT = false;
 
 const VEGGIE_GUTTER = 60;
@@ -24,26 +25,61 @@ const VEGGIE_GUTTER = 60;
 module.exports = class Play extends Phaser.State {
   init() {
     this.gameEnded = false;
-    localStorage.clear();
+    window.localStorage.clear();
     TIME_START = new Date();
   }
   create() {
     console.log('[Play] — Create()');
+
+    this.veggies = [
+      'eggplant',
+      'carrot',
+      'onion',
+      'cucumber',
+      'rotten-eggplant',
+      'paprika',
+      'tomato',
+    ];
+
     this.loadSounds();
     this.createaBackground();
+    this.shuffleVeggies();
 
-    this.createRandomOrder();
+    VEGGIE_BEING_CUT = this.veggies[VEGGIES_COUNTER];
+    this.startVeggieSetup(VEGGIE_BEING_CUT);
 
     // indicator of what to chop and what already chopped
-    this.createVeggiesToChop();
-    this.createButton();
+    this.generateChoppedIndicators();
+
+    this.registerKeys();
   }
+
+  registerKeys() {
+    this.chopKey = this.game.input.keyboard.addKey(Phaser.KeyCode.C);
+    this.chopKey.onUp.add(this.playChopAnimation, this);
+
+    this.leverKey = this.game.input.keyboard.addKey(Phaser.KeyCode.L);
+    this.leverKey.onUp.add(this.leverVeggieAway, this);
+
+    this.sliderKey = this.game.input.keyboard.addKey(Phaser.KeyCode.S);
+    this.sliderKey.onUp.add(this.slideAwayExplosion, this);
+  }
+
   loadSounds() {
     this.chop = this.game.add.audio('chop');
   }
+
   createaBackground() {
     console.log('[Play] — createLogo()');
     this.background = this.add.image(0, 0, 'kitchenBackground');
+  }
+
+  shuffleVeggies() {
+    if (this.gameEnded) {
+      return;
+    }
+
+    this.veggies = this.shuffle(this.veggies);
   }
 
   shuffle(array) {
@@ -59,34 +95,14 @@ module.exports = class Play extends Phaser.State {
     return array;
   }
 
-  createRandomOrder() {
-    if (this.gameEnded) {
-      return;
-    }
-    this.veggies = [
-      'eggplant',
-      'carrot',
-      'onion',
-      'cucumber',
-      'rotten-eggplant',
-      'paprika',
-      'tomato',
-    ];
-    randomVeggies = this.shuffle(this.veggies);
-    VEGGIE_BEING_CUT = randomVeggies[VEGGIES_COUNTER];
-    this.setupVeggie(VEGGIE_BEING_CUT);
-  }
-
   positionVegetableToChop(name, xpos, ypos, scale) {
     VEGGIE_NAME = name;
     VEGGIE_XPOS = xpos;
     VEGGIE_YPOS = ypos;
     VEGGIE_SCALE = scale;
-
-    this.setupVegetableToChop(VEGGIE_NAME, VEGGIE_XPOS, VEGGIE_YPOS, VEGGIE_SCALE);
   }
 
-  setupVeggie(veggie) {
+  startVeggieSetup(veggie) {
     if (this.gameEnded) {
       return;
     }
@@ -119,18 +135,20 @@ module.exports = class Play extends Phaser.State {
         this.positionVegetableToChop('tomato', center, height - 380, 1);
         break;
 
-      case 'rotten-egplant':
+      case 'rotten-eggplant':
         this.positionVegetableToChop('rotten-eggplant', center + 50, height - 380, 0.7);
-        this.createLever();
+        ENABLE_LEVER = true;
         break;
 
       default:
         break;
     }
+
+    this.setupVegetableToChop(VEGGIE_NAME, VEGGIE_XPOS, VEGGIE_YPOS, VEGGIE_SCALE);
   }
 
   // veggies indicators
-  createVeggiesToChop() {
+  generateChoppedIndicators() {
     // rounded background for the indicators
     this.VegetableIndicatorBackground = this.game.add.graphics(0, 0);
     this.VegetableIndicatorBackground.beginFill(0xffffff, 1);
@@ -138,13 +156,11 @@ module.exports = class Play extends Phaser.State {
 
     this.veggieProgressArray = [];
 
-    for (let i = 0; i < this.veggies.length; i += 1) {
-      const veggieProgress = this.game.add.graphics(0, 0);
-      veggieProgress.beginFill(0xededed, 1);
-      veggieProgress.lineStyle(2, 0xff0000, 1);
-      veggieProgress.drawCircle(1500 + i * VEGGIE_GUTTER, 65, 50);
-
-      this.veggieProgressArray.push(veggieProgress);
+    let i = 0;
+    while (i < 7) {
+      const indicator = new ChoppedIndicator(this.game, i, VEGGIE_GUTTER);
+      this.veggieProgressArray.push(indicator);
+      i += 1;
     }
   }
 
@@ -192,7 +208,13 @@ module.exports = class Play extends Phaser.State {
   }
 
   slideAwayExplosion() {
+    if (!ENABLE_SLIDER) {
+      return;
+    }
+
     COUNTDOWN -= 1;
+    ENABLE_LEVER = false;
+
     this.splash.kill();
     this.splash = this.add.sprite(
       this.world.centerX,
@@ -205,13 +227,9 @@ module.exports = class Play extends Phaser.State {
 
     if (COUNTDOWN === 1) {
       console.log('[slideAwayExplosion]', 'COUNTDOWN is ONE');
-      console.log('[slideAwayExplosion()]', this.buttonLever);
-      DISABLE_LEVER = false;
+      ENABLE_SLIDER = false;
       DISABLE_HIT = false;
-      this.buttonLever.kill();
       this.splash.kill();
-      this.buttonSlider.kill();
-      this.buttonLever.kill();
       this.rottenEggplant.kill();
       this.setupNextVeggie();
       COUNTDOWN = 6;
@@ -231,7 +249,7 @@ module.exports = class Play extends Phaser.State {
 
   playSplashAnimation() {
     DISABLE_HIT = true;
-    DISABLE_LEVER = true;
+    ENABLE_LEVER = false;
 
     this.splash = this.add.sprite(
       this.world.centerX,
@@ -254,16 +272,12 @@ module.exports = class Play extends Phaser.State {
     this.splash.events.onAnimationComplete.add((e) => {
       e.kill();
       this.setupReverseAnimation();
-      this.createSlider();
+      ENABLE_SLIDER = true;
     }, this);
   }
 
   playChopAnimation() {
-    if (this.gameEnded) {
-      return;
-    }
-
-    if (DISABLE_HIT && DISABLE_LEVER) {
+    if (this.gameEnded || DISABLE_HIT) {
       return;
     }
 
@@ -281,71 +295,24 @@ module.exports = class Play extends Phaser.State {
         this.setupNextVeggie();
         COUNTER = 1;
       }
-    } else if (VEGGIE_NAME === 'rotten-eggplant') {
-      this.createLever();
+    } else if (VEGGIE_NAME === 'rotten-eggplant' && COUNTER === 2) {
+      this.playSplashAnimation();
     }
 
     if (VEGGIE_NAME === 'onion') {
       this.setupBlur();
       BLUR_COUNTER += 1;
     }
-
-    if (VEGGIE_NAME === 'rotten-eggplant' && COUNTER === 2) {
-      this.playSplashAnimation();
-    }
-  }
-
-  createButton() {
-    this.buttonPlay = new Button(
-      this.game,
-      this.world.centerX,
-      this.world.height - 150,
-      this.playChopAnimation,
-      this,
-      'button',
-      'Hit',
-    );
-    this.buttonPlay.anchor.setTo(0.5, 0.5);
-    this.add.existing(this.buttonPlay);
   }
 
   leverVeggieAway() {
-    if (DISABLE_LEVER) {
+    if (!ENABLE_LEVER) {
       return;
     }
+
+    ENABLE_LEVER = false;
     this.rottenEggplant.kill();
-    if (this.buttonSlider) {
-      this.buttonSlider.kill();
-    }
     this.setupNextVeggie();
-  }
-
-  createSlider() {
-    this.buttonSlider = new Button(
-      this.game,
-      this.world.centerX - 550,
-      this.world.height - 150,
-      this.slideAwayExplosion,
-      this,
-      'button',
-      'Slider',
-    );
-    this.buttonSlider.anchor.setTo(0.5, 0.5);
-    this.add.existing(this.buttonSlider);
-  }
-
-  createLever() {
-    this.buttonLever = new Button(
-      this.game,
-      this.world.centerX + 550,
-      this.world.height - 150,
-      this.leverVeggieAway,
-      this,
-      'button',
-      'Lever',
-    );
-    this.buttonLever.anchor.setTo(0.5, 0.5);
-    this.add.existing(this.buttonLever);
   }
 
   updateProgressbar() {
@@ -364,15 +331,11 @@ module.exports = class Play extends Phaser.State {
 
     this.updateProgressbar();
 
-    if (this.buttonLever) {
-      this.buttonLever.kill();
-    }
-
     // Add counter to get the next veggie in the array
     VEGGIES_COUNTER += 1;
 
-    if (VEGGIES_COUNTER < randomVeggies.length) {
-      this.setupVeggie(randomVeggies[VEGGIES_COUNTER]);
+    if (VEGGIES_COUNTER < this.veggies.length) {
+      this.startVeggieSetup(this.veggies[VEGGIES_COUNTER]);
     } else {
       this.gameEnded = true;
 
@@ -387,7 +350,7 @@ module.exports = class Play extends Phaser.State {
         seconds = `${seconds}`;
       }
       const TIME_FORMAT = `0${minutes}:${seconds}`;
-      localStorage.setItem('timePlayed', TIME_FORMAT);
+      window.localStorage.setItem('timePlayed', TIME_FORMAT);
 
       this.state.start('End');
     }
@@ -397,7 +360,7 @@ module.exports = class Play extends Phaser.State {
     COUNTER = 1;
     VEGGIES_COUNTER = 0;
 
-    randomVeggies = [];
+    // RANDOM_VEGGIES = [];
     VEGGIE_BEING_CUT = '';
     VEGGIE_NAME = '';
     VEGGIE_XPOS = '';

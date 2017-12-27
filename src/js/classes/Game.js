@@ -14,9 +14,11 @@ module.exports = class Game extends Phaser.Game {
 
     this.arduino = arduino;
 
-    this.arduino.addEventListener('drum-hit', this.logDrumHit);
-    this.arduino.addEventListener('spoon-pull', this.logSpoonPull);
+    this.registerGameStates();
+    this.startGame();
+  }
 
+  registerGameStates() {
     this.state.add('Boot', Boot);
     this.state.add('Preload', Preload);
     this.state.add('Menu', Menu);
@@ -26,15 +28,9 @@ module.exports = class Game extends Phaser.Game {
     this.state.add('Leaderboard', Leaderboard);
     this.state.add('Play', Play);
     this.state.add('End', End);
+  }
 
+  startGame() {
     this.state.start('Boot');
-  }
-
-  logDrumHit() {
-    console.log('drum-hit');
-  }
-
-  logSpoonPull() {
-    console.log('spoon-pull');
   }
 };
