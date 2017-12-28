@@ -1,9 +1,9 @@
 module.exports = class Nearby extends Phaser.State {
   create() {
-    console.log('[Menu] — create()');
     this.createaBackground();
     this.createLogo();
     this.registerActionTriggers();
+    this.createInstructions();
   }
 
   registerActionTriggers() {
@@ -14,13 +14,10 @@ module.exports = class Nearby extends Phaser.State {
   }
 
   createaBackground() {
-    console.log('[Nearby] — createaBackground()');
     this.game.stage.backgroundColor = '#FF780F';
   }
 
   createLogo() {
-    console.log('[Nearby] — createLogo()');
-
     // change position + move to background
     this.logoFill = this.add.image(this.world.centerX, this.world.centerY, 'logoFill');
     this.logoFill.anchor.setTo(0.5, 0.5);
@@ -34,14 +31,14 @@ module.exports = class Nearby extends Phaser.State {
     this.tomato = this.add.image(this.world.centerX - 110, this.world.centerY - 50, 'tomato');
     this.tomato.anchor.setTo(0.5, 0.5);
     this.tomato.scale.setTo(2, 2);
-    this.game.add.tween(this.tomato).to({ alpha: 0 }, 150, Phaser.Easing.Cubic.EaseOut, true);
+    this.game.add.tween(this.tomato).to({ alpha: 0 }, 250, Phaser.Easing.Cubic.EaseOut, true);
 
     // Carrot
     this.carrot = this.add.image(this.world.centerX - 230, this.world.centerY, 'carrot');
     this.carrot.anchor.setTo(0.5, 0.5);
     this.carrot.angle = -17;
     this.carrot.scale.setTo(-3, 3);
-    this.game.add.tween(this.carrot).to({ alpha: 0 }, 150, Phaser.Easing.Cubic.EaseOut, true);
+    this.game.add.tween(this.carrot).to({ alpha: 0 }, 250, Phaser.Easing.Cubic.EaseOut, true);
 
     // Top half of the cucumber
     this.choppedTopCucumber = this.add.image(
@@ -53,7 +50,7 @@ module.exports = class Nearby extends Phaser.State {
     this.choppedTopCucumber.scale.setTo(2.5, 2.5);
     this.game.add
       .tween(this.choppedTopCucumber)
-      .to({ alpha: 0 }, 150, Phaser.Easing.Cubic.EaseOut, true);
+      .to({ alpha: 0 }, 250, Phaser.Easing.Cubic.EaseOut, true);
 
     // Bottom half of the cucumber
     this.choppedBottomCucumber = this.add.image(
@@ -65,7 +62,7 @@ module.exports = class Nearby extends Phaser.State {
     this.choppedBottomCucumber.scale.setTo(2.5, 2.5);
     this.game.add
       .tween(this.choppedBottomCucumber)
-      .to({ alpha: 0 }, 150, Phaser.Easing.Cubic.EaseOut, true);
+      .to({ alpha: 0 }, 250, Phaser.Easing.Cubic.EaseOut, true);
 
     this.plate = this.add.sprite(
       this.world.centerX + 15,
@@ -100,8 +97,20 @@ module.exports = class Nearby extends Phaser.State {
     this.knife.animations.play('chop', 10, true);
   }
 
+  createInstructions() {
+    this.instruction = this.add.text(
+      this.world.centerX,
+      this.world.height - 150,
+      'Sla op de plaat',
+      {
+        font: '50px circular',
+        fill: '#fff',
+      },
+    );
+    this.instruction.anchor.setTo(0.5, 0.5);
+  }
+
   goToInstructionsState() {
-    console.log('[Nearby] — handleStart()');
     this.state.start('Instructions');
   }
 
