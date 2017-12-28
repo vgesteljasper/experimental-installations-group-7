@@ -18,27 +18,20 @@ module.exports = class Nearby extends Phaser.State {
   }
 
   createLogo() {
-    // change position + move to background
-    this.logoFill = this.add.image(this.world.centerX, this.world.centerY, 'logoFill');
-    this.logoFill.anchor.setTo(0.5, 0.5);
-    this.game.add.tween(this.logoFill).to({ y: 400 }, 250, Phaser.Easing.Cubic.EaseIn, true);
-
-    this.logoBorder = this.add.image(this.world.centerX, this.world.centerY, 'logoBorder');
-    this.logoBorder.anchor.setTo(0.5, 0.5);
-    this.game.add.tween(this.logoBorder).to({ y: 400 }, 250, Phaser.Easing.Cubic.EaseIn, true);
-
     // Tomato
     this.tomato = this.add.image(this.world.centerX - 110, this.world.centerY - 50, 'tomato');
     this.tomato.anchor.setTo(0.5, 0.5);
     this.tomato.scale.setTo(2, 2);
-    this.game.add.tween(this.tomato).to({ alpha: 0 }, 250, Phaser.Easing.Cubic.EaseOut, true);
+    this.game.add.tween(this.tomato)
+      .to({ alpha: 0.25, y: 350 }, 250, Phaser.Easing.Cubic.EaseOut, true);
 
     // Carrot
     this.carrot = this.add.image(this.world.centerX - 230, this.world.centerY, 'carrot');
     this.carrot.anchor.setTo(0.5, 0.5);
     this.carrot.angle = -17;
     this.carrot.scale.setTo(-3, 3);
-    this.game.add.tween(this.carrot).to({ alpha: 0 }, 250, Phaser.Easing.Cubic.EaseOut, true);
+    this.game.add.tween(this.carrot)
+      .to({ alpha: 0.25, y: 400 }, 250, Phaser.Easing.Cubic.EaseOut, true);
 
     // Top half of the cucumber
     this.choppedTopCucumber = this.add.image(
@@ -50,7 +43,7 @@ module.exports = class Nearby extends Phaser.State {
     this.choppedTopCucumber.scale.setTo(2.5, 2.5);
     this.game.add
       .tween(this.choppedTopCucumber)
-      .to({ alpha: 0 }, 250, Phaser.Easing.Cubic.EaseOut, true);
+      .to({ alpha: 0.25, y: 400 }, 250, Phaser.Easing.Cubic.EaseOut, true);
 
     // Bottom half of the cucumber
     this.choppedBottomCucumber = this.add.image(
@@ -62,7 +55,16 @@ module.exports = class Nearby extends Phaser.State {
     this.choppedBottomCucumber.scale.setTo(2.5, 2.5);
     this.game.add
       .tween(this.choppedBottomCucumber)
-      .to({ alpha: 0 }, 250, Phaser.Easing.Cubic.EaseOut, true);
+      .to({ alpha: 0.25, y: 400 }, 250, Phaser.Easing.Cubic.EaseOut, true);
+
+    // change position + move to background
+    this.logoFill = this.add.image(this.world.centerX, this.world.centerY, 'logoFill');
+    this.logoFill.anchor.setTo(0.5, 0.5);
+    this.game.add.tween(this.logoFill).to({ y: 400 }, 250, Phaser.Easing.Cubic.EaseIn, true);
+
+    this.logoBorder = this.add.image(this.world.centerX, this.world.centerY, 'logoBorder');
+    this.logoBorder.anchor.setTo(0.5, 0.5);
+    this.game.add.tween(this.logoBorder).to({ y: 400 }, 250, Phaser.Easing.Cubic.EaseIn, true);
 
     this.plate = this.add.sprite(
       this.world.centerX + 15,
