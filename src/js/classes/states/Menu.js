@@ -78,7 +78,7 @@ module.exports = class Menu extends Phaser.State {
     this.instruction = this.add.text(
       this.world.centerX,
       this.world.height - 150,
-      'Sta op de plaat om te beginnen',
+      'Sta op de        om te beginnen',
       {
         font: '50px circular',
         fill: '#fff',
@@ -86,10 +86,9 @@ module.exports = class Menu extends Phaser.State {
     );
     this.instruction.anchor.setTo(0.5, 0.5);
 
-    // => yPOS of this.instruction ~> this.world.height + 150
-    // ADD WHEN HAVING Arduino
-    // this.game.add.tween(this.instruction)
-    //   .to({ y: this.world.height - 150 }, 400, Phaser.Easing.Cubic.EaseIn, true);
+    this.pressurePlate = this.add.image(this.world.centerX - 67, this.world.height - 150, 'pressure-plate');
+    this.pressurePlate.anchor.setTo(0.5, 0.5);
+    this.pressurePlate.scale.setTo(0.1, 0.1);
   }
 
   goToNearbyState() {

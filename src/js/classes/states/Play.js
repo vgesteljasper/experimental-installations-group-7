@@ -30,8 +30,6 @@ module.exports = class Play extends Phaser.State {
   }
 
   create() {
-    console.log('[Play] — Create()');
-
     this.veggies = [
       'eggplant',
       'carrot',
@@ -148,9 +146,7 @@ module.exports = class Play extends Phaser.State {
     this.setupVegetableToChop(VEGGIE_NAME, VEGGIE_XPOS, VEGGIE_YPOS, VEGGIE_SCALE);
   }
 
-  // veggies indicators
   generateChoppedIndicators() {
-    // rounded background for the indicators
     this.VegetableIndicatorBackground = this.game.add.graphics(0, 0);
     this.VegetableIndicatorBackground.beginFill(0xffffff, 1);
     this.VegetableIndicatorBackground.drawRoundedRect(1450, 15, 460, 100, 58);
@@ -278,7 +274,6 @@ module.exports = class Play extends Phaser.State {
   }
 
   playChopAnimation() {
-    console.log('playChopAnimation()');
     if (this.gameEnded || DISABLE_HIT) {
       return;
     }
@@ -308,7 +303,6 @@ module.exports = class Play extends Phaser.State {
   }
 
   leverVeggieAway() {
-    console.log('leverVeggieAway()');
     if (!ENABLE_LEVER) {
       return;
     }
@@ -324,7 +318,7 @@ module.exports = class Play extends Phaser.State {
     const veggieChopped = this.game.add.graphics(0, 0);
     veggieChopped.beginFill(0xededed, 1);
     veggieChopped.lineStyle(2, 0x00ff00, 1);
-    veggieChopped.drawCircle(1500 + VEGGIES_COUNTER * VEGGIE_GUTTER, 65, 50);
+    veggieChopped.drawCircle(1500 + (VEGGIES_COUNTER * VEGGIE_GUTTER), 65, 50);
   }
 
   setupNextVeggie() {
