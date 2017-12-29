@@ -223,7 +223,6 @@ module.exports = class Play extends Phaser.State {
     this.splash.scale.setTo(1.8, 1.8);
 
     if (COUNTDOWN === 1) {
-      console.log('[slideAwayExplosion]', 'COUNTDOWN is ONE');
       ENABLE_SLIDER = false;
       DISABLE_HIT = false;
       this.splash.kill();

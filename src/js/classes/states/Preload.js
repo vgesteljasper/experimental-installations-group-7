@@ -24,6 +24,7 @@ module.exports = class Preload extends Phaser.State {
     this.load.image('choppedBottomCucumber', 'assets/img/cucumber-chopped-bottom.png');
     this.load.image('carrot', 'assets/img/carrot.png');
     this.load.image('tomato', 'assets/img/tomato.png');
+    this.load.image('rotten-pepper', 'assets/img/rotten-pepper.png');
 
     this.load.atlasJSONHash(
       'button-comp',
