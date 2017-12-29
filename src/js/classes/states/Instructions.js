@@ -31,14 +31,36 @@ module.exports = class Instructions extends Phaser.State {
   }
 
   createInstructions() {
-    this.subTitle = this.add.text(
+    /* INSTEAD OF TEXT */
+
+    // this.iconBackground = this.game.add.graphics(0, 0);
+    // this.iconBackground.lineStyle(5, 0xFF0000, 0.5);
+    // // this.iconBackground.beginFill(0xFF780F, 1);
+    // this.iconBackground.drawRect(this.world.centerX - 125, 180, 250, 150);
+    // this.iconBackground.endFill();
+    // this.iconBackground.anchor.setTo(0.5, 0.5);
+
+    this.plate = this.add.sprite(
       this.world.centerX,
-      300,
-      `Sla op de plank om
-      de groente in stukken te slaan`,
-      { font: '50px circular-medium', fill: '#000', align: 'center' },
+      280,
+      'plate-animation',
+      'plate/0001',
     );
-    this.subTitle.anchor.setTo(0.5, 0.5);
+    this.plate.anchor.setTo(0.5, 0.5);
+    this.plate.animations.add('pressure', Phaser.Animation.generateFrameNames('plate/', 1, 5, '', 4), 2, true, false);
+    this.plate.scale.setTo(0.3, 0.3);
+    this.plate.animations.play('pressure', 10, true);
+
+    this.knife = this.add.sprite(
+      this.world.centerX + 60,
+      200,
+      'cutting-animation',
+      'knife/chop/0001',
+    );
+    this.knife.anchor.setTo(0.5, 0.5);
+    this.knife.animations.add('chop', Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4), 5, true, false);
+    this.knife.scale.setTo(0.4, 0.4);
+    this.knife.animations.play('chop', 10, true);
   }
 
   setupVegetableToChop(veggie) {
