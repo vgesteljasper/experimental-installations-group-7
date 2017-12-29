@@ -75,6 +75,11 @@ module.exports = class Preload extends Phaser.State {
       'assets/img/components/plate-animation.png',
       'assets/img/components/plate-animation.json',
     );
+    this.load.atlasJSONHash(
+      'lever-animation',
+      'assets/img/components/lever-animation.png',
+      'assets/img/components/lever-animation.json',
+    );
 
     this.load.audio('chop', 'assets/audio/chop.mp3');
 

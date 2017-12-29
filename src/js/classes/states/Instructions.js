@@ -61,6 +61,18 @@ module.exports = class Instructions extends Phaser.State {
     this.knife.animations.add('chop', Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4), 5, true, false);
     this.knife.scale.setTo(0.4, 0.4);
     this.knife.animations.play('chop', 10, true);
+
+
+    this.lever = this.add.sprite(
+      this.world.centerX,
+      230,
+      'lever-animation',
+      'lever/0001',
+    );
+    this.lever.anchor.setTo(0.5, 0.5);
+    this.lever.animations.add('lever', Phaser.Animation.generateFrameNames('lever/', 1, 5, '', 4), 2, true, false);
+    this.lever.scale.setTo(0.4, 0.4);
+    this.lever.animations.play('lever', 2, true);
   }
 
   setupVegetableToChop(veggie) {
