@@ -80,6 +80,11 @@ module.exports = class Preload extends Phaser.State {
       'assets/img/components/lever-animation.png',
       'assets/img/components/lever-animation.json',
     );
+    this.load.atlasJSONHash(
+      'fader-animation',
+      'assets/img/components/fader-animation.png',
+      'assets/img/components/fader-animation.json',
+    );
 
     this.load.audio('chop', 'assets/audio/chop.mp3');
 

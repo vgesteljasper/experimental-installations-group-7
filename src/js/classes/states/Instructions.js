@@ -70,9 +70,21 @@ module.exports = class Instructions extends Phaser.State {
       'lever/0001',
     );
     this.lever.anchor.setTo(0.5, 0.5);
-    this.lever.animations.add('lever', Phaser.Animation.generateFrameNames('lever/', 1, 5, '', 4), 2, true, false);
+    this.lever.animations.add('lever', Phaser.Animation.generateFrameNames('lever/', 1, 2, '', 4), 2, true, false);
     this.lever.scale.setTo(0.4, 0.4);
     this.lever.animations.play('lever', 2, true);
+
+
+    this.fader = this.add.sprite(
+      this.world.centerX,
+      230,
+      'fader-animation',
+      'fader/0001',
+    );
+    this.fader.anchor.setTo(0.5, 0.5);
+    this.fader.animations.add('fader', Phaser.Animation.generateFrameNames('fader/', 1, 3, '', 4), 2, true, false);
+    this.fader.scale.setTo(0.5, 0.5);
+    this.fader.animations.play('fader', 6, true);
   }
 
   setupVegetableToChop(veggie) {

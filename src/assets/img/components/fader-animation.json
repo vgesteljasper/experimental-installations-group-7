@@ -1,0 +1,36 @@
+﻿{
+  "frames": {
+    "fader/0001":
+    {
+    	"frame": {"x":0,"y":0,"w":403,"h":67},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":403,"h":67},
+    	"sourceSize": {"w":403,"h":67}
+    },
+    "fader/0002":
+    {
+    	"frame": {"x":0,"y":67,"w":403,"h":67},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":403,"h":67},
+    	"sourceSize": {"w":403,"h":67}
+    },
+    "fader/0003":
+    {
+    	"frame": {"x":0,"y":134,"w":403,"h":67},
+    	"rotated": false,
+    	"trimmed": false,
+    	"spriteSourceSize": {"x":0,"y":0,"w":403,"h":67},
+    	"sourceSize": {"w":403,"h":67}
+    }
+  },
+  "meta": {
+  	"app": "Adobe Animate",
+  	"version": "15.2.1.95",
+  	"image": "fader-animation.png",
+  	"format": "RGBA8888",
+  	"size": {"w":403,"h":201},
+  	"scale": "1"
+  }
+}
