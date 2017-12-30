@@ -88,11 +88,15 @@ module.exports = class Preload extends Phaser.State {
     );
 
     this.load.audio('chop', 'assets/audio/chop.mp3');
+    this.load.audio('fart', 'assets/audio/fart.mp3');
+    this.load.audio('lever', 'assets/audio/lever.mp3');
+    this.load.audio('slider', 'assets/audio/slider.mp3');
+    this.load.audio('countdown', 'assets/audio/countdown.wav');
 
     this.load.script('BlurX', 'js/vendors/filter/blurX.js');
     this.load.script('BlurY', 'js/vendors/filter/blurY.js');
   }
   create() {
-    this.state.start('Instructions');
+    this.state.start('Menu');
   }
 };

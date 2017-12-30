@@ -1,6 +1,7 @@
 module.exports = class Nearby extends Phaser.State {
   create() {
     this.createaBackground();
+    this.loadSounds();
     this.createLogo();
     this.registerActionTriggers();
     this.createInstructions();
@@ -15,6 +16,10 @@ module.exports = class Nearby extends Phaser.State {
 
   createaBackground() {
     this.game.stage.backgroundColor = '#FF780F';
+  }
+
+  loadSounds() {
+    this.chop = this.game.add.audio('chop');
   }
 
   createLogo() {
@@ -113,6 +118,7 @@ module.exports = class Nearby extends Phaser.State {
   }
 
   goToInstructionsState() {
+    this.chop.play();
     this.state.start('Instructions');
   }
 

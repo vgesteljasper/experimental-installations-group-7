@@ -66,10 +66,12 @@ module.exports = class Play extends Phaser.State {
 
   loadSounds() {
     this.chop = this.game.add.audio('chop');
+    this.fart = this.game.add.audio('fart');
+    this.lever = this.game.add.audio('lever');
+    this.slider = this.game.add.audio('slider');
   }
 
   createaBackground() {
-    console.log('[Play] — createLogo()');
     this.background = this.add.image(0, 0, 'kitchenBackground');
   }
 
@@ -209,6 +211,8 @@ module.exports = class Play extends Phaser.State {
       return;
     }
 
+    this.slider.play();
+
     COUNTDOWN -= 1;
     ENABLE_LEVER = false;
 
@@ -246,6 +250,8 @@ module.exports = class Play extends Phaser.State {
   playSplashAnimation() {
     DISABLE_HIT = true;
     ENABLE_LEVER = false;
+
+    this.fart.play();
 
     this.splash = this.add.sprite(
       this.world.centerX,
@@ -305,6 +311,8 @@ module.exports = class Play extends Phaser.State {
     if (!ENABLE_LEVER) {
       return;
     }
+
+    this.lever.play();
 
     ENABLE_LEVER = false;
     this.rottenEggplant.kill();

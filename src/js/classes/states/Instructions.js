@@ -30,8 +30,6 @@ module.exports = class Instructions extends Phaser.State {
 
     VEGGIE_BEING_CUT = this.veggies[VEGGIES_COUNTER];
     this.startVeggieSetup(VEGGIE_BEING_CUT);
-
-    this.createChoppingAnimation();
     this.registerActionTriggers();
   }
 
@@ -48,6 +46,9 @@ module.exports = class Instructions extends Phaser.State {
 
   loadSounds() {
     this.chop = this.game.add.audio('chop');
+    this.fart = this.game.add.audio('fart');
+    this.lever = this.game.add.audio('lever');
+    this.slider = this.game.add.audio('slider');
   }
 
   createaBackground() {
@@ -166,6 +167,8 @@ module.exports = class Instructions extends Phaser.State {
     DISABLE_HIT = true;
     ENABLE_LEVER = false;
 
+    this.fart.play();
+
     this.splash = this.add.sprite(
       this.world.centerX,
       this.world.centerY - 20,
@@ -207,7 +210,6 @@ module.exports = class Instructions extends Phaser.State {
 
       case 'rotten-pepper':
         this.positionVegetableToChop('rotten-pepper', center + 50, height - 380, 1);
-        this.knife.kill();
         this.setupLeverAnimation();
         ENABLE_LEVER = true;
         break;
@@ -223,23 +225,6 @@ module.exports = class Instructions extends Phaser.State {
     }
 
     this.setupVegetableToChop(VEGGIE_NAME, VEGGIE_XPOS, VEGGIE_YPOS, VEGGIE_SCALE);
-  }
-
-  createChoppingAnimation() {
-    this.knife = this.add.sprite(
-      this.world.centerX + 200,
-      this.world.centerY + 90,
-      'cutting-animation',
-      'knife/chop/0001',
-    );
-    this.knife.anchor.setTo(0.5, 0.5);
-    this.knife.animations.add(
-      'chop',
-      Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4),
-      100,
-      true,
-      false,
-    );
   }
 
   playChopAnimation() {
@@ -266,12 +251,6 @@ module.exports = class Instructions extends Phaser.State {
     if (VEGGIE_NAME === 'rotten-eggplant' && COUNTER === 2) {
       this.playSplashAnimation();
     }
-
-    this.knife.animations.play('chop', 15, false);
-    this.knife.events.onAnimationComplete.add((e) => {
-      e.kill();
-      this.createChoppingAnimation();
-    }, this);
   }
 
   setupNextVeggie() {
@@ -292,6 +271,8 @@ module.exports = class Instructions extends Phaser.State {
     if (!ENABLE_SLIDER) {
       return;
     }
+
+    this.slider.play();
 
     COUNTDOWN -= 1;
     ENABLE_LEVER = false;
@@ -320,6 +301,8 @@ module.exports = class Instructions extends Phaser.State {
     if (!ENABLE_LEVER) {
       return;
     }
+
+    this.lever.play();
 
     ENABLE_LEVER = false;
     this.rottenVeggie.kill();

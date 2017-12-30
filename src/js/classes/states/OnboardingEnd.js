@@ -4,6 +4,7 @@ module.exports = class OnboardingEnd extends Phaser.State {
   create() {
     console.log('[OnboardingEnd] — create()');
     this.createaBackground();
+    this.loadSounds();
     this.createFeedback();
     this.setupCountdownText();
     this.goToPlayState();
@@ -12,6 +13,10 @@ module.exports = class OnboardingEnd extends Phaser.State {
   createaBackground() {
     console.log('[OnboardingEnd] — createaBackground()');
     this.game.stage.backgroundColor = '#FF780F';
+  }
+
+  loadSounds() {
+    this.countdown = this.game.add.audio('countdown');
   }
 
   createFeedback() {
@@ -51,7 +56,7 @@ module.exports = class OnboardingEnd extends Phaser.State {
 
   setupCountdownText() {
     this.countdownText = this.add.text(this.world.centerX, this.world.centerY, '', {
-      font: '150px circular-medium',
+      font: '350px circular-medium',
       fill: '#fff',
     });
     this.countdownText.anchor.setTo(0.5, 0.5);
@@ -62,7 +67,14 @@ module.exports = class OnboardingEnd extends Phaser.State {
 
     this.countdownText.text = `${COUNTDOWN}`;
 
-    if (COUNTDOWN <= 0) this.state.start('Play');
+    this.countdown.play();
+
+    if (COUNTDOWN <= 0) {
+      if (this.countdown) {
+        this.countdown.destroy();
+      }
+      this.state.start('Play');
+    }
   }
 
   shutdown() {
