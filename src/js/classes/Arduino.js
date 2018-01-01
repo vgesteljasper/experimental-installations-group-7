@@ -34,5 +34,10 @@ module.exports = class Arduino extends EventTarget {
       // emit event that the spoon was pulled
       this.dispatchEvent(new Event('lever-pull'));
     }
+
+    if (value === 'slider-move') {
+      // emit event that the slider was moved
+      this.dispatchEvent(new Event('slider-move'));
+    }
   }
 };

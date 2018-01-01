@@ -60,8 +60,10 @@ module.exports = class Play extends Phaser.State {
 
     this.playChopAnimation = this.playChopAnimation.bind(this);
     this.leverVeggieAway = this.leverVeggieAway.bind(this);
+    this.slideAwayExplosion = this.slideAwayExplosion.bind(this);
     Arduino.addEventListener('drum-hit', this.playChopAnimation);
     Arduino.addEventListener('lever-pull', this.leverVeggieAway);
+    Arduino.addEventListener('slider-move', this.slideAwayExplosion);
   }
 
   loadSounds() {
@@ -363,6 +365,7 @@ module.exports = class Play extends Phaser.State {
   shutdown() {
     Arduino.removeEventListener('drum-hit', this.playChopAnimation);
     Arduino.removeEventListener('lever-pull', this.leverVeggieAway);
+    Arduino.removeEventListener('slider-move', this.slideAwayExplosion);
 
     COUNTER = 1;
     VEGGIES_COUNTER = 0;
