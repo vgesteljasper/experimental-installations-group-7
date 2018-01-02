@@ -35,7 +35,7 @@ module.exports = class Arduino extends EventTarget {
       this.dispatchEvent(new Event('lever-pull'));
     }
 
-    if (value === 'slider-move') {
+    if (value.indexOf('slider-move') !== -1) {
       // emit event that the slider was moved
       this.dispatchEvent(new Event('slider-move'));
     }

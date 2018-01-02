@@ -18,12 +18,12 @@ module.exports = class Instructions extends Phaser.State {
   init() {
     this.gameEnded = false;
   }
-
   create() {
+    // switch veggies (first & last)
     this.veggies = [
-      'cucumber',
-      'rotten-pepper',
       'rotten-eggplant',
+      'rotten-pepper',
+      'cucumber',
     ];
     this.loadSounds();
     this.createaBackground();

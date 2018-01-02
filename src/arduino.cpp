@@ -1,13 +1,15 @@
 #include <Arduino.h>
 
 int peizoPin = A0;
-int sliderPin = A1;
 int minPeizoValue = 100;
 int peizoValue = 0;
-int sliderValue = 0;
+
+int sliderPin = A1;
+int previousSliderValue = 0;
 
 void setup() {
   Serial.begin(9600);
+  previousSliderValue = analogRead(sliderPin);
 }
 
 void loop() {
@@ -17,6 +19,10 @@ void loop() {
     delay(50);
   }
 
-  sliderValue = analogRead(sliderPin);
-  Serial.println("[sliderValue] %p\n", sliderValue);
+  int sliderValue = analogRead(sliderPin);
+  if(sliderValue - previousSliderValue > 500 || sliderValue - previousSliderValue < -500) {
+      Serial.println("slider-move");
+  }
+
+  previousSliderValue = sliderValue;
 }
