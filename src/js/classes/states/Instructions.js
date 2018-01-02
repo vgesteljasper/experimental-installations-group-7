@@ -21,9 +21,9 @@ module.exports = class Instructions extends Phaser.State {
   create() {
     // switch veggies (first & last)
     this.veggies = [
-      'rotten-eggplant',
-      'rotten-pepper',
       'cucumber',
+      'rotten-pepper',
+      'rotten-eggplant',
     ];
     this.loadSounds();
     this.createaBackground();
