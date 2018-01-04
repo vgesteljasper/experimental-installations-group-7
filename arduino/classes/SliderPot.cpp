@@ -26,7 +26,7 @@ public:
     {
       lastMillis = currentMillis;
 
-      float currentValue = logToLinearMap(analogRead(pin));
+      float currentValue = _logToLinearMap(analogRead(pin));
       if ((currentValue < lastValue - threshold) ||
           (currentValue > lastValue + threshold))
       {
@@ -37,7 +37,7 @@ public:
   };
 
 private:
-  float logToLinearMap(int value)
+  float _logToLinearMap(int value)
   {
     return 5.0 * pow(value / 1004.0, 5.0);
   }
