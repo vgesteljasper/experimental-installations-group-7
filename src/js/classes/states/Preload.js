@@ -19,6 +19,7 @@ module.exports = class Preload extends Phaser.State {
     this.load.image('medal', 'assets/img/medal.png');
     this.load.image('rotten-eggplant', 'assets/img/rotten-eggplant.png');
     this.load.image('pressure-plate', 'assets/img/pressure-plate.png');
+    this.load.image('onboarding-end-veggies', 'assets/img/onboarding-end-veggies-04.png');
 
     this.load.image('choppedTopCucumber', 'assets/img/cucumber-chopped-top.png');
     this.load.image('choppedBottomCucumber', 'assets/img/cucumber-chopped-bottom.png');
@@ -97,6 +98,6 @@ module.exports = class Preload extends Phaser.State {
     this.load.script('BlurY', 'js/vendors/filter/blurY.js');
   }
   create() {
-    this.state.start('Menu');
+    this.state.start('OnboardingEnd');
   }
 };

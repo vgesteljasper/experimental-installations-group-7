@@ -42,18 +42,19 @@ module.exports = class OnboardingEnd extends Phaser.State {
       .tween(this.thumbsUp)
       .to({ angle: 0 }, 450, Phaser.Easing.Cubic.EaseOut, true, 600);
 
-    this.cumcum = this.add.image(this.world.centerX, this.world.centerY + 80, 'cucumber');
-    this.cumcum.anchor.setTo(0.5, 0.5);
-    this.cumcum.scale.setTo(2.5, 2.5);
+    this.onboardingEndImage = this.add.image(this.world.centerX, this.world.centerY, 'onboarding-end-veggies');
+    this.onboardingEndImage.anchor.setTo(0.5, 0.5);
+    this.onboardingEndImage.scale.setTo(1.1, 1.1);
   }
 
   goToPlayState() {
-    console.log('[OnboardingEnd] — handleStart()');
-    this.time.events.repeat(Phaser.Timer.SECOND, 4, this.handleCountdown, this);
+    this.time.events.repeat(1000, 0, () => {
+      this.time.events.repeat(Phaser.Timer.SECOND, 4, this.handleCountdown, this);
+    });
   }
 
   setupCountdownText() {
-    this.countdownText = this.add.text(this.world.centerX, this.world.centerY, '', {
+    this.countdownText = this.add.text(this.world.centerX, this.world.centerY + 70, '', {
       font: '350px circular-medium',
       fill: '#fff',
     });
