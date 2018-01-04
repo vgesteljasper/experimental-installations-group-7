@@ -98,6 +98,6 @@ module.exports = class Preload extends Phaser.State {
     this.load.script('BlurY', 'js/vendors/filter/blurY.js');
   }
   create() {
-    this.state.start('OnboardingEnd');
+    this.state.start('Nearby');
   }
 };
