@@ -18,13 +18,13 @@ module.exports = class Restart extends Phaser.State {
   }
 
   createFeedback() {
-    this.pageTitle = this.add.text(this.world.centerX, 150, 'Rematch!', {
+    this.pageTitle = this.add.text(this.world.centerX, 150, 'Herkansing!', {
       font: '90px circular-medium',
       fill: '#fff',
     });
     this.pageTitle.anchor.setTo(0.5, 0.5);
 
-    this.ok = this.add.image(this.world.centerX + 240, 140, 'ok');
+    this.ok = this.add.image(this.world.centerX + 290, 140, 'ok');
     this.ok.anchor.setTo(0.5, 0.5);
     this.ok.scale.setTo(0.6, 0.6);
 
@@ -34,7 +34,18 @@ module.exports = class Restart extends Phaser.State {
     });
     this.subTitle.anchor.setTo(0.5, 0.5);
 
-    this.cumcum = this.add.image(this.world.centerX, this.world.centerY + 80, 'cucumber');
+    // Tomato
+    this.tomato = this.add.image(this.world.centerX - 60, this.world.centerY, 'tomato');
+    this.tomato.anchor.setTo(0.5, 0.5);
+    this.tomato.scale.setTo(2, 2);
+
+    // Carrot
+    this.carrot = this.add.image(this.world.centerX - 180, this.world.centerY + 80, 'carrot');
+    this.carrot.anchor.setTo(0.5, 0.5);
+    this.carrot.angle = -17;
+    this.carrot.scale.setTo(-3, 3);
+
+    this.cumcum = this.add.image(this.world.centerX + 50, this.world.centerY + 80, 'cucumber');
     this.cumcum.anchor.setTo(0.5, 0.5);
     this.cumcum.scale.setTo(2.5, 2.5);
   }
@@ -44,7 +55,7 @@ module.exports = class Restart extends Phaser.State {
   }
 
   setupCountdownText() {
-    this.countdownText = this.add.text(this.world.centerX, this.world.centerY, '', {
+    this.countdownText = this.add.text(this.world.centerX, this.world.centerY + 35, '', {
       font: '350px circular-medium',
       fill: '#fff',
     });
