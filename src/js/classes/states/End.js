@@ -1,20 +1,26 @@
+const Button = require('../objects/Button.js');
+
 module.exports = class End extends Phaser.State {
   create() {
-    console.log('[End] — create()');
     this.createaBackground();
     this.createScore();
     this.registerActionTriggers();
+    this.setupButtons();
   }
 
   registerActionTriggers() {
-    this.game.input.keyboard.addKey(Phaser.KeyCode.D).onUp.add(this.goToMenuState, this);
+    this.time.events.repeat(2500, 0, () => {
+      this.game.input.keyboard.addKey(Phaser.KeyCode.D).onUp.add(this.goToRestartState, this);
+      this.game.input.keyboard.addKey(Phaser.KeyCode.L).onUp.add(this.goToInstructionState, this);
 
-    this.goToMenuState = this.goToMenuState.bind(this);
-    Arduino.addEventListener('drum-hit', this.goToMenuState);
+      this.goToRestartState = this.goToRestartState.bind(this);
+      this.goToInstructionState = this.goToInstructionState.bind(this);
+      Arduino.addEventListener('drum-hit', this.goToRestartState);
+      Arduino.addEventListener('lever-pull', this.goToInstructionState);
+    });
   }
 
   createaBackground() {
-    console.log('[End] — createaBackground()');
     this.game.stage.backgroundColor = '#FF780F';
   }
 
@@ -51,11 +57,29 @@ module.exports = class End extends Phaser.State {
   }
 
   goToMenuState() {
-    console.log('[End] — handleStart()');
     this.state.start('Menu');
   }
 
+  setupButtons() {
+    const playAgainButton = new Button(this.game, 734, 933, this.goToRestartState, this, 'button', 'Herstart', 'cutting', 'knife/chop');
+    playAgainButton.anchor.setTo(0.5, 0.5);
+    this.add.existing(playAgainButton);
+
+    const instructionButton = new Button(this.game, 1186, 933, this.goToInstructionState, this, 'button', 'Instructies ', 'lever', 'lever');
+    instructionButton.anchor.setTo(0.5, 0.5);
+    this.add.existing(instructionButton);
+  }
+
+  goToInstructionState() {
+    this.state.start('Nearby');
+  }
+
+  goToRestartState() {
+    this.state.start('Restart');
+  }
+
   shutdown() {
-    Arduino.removeEventListener('drum-hit', this.goToMenuState);
+    Arduino.removeEventListener('drum-hit', this.goToRestartState);
+    Arduino.removeEventListener('lever-pull', this.goToInstructionState);
   }
 };
