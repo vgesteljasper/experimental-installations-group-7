@@ -42,5 +42,15 @@ module.exports = class Arduino extends EventTarget {
     if (value.indexOf('s') !== -1) {
       this.dispatchEvent(new Event('slider-move'));
     }
+
+    // emit event that the pressure plate is active
+    if (value.indexOf('1') !== -1) {
+      this.dispatchEvent(new CustomEvent('pressure-plate-change', { detail: { active: true } }));
+    }
+
+    // emit event that the pressure plate is inactive
+    if (value.indexOf('0') !== -1) {
+      this.dispatchEvent(new CustomEvent('pressure-plate-change', { detail: { active: false } }));
+    }
   }
 };
