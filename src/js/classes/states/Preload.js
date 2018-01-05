@@ -12,7 +12,6 @@ module.exports = class Preload extends Phaser.State {
     this.load.image('choppedVegetables', 'assets/img/chopped-vegetables-05.png');
     this.load.image('knife', 'assets/img/knife-05.png');
     this.load.image('kitchenBackground', 'assets/img/kitchen-background-03.jpg');
-    this.load.image('spaghetti', 'assets/img/spaghetti.jpg');
     this.load.image('cucumber', 'assets/img/cucumber.png');
     this.load.image('ok', 'assets/img/ok.png');
     this.load.image('thumbsUp', 'assets/img/thumbs-up.png');
@@ -98,6 +97,6 @@ module.exports = class Preload extends Phaser.State {
     this.load.script('BlurY', 'js/vendors/filter/blurY.js');
   }
   create() {
-    this.state.start('Restart');
+    this.state.start('Menu');
   }
 };

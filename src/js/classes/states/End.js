@@ -1,5 +1,3 @@
-const Button = require('../objects/Button.js');
-
 module.exports = class End extends Phaser.State {
   create() {
     this.createaBackground();
@@ -11,12 +9,9 @@ module.exports = class End extends Phaser.State {
   registerActionTriggers() {
     this.time.events.repeat(2500, 0, () => {
       this.game.input.keyboard.addKey(Phaser.KeyCode.D).onUp.add(this.goToRestartState, this);
-      this.game.input.keyboard.addKey(Phaser.KeyCode.L).onUp.add(this.goToInstructionState, this);
 
       this.goToRestartState = this.goToRestartState.bind(this);
-      this.goToInstructionState = this.goToInstructionState.bind(this);
       Arduino.addEventListener('drum-hit', this.goToRestartState);
-      Arduino.addEventListener('lever-pull', this.goToInstructionState);
     });
   }
 
@@ -61,17 +56,36 @@ module.exports = class End extends Phaser.State {
   }
 
   setupButtons() {
-    const playAgainButton = new Button(this.game, 734, 933, this.goToRestartState, this, 'button', 'Herstart', 'cutting', 'knife/chop');
-    playAgainButton.anchor.setTo(0.5, 0.5);
-    this.add.existing(playAgainButton);
+    this.instruction = this.add.text(
+      this.world.centerX,
+      this.world.height - 150,
+      '            op de           om te herstarten',
+      {
+        font: '50px circular',
+        fill: '#fff',
+      },
+    );
+    this.instruction.anchor.setTo(0.5, 0.5);
 
-    const instructionButton = new Button(this.game, 1186, 933, this.goToInstructionState, this, 'button', 'Instructies ', 'lever', 'lever');
-    instructionButton.anchor.setTo(0.5, 0.5);
-    this.add.existing(instructionButton);
-  }
+    this.knifeNearby = this.add.sprite(
+      this.world.centerX - 330,
+      this.world.height - 180,
+      'cutting-animation',
+      'knife/chop/0001',
+    );
+    this.knifeNearby.anchor.setTo(0.5, 0.5);
+    this.knifeNearby.animations.add('chop', Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4), 5, true, false);
+    this.knifeNearby.scale.setTo(0.3, 0.3);
+    this.knifeNearby.animations.play('chop', 10, true);
 
-  goToInstructionState() {
-    this.state.start('Nearby');
+    this.plateNearby = this.add.sprite(
+      this.world.centerX - 48,
+      this.world.height - 150,
+      'plate-animation',
+      'plate/0001',
+    );
+    this.plateNearby.anchor.setTo(0.5, 0.5);
+    this.plateNearby.scale.setTo(0.3, 0.3);
   }
 
   goToRestartState() {
@@ -80,6 +94,5 @@ module.exports = class End extends Phaser.State {
 
   shutdown() {
     Arduino.removeEventListener('drum-hit', this.goToRestartState);
-    Arduino.removeEventListener('lever-pull', this.goToInstructionState);
   }
 };
