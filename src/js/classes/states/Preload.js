@@ -16,7 +16,6 @@ module.exports = class Preload extends Phaser.State {
     this.load.image('ok', 'assets/img/ok.png');
     this.load.image('thumbsUp', 'assets/img/thumbs-up.png');
     this.load.image('medal', 'assets/img/medal.png');
-    this.load.image('rotten-eggplant', 'assets/img/rotten-eggplant.png');
     this.load.image('pressure-plate', 'assets/img/pressure-plate.png');
     this.load.image('onboarding-end-veggies', 'assets/img/onboarding-end-veggies-04.png');
 
@@ -24,7 +23,13 @@ module.exports = class Preload extends Phaser.State {
     this.load.image('choppedBottomCucumber', 'assets/img/cucumber-chopped-bottom.png');
     this.load.image('carrot', 'assets/img/carrot.png');
     this.load.image('tomato', 'assets/img/tomato.png');
+
+    this.load.image('rotten-eggplant', 'assets/img/rotten-eggplant.png');
     this.load.image('rotten-pepper', 'assets/img/rotten-pepper.png');
+    this.load.image('rotten-bell-pepper', 'assets/img/rotten-green-bell-pepper.png');
+    this.load.image('rotten-cucumber', 'assets/img/rotten-cucumber.png');
+    this.load.image('rotten-paprika', 'assets/img/rotten-paprika.png');
+    this.load.image('rotten-tomato', 'assets/img/rotten-tomato.png');
 
     this.load.atlasJSONHash(
       'button-comp',
@@ -70,6 +75,16 @@ module.exports = class Preload extends Phaser.State {
       'splash-animation',
       'assets/img/components/splash-animation.png',
       'assets/img/components/splash-animation.json',
+    );
+    this.load.atlasJSONHash(
+      'splash-animation-red',
+      'assets/img/components/splash-animation-red.png',
+      'assets/img/components/splash-animation-red.json',
+    );
+    this.load.atlasJSONHash(
+      'splash-animation-green',
+      'assets/img/components/splash-animation-green.png',
+      'assets/img/components/splash-animation-green.json',
     );
     this.load.atlasJSONHash(
       'plate-animation',
