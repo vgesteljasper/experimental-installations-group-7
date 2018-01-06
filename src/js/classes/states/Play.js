@@ -69,8 +69,10 @@ module.exports = class Play extends Phaser.State {
   loadSounds() {
     this.chop = this.game.add.audio('chop');
     this.fart = this.game.add.audio('fart');
+    this.fart.volume = 3;
     this.lever = this.game.add.audio('lever');
     this.slider = this.game.add.audio('slider');
+    this.fart.volume = 2;
   }
 
   createaBackground() {

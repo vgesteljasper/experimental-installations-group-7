@@ -19,7 +19,6 @@ module.exports = class Instructions extends Phaser.State {
     this.gameEnded = false;
   }
   create() {
-    // switch veggies (first & last)
     this.veggies = [
       'cucumber',
       'rotten-pepper',
@@ -49,8 +48,10 @@ module.exports = class Instructions extends Phaser.State {
   loadSounds() {
     this.chop = this.game.add.audio('chop');
     this.fart = this.game.add.audio('fart');
+    this.fart.volume = 3;
     this.lever = this.game.add.audio('lever');
     this.slider = this.game.add.audio('slider');
+    this.slider.volume = 2;
   }
 
   createaBackground() {
