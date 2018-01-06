@@ -19,6 +19,8 @@ let ENABLE_LEVER = false;
 let ENABLE_SLIDER = false;
 let DISABLE_HIT = false;
 
+const PROGRESS_START = 1200;
+
 const VEGGIE_GUTTER = 60;
 
 module.exports = class Play extends Phaser.State {
@@ -51,7 +53,6 @@ module.exports = class Play extends Phaser.State {
     VEGGIE_BEING_CUT = this.veggies[VEGGIES_COUNTER];
     this.startVeggieSetup(VEGGIE_BEING_CUT);
 
-    // indicator of what to chop and what already chopped
     this.generateChoppedIndicators();
 
     this.registerActionTriggers();
@@ -184,13 +185,14 @@ module.exports = class Play extends Phaser.State {
   generateChoppedIndicators() {
     this.VegetableIndicatorBackground = this.game.add.graphics(0, 0);
     this.VegetableIndicatorBackground.beginFill(0xffffff, 1);
-    this.VegetableIndicatorBackground.drawRoundedRect(1450, 15, 460, 100, 58);
+    this.VegetableIndicatorBackground.drawRoundedRect(PROGRESS_START - 50, 15, 760, 100, 58);
 
     this.veggieProgressArray = [];
 
     let i = 0;
+
     while (i < this.veggies.length) {
-      const indicator = new ChoppedIndicator(this.game, i, VEGGIE_GUTTER);
+      const indicator = new ChoppedIndicator(this.game, i, VEGGIE_GUTTER, PROGRESS_START);
       this.veggieProgressArray.push(indicator);
       i += 1;
     }
@@ -387,7 +389,6 @@ module.exports = class Play extends Phaser.State {
       this.currentVeggie.kill();
 
       if (COUNTER <= TOTAL_CHOP_COUNT) {
-        console.log('[playChopAnimation] — COUNTER', COUNTER)
         this.setupVegetableToChop(VEGGIE_NAME, VEGGIE_XPOS, VEGGIE_YPOS, VEGGIE_SCALE, COUNTER);
       } else {
         this.setupNextVeggie();
@@ -413,15 +414,6 @@ module.exports = class Play extends Phaser.State {
     ENABLE_LEVER = false;
     this.rottenVeggie.kill();
     this.setupNextVeggie();
-  }
-
-  updateProgressbar() {
-    this.veggieProgressArray[VEGGIES_COUNTER].kill();
-
-    const veggieChopped = this.game.add.graphics(0, 0);
-    veggieChopped.beginFill(0xededed, 1);
-    veggieChopped.lineStyle(2, 0x00ff00, 1);
-    veggieChopped.drawCircle(1500 + (VEGGIES_COUNTER * VEGGIE_GUTTER), 65, 50);
   }
 
   setupNextVeggie() {
@@ -454,6 +446,15 @@ module.exports = class Play extends Phaser.State {
 
       this.state.start('End');
     }
+  }
+
+  updateProgressbar() {
+    this.veggieProgressArray[VEGGIES_COUNTER].kill();
+
+    const veggieChopped = this.game.add.graphics(0, 0);
+    veggieChopped.beginFill(0xededed, 1);
+    veggieChopped.lineStyle(2, 0x00ff00, 1);
+    veggieChopped.drawCircle(PROGRESS_START + (VEGGIES_COUNTER * VEGGIE_GUTTER), 65, 50);
   }
 
   shutdown() {
