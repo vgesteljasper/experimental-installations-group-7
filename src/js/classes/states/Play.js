@@ -4,7 +4,6 @@ let TOTAL_CHOP_COUNT;
 let COUNTER = 1;
 let VEGGIES_COUNTER = 0;
 
-// let RANDOM_VEGGIES = [];
 let VEGGIE_BEING_CUT = '';
 let VEGGIE_NAME = '';
 let VEGGIE_XPOS = '';
@@ -14,7 +13,7 @@ let VEGGIE_SCALE = '';
 let BLUR_COUNTER = 0;
 let TIME_START = '';
 
-let COUNTDOWN = 6;
+let SPLASH_COUNTDOWN = 6;
 
 let ENABLE_LEVER = false;
 let ENABLE_SLIDER = false;
@@ -31,13 +30,18 @@ module.exports = class Play extends Phaser.State {
 
   create() {
     this.veggies = [
+      'rotten-cucumber',
       'eggplant',
       'carrot',
+      'rotten-pepper',
       'onion',
+      'rotten-tomato',
       'cucumber',
       'rotten-eggplant',
       'paprika',
       'tomato',
+      'rotten-bell-pepper',
+      'rotten-paprika',
     ];
 
     this.loadSounds();
@@ -69,8 +73,10 @@ module.exports = class Play extends Phaser.State {
   loadSounds() {
     this.chop = this.game.add.audio('chop');
     this.fart = this.game.add.audio('fart');
+    this.fart.volume = 3;
     this.lever = this.game.add.audio('lever');
     this.slider = this.game.add.audio('slider');
+    this.fart.volume = 2;
   }
 
   createaBackground() {
@@ -139,7 +145,32 @@ module.exports = class Play extends Phaser.State {
         break;
 
       case 'rotten-eggplant':
-        this.positionVegetableToChop('rotten-eggplant', center + 50, height - 380, 0.7);
+        this.positionVegetableToChop('rotten-eggplant', center + 80, height - 370, 0.7);
+        ENABLE_LEVER = true;
+        break;
+
+      case 'rotten-pepper':
+        this.positionVegetableToChop('rotten-pepper', center + 50, height - 380, 1);
+        ENABLE_LEVER = true;
+        break;
+
+      case 'rotten-bell-pepper':
+        this.positionVegetableToChop('rotten-bell-pepper', center, height - 430, 0.9);
+        ENABLE_LEVER = true;
+        break;
+
+      case 'rotten-tomato':
+        this.positionVegetableToChop('rotten-tomato', center, height - 380, 1);
+        ENABLE_LEVER = true;
+        break;
+
+      case 'rotten-cucumber':
+        this.positionVegetableToChop('rotten-cucumber', center, height - 300, 1.1);
+        ENABLE_LEVER = true;
+        break;
+
+      case 'rotten-paprika':
+        this.positionVegetableToChop('rotten-paprika', center, height - 400, 1);
         ENABLE_LEVER = true;
         break;
 
@@ -158,7 +189,7 @@ module.exports = class Play extends Phaser.State {
     this.veggieProgressArray = [];
 
     let i = 0;
-    while (i < 7) {
+    while (i < this.veggies.length) {
       const indicator = new ChoppedIndicator(this.game, i, VEGGIE_GUTTER);
       this.veggieProgressArray.push(indicator);
       i += 1;
@@ -192,7 +223,12 @@ module.exports = class Play extends Phaser.State {
 
     this.removeBlur();
 
-    if (name !== 'rotten-eggplant') {
+    if (name !== 'rotten-eggplant' &&
+    name !== 'rotten-pepper' &&
+    name !== 'rotten-cucumber' &&
+    name !== 'rotten-bell-pepper' &&
+    name !== 'rotten-tomato' &&
+    name !== 'rotten-paprika') {
       this.currentVeggie = this.add.sprite(
         posX,
         posY,
@@ -202,9 +238,9 @@ module.exports = class Play extends Phaser.State {
       this.currentVeggie.anchor.setTo(0.5, 0.5);
       this.currentVeggie.scale.setTo(scale, scale);
     } else {
-      this.rottenEggplant = this.add.sprite(posX, posY, name);
-      this.rottenEggplant.anchor.setTo(0.5, 0.5);
-      this.rottenEggplant.scale.setTo(scale, scale);
+      this.rottenVeggie = this.add.sprite(posX, posY, name);
+      this.rottenVeggie.anchor.setTo(0.5, 0.5);
+      this.rottenVeggie.scale.setTo(scale, scale);
     }
   }
 
@@ -213,54 +249,79 @@ module.exports = class Play extends Phaser.State {
       return;
     }
 
+    this.splash.kill();
+
     this.slider.play();
 
-    COUNTDOWN -= 1;
+    SPLASH_COUNTDOWN -= 1;
     ENABLE_LEVER = false;
 
-    this.splash.kill();
-    this.splash = this.add.sprite(
-      this.world.centerX,
-      this.world.centerY - 20,
-      'splash-animation',
-      `splash/000${COUNTDOWN}`,
-    );
+    if (VEGGIE_NAME === 'rotten-pepper' || VEGGIE_NAME === 'rotten-paprika' || VEGGIE_NAME === 'rotten-tomato') {
+      this.splash = this.add.sprite(
+        this.world.centerX,
+        this.world.centerY - 20,
+        'splash-animation-red',
+        `splash/000${SPLASH_COUNTDOWN}`,
+      );
+    } else if (VEGGIE_NAME === 'rotten-cucumber' || VEGGIE_NAME === 'rotten-bell-pepper') {
+      this.splash = this.add.sprite(
+        this.world.centerX,
+        this.world.centerY - 20,
+        'splash-animation-green',
+        `splash/000${SPLASH_COUNTDOWN}`,
+      );
+    } else {
+      this.splash = this.add.sprite(
+        this.world.centerX,
+        this.world.centerY - 20,
+        'splash-animation',
+        `splash/000${SPLASH_COUNTDOWN}`,
+      );
+    }
     this.splash.anchor.setTo(0.5, 0.5);
     this.splash.scale.setTo(1.8, 1.8);
 
-    if (COUNTDOWN === 1) {
+
+    if (SPLASH_COUNTDOWN <= 1) {
       ENABLE_SLIDER = false;
       DISABLE_HIT = false;
       this.splash.kill();
-      this.rottenEggplant.kill();
+      this.rottenVeggie.kill();
       this.setupNextVeggie();
-      COUNTDOWN = 6;
+      SPLASH_COUNTDOWN = 6;
+      COUNTER = 1;
     }
-  }
-
-  setupReverseAnimation() {
-    this.splash = this.add.sprite(
-      this.world.centerX,
-      this.world.centerY - 20,
-      'splash-animation',
-      `splash/000${COUNTDOWN}`,
-    );
-    this.splash.anchor.setTo(0.5, 0.5);
-    this.splash.scale.setTo(1.8, 1.8);
   }
 
   playSplashAnimation() {
     DISABLE_HIT = true;
     ENABLE_LEVER = false;
 
+    if (VEGGIE_NAME === 'rotten-pepper' || VEGGIE_NAME === 'rotten-paprika' || VEGGIE_NAME === 'rotten-tomato') {
+      this.splash = this.add.sprite(
+        this.world.centerX,
+        this.world.centerY - 20,
+        'splash-animation-red',
+        'splash/0001',
+      );
+    } else if (VEGGIE_NAME === 'rotten-cucumber' || VEGGIE_NAME === 'rotten-bell-pepper') {
+      this.splash = this.add.sprite(
+        this.world.centerX,
+        this.world.centerY - 20,
+        'splash-animation-green',
+        'splash/0001',
+      );
+    } else {
+      this.splash = this.add.sprite(
+        this.world.centerX,
+        this.world.centerY - 20,
+        'splash-animation',
+        'splash/0001',
+      );
+    }
+
     this.fart.play();
 
-    this.splash = this.add.sprite(
-      this.world.centerX,
-      this.world.centerY - 20,
-      'splash-animation',
-      'splash/0001',
-    );
     this.splash.anchor.setTo(0.5, 0.5);
     this.splash.scale.setTo(1.8, 1.8);
     this.splash.animations.add(
@@ -272,12 +333,38 @@ module.exports = class Play extends Phaser.State {
     );
     this.splash.animations.play('splash', 25, false);
 
-    // REVERSE SPLASHEFFECT. CHECK IF ANIMATION IS BACK AT FRAME 1 & THEN GO TO NEXT VEGGIE
     this.splash.events.onAnimationComplete.add((e) => {
       e.kill();
       this.setupReverseAnimation();
       ENABLE_SLIDER = true;
     }, this);
+  }
+
+  setupReverseAnimation() {
+    if (VEGGIE_NAME === 'rotten-pepper' || VEGGIE_NAME === 'rotten-paprika' || VEGGIE_NAME === 'rotten-tomato') {
+      this.splash = this.add.sprite(
+        this.world.centerX,
+        this.world.centerY - 20,
+        'splash-animation-red',
+        `splash/000${SPLASH_COUNTDOWN}`,
+      );
+    } else if (VEGGIE_NAME === 'rotten-cucumber' || VEGGIE_NAME === 'rotten-bell-pepper') {
+      this.splash = this.add.sprite(
+        this.world.centerX,
+        this.world.centerY - 20,
+        'splash-animation-green',
+        `splash/000${SPLASH_COUNTDOWN}`,
+      );
+    } else {
+      this.splash = this.add.sprite(
+        this.world.centerX,
+        this.world.centerY - 20,
+        'splash-animation',
+        `splash/000${SPLASH_COUNTDOWN}`,
+      );
+    }
+    this.splash.anchor.setTo(0.5, 0.5);
+    this.splash.scale.setTo(1.8, 1.8);
   }
 
   playChopAnimation() {
@@ -286,20 +373,27 @@ module.exports = class Play extends Phaser.State {
     }
 
     COUNTER += 1;
+
     this.chop.play();
 
-    if (VEGGIE_NAME !== 'rotten-eggplant') {
+    if (VEGGIE_NAME !== 'rotten-eggplant' &&
+    VEGGIE_NAME !== 'rotten-pepper' &&
+    VEGGIE_NAME !== 'rotten-cucumber' &&
+    VEGGIE_NAME !== 'rotten-bell-pepper' &&
+    VEGGIE_NAME !== 'rotten-tomato' &&
+    VEGGIE_NAME !== 'rotten-paprika') {
       // LENGTH OF THE TOTAL AMOUNT OF FRAMES
       TOTAL_CHOP_COUNT = this.currentVeggie.animations.frameTotal;
       this.currentVeggie.kill();
 
       if (COUNTER <= TOTAL_CHOP_COUNT) {
+        console.log('[playChopAnimation] — COUNTER', COUNTER)
         this.setupVegetableToChop(VEGGIE_NAME, VEGGIE_XPOS, VEGGIE_YPOS, VEGGIE_SCALE, COUNTER);
       } else {
         this.setupNextVeggie();
         COUNTER = 1;
       }
-    } else if (VEGGIE_NAME === 'rotten-eggplant' && COUNTER === 2) {
+    } else {
       this.playSplashAnimation();
     }
 
@@ -317,7 +411,7 @@ module.exports = class Play extends Phaser.State {
     this.lever.play();
 
     ENABLE_LEVER = false;
-    this.rottenEggplant.kill();
+    this.rottenVeggie.kill();
     this.setupNextVeggie();
   }
 

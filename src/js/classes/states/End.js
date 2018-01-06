@@ -1,20 +1,21 @@
 module.exports = class End extends Phaser.State {
   create() {
-    console.log('[End] — create()');
     this.createaBackground();
     this.createScore();
     this.registerActionTriggers();
+    this.setupButtons();
   }
 
   registerActionTriggers() {
-    this.game.input.keyboard.addKey(Phaser.KeyCode.D).onUp.add(this.goToMenuState, this);
+    this.time.events.repeat(2500, 0, () => {
+      this.game.input.keyboard.addKey(Phaser.KeyCode.D).onUp.add(this.goToRestartState, this);
 
-    this.goToMenuState = this.goToMenuState.bind(this);
-    Arduino.addEventListener('drum-hit', this.goToMenuState);
+      this.goToRestartState = this.goToRestartState.bind(this);
+      Arduino.addEventListener('drum-hit', this.goToRestartState);
+    });
   }
 
   createaBackground() {
-    console.log('[End] — createaBackground()');
     this.game.stage.backgroundColor = '#FF780F';
   }
 
@@ -51,11 +52,47 @@ module.exports = class End extends Phaser.State {
   }
 
   goToMenuState() {
-    console.log('[End] — handleStart()');
     this.state.start('Menu');
   }
 
+  setupButtons() {
+    this.instruction = this.add.text(
+      this.world.centerX,
+      this.world.height - 150,
+      '            op de           om te herstarten',
+      {
+        font: '50px circular',
+        fill: '#fff',
+      },
+    );
+    this.instruction.anchor.setTo(0.5, 0.5);
+
+    this.knifeNearby = this.add.sprite(
+      this.world.centerX - 330,
+      this.world.height - 180,
+      'cutting-animation',
+      'knife/chop/0001',
+    );
+    this.knifeNearby.anchor.setTo(0.5, 0.5);
+    this.knifeNearby.animations.add('chop', Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4), 5, true, false);
+    this.knifeNearby.scale.setTo(0.3, 0.3);
+    this.knifeNearby.animations.play('chop', 10, true);
+
+    this.plateNearby = this.add.sprite(
+      this.world.centerX - 48,
+      this.world.height - 150,
+      'plate-animation',
+      'plate/0001',
+    );
+    this.plateNearby.anchor.setTo(0.5, 0.5);
+    this.plateNearby.scale.setTo(0.3, 0.3);
+  }
+
+  goToRestartState() {
+    this.state.start('Restart');
+  }
+
   shutdown() {
-    Arduino.removeEventListener('drum-hit', this.goToMenuState);
+    Arduino.removeEventListener('drum-hit', this.goToRestartState);
   }
 };

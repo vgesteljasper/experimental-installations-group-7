@@ -108,13 +108,33 @@ module.exports = class Nearby extends Phaser.State {
     this.instruction = this.add.text(
       this.world.centerX,
       this.world.height - 150,
-      'Sla op de plaat',
+      '   op de       ',
       {
         font: '50px circular',
         fill: '#fff',
       },
     );
     this.instruction.anchor.setTo(0.5, 0.5);
+
+    this.knifeNearby = this.add.sprite(
+      this.world.centerX - 190,
+      this.world.height - 180,
+      'cutting-animation',
+      'knife/chop/0001',
+    );
+    this.knifeNearby.anchor.setTo(0.5, 0.5);
+    this.knifeNearby.animations.add('chop', Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4), 5, true, false);
+    this.knifeNearby.scale.setTo(0.3, 0.3);
+    this.knifeNearby.animations.play('chop', 10, true);
+
+    this.plateNearby = this.add.sprite(
+      this.world.centerX + 115,
+      this.world.height - 150,
+      'plate-animation',
+      'plate/0001',
+    );
+    this.plateNearby.anchor.setTo(0.5, 0.5);
+    this.plateNearby.scale.setTo(0.3, 0.3);
   }
 
   goToInstructionsState() {

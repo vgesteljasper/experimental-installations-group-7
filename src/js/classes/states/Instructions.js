@@ -19,7 +19,6 @@ module.exports = class Instructions extends Phaser.State {
     this.gameEnded = false;
   }
   create() {
-    // switch veggies (first & last)
     this.veggies = [
       'cucumber',
       'rotten-pepper',
@@ -49,8 +48,10 @@ module.exports = class Instructions extends Phaser.State {
   loadSounds() {
     this.chop = this.game.add.audio('chop');
     this.fart = this.game.add.audio('fart');
+    this.fart.volume = 3;
     this.lever = this.game.add.audio('lever');
     this.slider = this.game.add.audio('slider');
+    this.slider.volume = 2;
   }
 
   createaBackground() {
@@ -88,12 +89,11 @@ module.exports = class Instructions extends Phaser.State {
   setupHittingAnimation() {
     /* INSTEAD OF TEXT */
 
-    // this.iconBackground = this.game.add.graphics(0, 0);
-    // this.iconBackground.lineStyle(5, 0xFF0000, 0.5);
-    // // this.iconBackground.beginFill(0xFF780F, 1);
-    // this.iconBackground.drawRect(this.world.centerX - 125, 180, 250, 150);
-    // this.iconBackground.endFill();
-    // this.iconBackground.anchor.setTo(0.5, 0.5);
+    this.iconBackground = this.game.add.graphics(0, 0);
+    this.iconBackground.beginFill(0xFFFFFF, 0.8);
+    this.iconBackground.drawRect(0, 0, this.world.width, 330);
+    this.iconBackground.endFill();
+    this.iconBackground.anchor.setTo(0.5, 0.5);
 
     if (this.leverOnboarding) {
       this.leverOnboarding.kill();
@@ -101,24 +101,24 @@ module.exports = class Instructions extends Phaser.State {
 
     this.plateOnboarding = this.add.sprite(
       this.world.centerX,
-      280,
+      250,
       'plate-animation',
       'plate/0001',
     );
     this.plateOnboarding.anchor.setTo(0.5, 0.5);
     this.plateOnboarding.animations.add('pressure', Phaser.Animation.generateFrameNames('plate/', 1, 5, '', 4), 2, true, false);
-    this.plateOnboarding.scale.setTo(0.3, 0.3);
+    this.plateOnboarding.scale.setTo(0.5, 0.5);
     this.plateOnboarding.animations.play('pressure', 10, true);
 
     this.knifeOnboarding = this.add.sprite(
       this.world.centerX + 60,
-      200,
+      130,
       'cutting-animation',
       'knife/chop/0001',
     );
     this.knifeOnboarding.anchor.setTo(0.5, 0.5);
     this.knifeOnboarding.animations.add('chop', Phaser.Animation.generateFrameNames('knife/chop/', 1, 5, '', 4), 5, true, false);
-    this.knifeOnboarding.scale.setTo(0.4, 0.4);
+    this.knifeOnboarding.scale.setTo(0.6, 0.6);
     this.knifeOnboarding.animations.play('chop', 10, true);
   }
 
@@ -128,13 +128,13 @@ module.exports = class Instructions extends Phaser.State {
 
     this.leverOnboarding = this.add.sprite(
       this.world.centerX,
-      230,
+      170,
       'lever-animation',
       'lever/0001',
     );
     this.leverOnboarding.anchor.setTo(0.5, 0.5);
     this.leverOnboarding.animations.add('lever', Phaser.Animation.generateFrameNames('lever/', 1, 2, '', 4), 2, true, false);
-    this.leverOnboarding.scale.setTo(0.4, 0.4);
+    this.leverOnboarding.scale.setTo(0.5, 0.5);
     this.leverOnboarding.animations.play('lever', 2, true);
   }
 
@@ -155,13 +155,13 @@ module.exports = class Instructions extends Phaser.State {
 
     this.faderOnboarding = this.add.sprite(
       this.world.centerX,
-      230,
+      150,
       'fader-animation',
       'fader/0001',
     );
     this.faderOnboarding.anchor.setTo(0.5, 0.5);
     this.faderOnboarding.animations.add('fader', Phaser.Animation.generateFrameNames('fader/', 1, 3, '', 4), 2, true, false);
-    this.faderOnboarding.scale.setTo(0.5, 0.5);
+    this.faderOnboarding.scale.setTo(0.6, 0.6);
     this.faderOnboarding.animations.play('fader', 6, true);
   }
 
@@ -213,11 +213,13 @@ module.exports = class Instructions extends Phaser.State {
       case 'rotten-pepper':
         this.positionVegetableToChop('rotten-pepper', center + 50, height - 380, 1);
         this.setupLeverAnimation();
+        DISABLE_HIT = true;
         ENABLE_LEVER = true;
         break;
 
       case 'rotten-eggplant':
         this.positionVegetableToChop('rotten-eggplant', center + 50, height - 380, 0.7);
+        DISABLE_HIT = false;
         ENABLE_SLIDER = true;
         this.setupHittingAnimation();
         break;
@@ -318,5 +320,12 @@ module.exports = class Instructions extends Phaser.State {
 
     this.gameEnded = true;
     COUNTER = 1;
+
+    VEGGIES_COUNTER = 0;
+    ENABLE_LEVER = false;
+    COUNTDOWN = 6;
+
+    ENABLE_SLIDER = false;
+    DISABLE_HIT = false;
   }
 };

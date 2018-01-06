@@ -2,6 +2,7 @@ module.exports = class Menu extends Phaser.State {
   create() {
     console.log('[Menu] — create()');
     this.createaBackground();
+    this.loadSounds();
     this.createLogo();
     this.createInstructions();
     this.registerActionTriggers();
@@ -15,13 +16,15 @@ module.exports = class Menu extends Phaser.State {
   }
 
   createaBackground() {
-    console.log('[Menu] — createaBackground()');
     this.game.stage.backgroundColor = '#FF780F';
   }
 
-  createLogo() {
-    console.log('[Menu] — createLogo()');
+  loadSounds() {
+    this.click = this.game.add.audio('slider');
+    this.click.volume = 2;
+  }
 
+  createLogo() {
     // Tomato
     this.tomato = this.add.image(this.world.centerX - 110, this.world.centerY - 50, 'tomato');
     this.tomato.anchor.setTo(0.5, 0.5);
@@ -92,7 +95,7 @@ module.exports = class Menu extends Phaser.State {
   }
 
   goToNearbyState() {
-    console.log('[Menu] — handleStart()');
+    this.click.play();
     this.state.start('Nearby');
   }
 
