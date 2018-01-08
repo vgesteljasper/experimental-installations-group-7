@@ -1,5 +1,9 @@
-module.exports = class Nearby extends Phaser.State {
+const SuperState = require('./SuperState.js');
+
+module.exports = class Nearby extends SuperState {
   create() {
+    super.create();
+
     this.createaBackground();
     this.loadSounds();
     this.createLogo();
@@ -143,6 +147,8 @@ module.exports = class Nearby extends Phaser.State {
   }
 
   shutdown() {
+    super.shutdown();
+
     Arduino.removeEventListener('drum-hit', this.goToInstructionsState);
   }
 };

@@ -40,7 +40,8 @@ module.exports = class Arduino extends EventTarget {
 
   onPortData(buffer) {
     const value = buffer.toString('ascii').trim();
-    console.log(value);
+
+    console.log('ARDUINO: ', value);
 
     // emit event that the drumpad was hit
     if (value.indexOf('d') !== -1) {

@@ -1,3 +1,5 @@
+const SuperState = require('./SuperState.js');
+
 let TOTAL_CHOP_COUNT;
 let COUNTER = 1;
 let VEGGIES_COUNTER = 0;
@@ -14,11 +16,13 @@ let COUNTDOWN = 6;
 let ENABLE_SLIDER = false;
 let DISABLE_HIT = false;
 
-module.exports = class Instructions extends Phaser.State {
+module.exports = class Instructions extends SuperState {
   init() {
     this.gameEnded = false;
   }
   create() {
+    super.create();
+
     this.veggies = [
       'cucumber',
       'rotten-pepper',
@@ -76,6 +80,10 @@ module.exports = class Instructions extends Phaser.State {
       this.rottenVeggie = this.add.sprite(posX, posY, name);
       this.rottenVeggie.anchor.setTo(0.5, 0.5);
       this.rottenVeggie.scale.setTo(scale, scale);
+
+      if (name === 'rotten-eggplant') {
+        this.playSplashAnimation();
+      }
     }
   }
 
@@ -150,9 +158,6 @@ module.exports = class Instructions extends Phaser.State {
   }
 
   setupFaderAnimation() {
-    this.plateOnboarding.kill();
-    this.knifeOnboarding.kill();
-
     this.faderOnboarding = this.add.sprite(
       this.world.centerX,
       150,
@@ -163,6 +168,63 @@ module.exports = class Instructions extends Phaser.State {
     this.faderOnboarding.animations.add('fader', Phaser.Animation.generateFrameNames('fader/', 1, 3, '', 4), 2, true, false);
     this.faderOnboarding.scale.setTo(0.6, 0.6);
     this.faderOnboarding.animations.play('fader', 6, true);
+  }
+
+  startVeggieSetup(veggie) {
+    if (this.gameEnded) {
+      return;
+    }
+
+    const center = this.world.centerX;
+    const height = this.world.height;
+
+    switch (veggie) {
+      case 'cucumber':
+        this.positionVegetableToChop('cucumber', center, height - 300, 1.1);
+        this.setupHittingAnimation();
+        break;
+
+      case 'rotten-pepper':
+        this.positionVegetableToChop('rotten-pepper', center + 50, height - 380, 1);
+        this.setupLeverAnimation();
+        DISABLE_HIT = true;
+        ENABLE_LEVER = true;
+        break;
+
+      case 'rotten-eggplant':
+        DISABLE_HIT = true;
+        ENABLE_SLIDER = true;
+        this.positionVegetableToChop('rotten-eggplant', center + 50, height - 380, 0.7);
+        this.leverOnboarding.kill();
+        break;
+
+      default:
+        break;
+    }
+
+    this.setupVegetableToChop(VEGGIE_NAME, VEGGIE_XPOS, VEGGIE_YPOS, VEGGIE_SCALE);
+  }
+
+  playChopAnimation() {
+    if (this.gameEnded || DISABLE_HIT) {
+      return;
+    }
+
+    COUNTER += 1;
+    this.chop.play();
+
+    if (VEGGIE_NAME !== 'rotten-eggplant' && VEGGIE_NAME !== 'rotten-pepper') {
+      // LENGTH OF THE TOTAL AMOUNT OF FRAMES
+      TOTAL_CHOP_COUNT = this.currentVeggie.animations.frameTotal;
+      this.currentVeggie.kill();
+
+      if (COUNTER <= TOTAL_CHOP_COUNT) {
+        this.setupVegetableToChop(VEGGIE_NAME, VEGGIE_XPOS, VEGGIE_YPOS, VEGGIE_SCALE, COUNTER);
+      } else {
+        this.setupNextVeggie();
+        COUNTER = 1;
+      }
+    }
   }
 
   playSplashAnimation() {
@@ -194,67 +256,6 @@ module.exports = class Instructions extends Phaser.State {
       this.setupFaderAnimation();
       ENABLE_SLIDER = true;
     }, this);
-  }
-
-  startVeggieSetup(veggie) {
-    if (this.gameEnded) {
-      return;
-    }
-
-    const center = this.world.centerX;
-    const height = this.world.height;
-
-    switch (veggie) {
-      case 'cucumber':
-        this.positionVegetableToChop('cucumber', center, height - 300, 1.1);
-        this.setupHittingAnimation();
-        break;
-
-      case 'rotten-pepper':
-        this.positionVegetableToChop('rotten-pepper', center + 50, height - 380, 1);
-        this.setupLeverAnimation();
-        DISABLE_HIT = true;
-        ENABLE_LEVER = true;
-        break;
-
-      case 'rotten-eggplant':
-        this.positionVegetableToChop('rotten-eggplant', center + 50, height - 380, 0.7);
-        DISABLE_HIT = false;
-        ENABLE_SLIDER = true;
-        this.setupHittingAnimation();
-        break;
-
-      default:
-        break;
-    }
-
-    this.setupVegetableToChop(VEGGIE_NAME, VEGGIE_XPOS, VEGGIE_YPOS, VEGGIE_SCALE);
-  }
-
-  playChopAnimation() {
-    if (this.gameEnded || DISABLE_HIT) {
-      return;
-    }
-
-    COUNTER += 1;
-    this.chop.play();
-
-    if (VEGGIE_NAME !== 'rotten-eggplant' && VEGGIE_NAME !== 'rotten-pepper') {
-      // LENGTH OF THE TOTAL AMOUNT OF FRAMES
-      TOTAL_CHOP_COUNT = this.currentVeggie.animations.frameTotal;
-      this.currentVeggie.kill();
-
-      if (COUNTER <= TOTAL_CHOP_COUNT) {
-        this.setupVegetableToChop(VEGGIE_NAME, VEGGIE_XPOS, VEGGIE_YPOS, VEGGIE_SCALE, COUNTER);
-      } else {
-        this.setupNextVeggie();
-        COUNTER = 1;
-      }
-    }
-
-    if (VEGGIE_NAME === 'rotten-eggplant' && COUNTER === 2) {
-      this.playSplashAnimation();
-    }
   }
 
   setupNextVeggie() {
@@ -314,6 +315,8 @@ module.exports = class Instructions extends Phaser.State {
   }
 
   shutdown() {
+    super.shutdown();
+
     Arduino.removeEventListener('drum-hit', this.playChopAnimation);
     Arduino.removeEventListener('lever-pull', this.leverVeggieAway);
     Arduino.removeEventListener('slider-move', this.slideAwayExplosion);

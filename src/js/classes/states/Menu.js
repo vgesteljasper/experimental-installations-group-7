@@ -1,6 +1,7 @@
-module.exports = class Menu extends Phaser.State {
+const SuperState = require('./SuperState.js');
+
+module.exports = class Menu extends SuperState {
   create() {
-    console.log('[Menu] — create()');
     this.createaBackground();
     this.loadSounds();
     this.createLogo();
@@ -9,10 +10,8 @@ module.exports = class Menu extends Phaser.State {
   }
 
   registerActionTriggers() {
-    this.game.input.keyboard.addKey(Phaser.KeyCode.P).onUp.add(this.goToNearbyState, this);
-
     this.goToNearbyState = this.goToNearbyState.bind(this);
-    Arduino.addEventListener('plate-force', this.goToNearbyState);
+    Arduino.addEventListener('pressure-plate-change', this.goToNearbyState);
   }
 
   createaBackground() {
@@ -94,12 +93,14 @@ module.exports = class Menu extends Phaser.State {
     this.pressurePlate.scale.setTo(0.1, 0.1);
   }
 
-  goToNearbyState() {
-    this.click.play();
-    this.state.start('Nearby');
+  goToNearbyState(e) {
+    if (e.detail.active) {
+      this.state.start('Nearby');
+      this.click.play();
+    }
   }
 
   shutdown() {
-    Arduino.removeEventListener('plate-force', this.goToNearbyState);
+    Arduino.removeEventListener('pressure-plate-change', this.goToNearbyState);
   }
 };
