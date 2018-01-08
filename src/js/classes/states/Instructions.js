@@ -325,9 +325,15 @@ module.exports = class Instructions extends SuperState {
     COUNTER = 1;
 
     VEGGIES_COUNTER = 0;
-    ENABLE_LEVER = false;
     COUNTDOWN = 6;
 
+    VEGGIE_BEING_CUT = '';
+    VEGGIE_NAME = '';
+    VEGGIE_XPOS = '';
+    VEGGIE_YPOS = '';
+    VEGGIE_SCALE = '';
+
+    ENABLE_LEVER = false;
     ENABLE_SLIDER = false;
     DISABLE_HIT = false;
   }

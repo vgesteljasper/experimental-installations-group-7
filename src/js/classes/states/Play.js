@@ -470,7 +470,7 @@ module.exports = class Play extends SuperState {
 
   shutdown() {
     super.shutdown();
-    
+
     Arduino.removeEventListener('drum-hit', this.playChopAnimation);
     Arduino.removeEventListener('lever-pull', this.leverVeggieAway);
     Arduino.removeEventListener('slider-move', this.slideAwayExplosion);
@@ -478,7 +478,6 @@ module.exports = class Play extends SuperState {
     COUNTER = 1;
     VEGGIES_COUNTER = 0;
 
-    // RANDOM_VEGGIES = [];
     VEGGIE_BEING_CUT = '';
     VEGGIE_NAME = '';
     VEGGIE_XPOS = '';
@@ -488,5 +487,11 @@ module.exports = class Play extends SuperState {
     BLUR_COUNTER = 0;
 
     TIME_START = '';
+
+    SPLASH_COUNTDOWN = 6;
+
+    ENABLE_LEVER = false;
+    ENABLE_SLIDER = false;
+    DISABLE_HIT = false;
   }
 };

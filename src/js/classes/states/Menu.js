@@ -1,6 +1,4 @@
-const SuperState = require('./SuperState.js');
-
-module.exports = class Menu extends SuperState {
+module.exports = class Menu extends Phaser.State {
   create() {
     this.createaBackground();
     this.loadSounds();
