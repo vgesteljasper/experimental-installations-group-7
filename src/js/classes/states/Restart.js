@@ -1,7 +1,11 @@
+const SuperState = require('./SuperState.js');
+
 let COUNTDOWN = 4;
 
-module.exports = class Restart extends Phaser.State {
+module.exports = class Restart extends SuperState {
   create() {
+    super.create();
+
     this.createaBackground();
     this.loadSounds();
     this.createFeedback();
@@ -78,6 +82,8 @@ module.exports = class Restart extends Phaser.State {
   }
 
   shutdown() {
+    super.shutdown();
+
     COUNTDOWN = 4;
   }
 };

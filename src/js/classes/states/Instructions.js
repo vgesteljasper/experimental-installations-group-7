@@ -1,3 +1,5 @@
+const SuperState = require('./SuperState.js');
+
 let TOTAL_CHOP_COUNT;
 let COUNTER = 1;
 let VEGGIES_COUNTER = 0;
@@ -14,11 +16,13 @@ let COUNTDOWN = 6;
 let ENABLE_SLIDER = false;
 let DISABLE_HIT = false;
 
-module.exports = class Instructions extends Phaser.State {
+module.exports = class Instructions extends SuperState {
   init() {
     this.gameEnded = false;
   }
   create() {
+    super.create();
+
     this.veggies = [
       'cucumber',
       'rotten-pepper',
@@ -150,9 +154,6 @@ module.exports = class Instructions extends Phaser.State {
   }
 
   setupFaderAnimation() {
-    this.plateOnboarding.kill();
-    this.knifeOnboarding.kill();
-
     this.faderOnboarding = this.add.sprite(
       this.world.centerX,
       150,
@@ -166,6 +167,8 @@ module.exports = class Instructions extends Phaser.State {
   }
 
   playSplashAnimation() {
+    this.leverOnboarding.kill();
+
     DISABLE_HIT = true;
     ENABLE_LEVER = false;
 
@@ -219,9 +222,9 @@ module.exports = class Instructions extends Phaser.State {
 
       case 'rotten-eggplant':
         this.positionVegetableToChop('rotten-eggplant', center + 50, height - 380, 0.7);
-        DISABLE_HIT = false;
+        DISABLE_HIT = true;
         ENABLE_SLIDER = true;
-        this.setupHittingAnimation();
+        this.playSplashAnimation();
         break;
 
       default:
@@ -314,6 +317,8 @@ module.exports = class Instructions extends Phaser.State {
   }
 
   shutdown() {
+    super.shutdown();
+
     Arduino.removeEventListener('drum-hit', this.playChopAnimation);
     Arduino.removeEventListener('lever-pull', this.leverVeggieAway);
     Arduino.removeEventListener('slider-move', this.slideAwayExplosion);

@@ -1,5 +1,9 @@
-module.exports = class End extends Phaser.State {
+const SuperState = require('./SuperState.js');
+
+module.exports = class End extends SuperState {
   create() {
+    super.create();
+
     this.createaBackground();
     this.createScore();
     this.registerActionTriggers();
@@ -93,6 +97,7 @@ module.exports = class End extends Phaser.State {
   }
 
   shutdown() {
+    super.shutdown();
     Arduino.removeEventListener('drum-hit', this.goToRestartState);
   }
 };

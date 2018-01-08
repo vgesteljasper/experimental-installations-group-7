@@ -1,4 +1,5 @@
 const ChoppedIndicator = require('./../objects/ChoppedIndicator');
+const SuperState = require('./SuperState.js');
 
 let TOTAL_CHOP_COUNT;
 let COUNTER = 1;
@@ -23,7 +24,7 @@ const PROGRESS_START = 1200;
 
 const VEGGIE_GUTTER = 60;
 
-module.exports = class Play extends Phaser.State {
+module.exports = class Play extends SuperState {
   init() {
     this.gameEnded = false;
     window.localStorage.clear();
@@ -31,6 +32,8 @@ module.exports = class Play extends Phaser.State {
   }
 
   create() {
+    super.create();
+
     this.veggies = [
       'rotten-cucumber',
       'eggplant',
@@ -457,7 +460,17 @@ module.exports = class Play extends Phaser.State {
     veggieChopped.drawCircle(PROGRESS_START + (VEGGIES_COUNTER * VEGGIE_GUTTER), 65, 50);
   }
 
+  goToMenuState(e) {
+    const state = e.detail.active;
+
+    if (!state) {
+      this.state.start('Menu');
+    }
+  }
+
   shutdown() {
+    super.shutdown();
+    
     Arduino.removeEventListener('drum-hit', this.playChopAnimation);
     Arduino.removeEventListener('lever-pull', this.leverVeggieAway);
     Arduino.removeEventListener('slider-move', this.slideAwayExplosion);

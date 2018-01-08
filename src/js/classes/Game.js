@@ -4,7 +4,6 @@ const Menu = require('./states/Menu');
 const Nearby = require('./states/Nearby');
 const OnboardingEnd = require('./states/OnboardingEnd');
 const Instructions = require('./states/Instructions');
-const Leaderboard = require('./states/Leaderboard');
 const Play = require('./states/Play');
 const Restart = require('./states/Restart');
 const End = require('./states/End');
@@ -24,7 +23,6 @@ module.exports = class Game extends Phaser.Game {
     this.state.add('Nearby', Nearby);
     this.state.add('OnboardingEnd', OnboardingEnd);
     this.state.add('Instructions', Instructions);
-    this.state.add('Leaderboard', Leaderboard);
     this.state.add('Play', Play);
     this.state.add('Restart', Restart);
     this.state.add('End', End);
