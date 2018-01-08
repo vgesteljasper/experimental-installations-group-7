@@ -1,12 +1,26 @@
+const Store = require('electron-store');
+const electron = require('electron');
+
 const SerialPort = require('serialport');
 const EventTarget = require('./EventTarget.js');
+
+const remote = electron.remote;
 
 module.exports = class Arduino extends EventTarget {
   constructor() {
     super();
 
-    this.port = new SerialPort(process.env.SERIAL_PORT, {
-      baudRate: Number(process.env.BAUD_RATE),
+    const store = new Store();
+
+    const serialport = store.get('serialport');
+    const baudrate = Number(store.get('baudrate'));
+
+    if (!serialport || !baudrate) {
+      remote.getGlobal('createSettingsWindow')();
+    }
+
+    this.port = new SerialPort(serialport, {
+      baudRate: baudrate,
     });
 
     this.onPortData = this.onPortData.bind(this);

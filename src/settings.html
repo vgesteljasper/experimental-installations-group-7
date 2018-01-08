@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>settings</title>
+  <style>
+    body {
+      font-family: 'Circular', -apple-system, sans-serif;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    * {
+      box-sizing: inherit;
+    }
+
+    h1 {
+      margin: 4px 0 20px;
+    }
+
+    .label {
+      display: block;
+      margin: 0 0 6px;
+    }
+
+    .row {
+      padding: 0 0 20px;
+    }
+
+    .input,
+    .button {
+      border: 1px solid lightgrey;
+      padding: 6px 12px;
+      background-color: white;
+    }
+
+    .input {
+      width: 100%;
+    }
+
+    .button {
+      border-radius: 4px;
+    }
+
+    #done {
+      float: right;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Instellingen</h1>
+
+  <div class="row">
+    <label class="label" for="serialport">serialport</label>
+    <input class="input" data-label="serialport" id="serialport" type="text" name="serialport">
+  </div>
+
+  <div class="row">
+    <label class="label" for="baudrate">baudrate</label>
+    <input class="input" data-label="baudrate" id="baudrate" type="text" name="baudrate">
+  </div>
+
+  <div class="row">
+    <button class="button" id="done">Klaar</button>
+  </div>
+  <script>
+
+    // fontloader
+    require(`webfontloader`).load({
+      custom: {
+        families: ['circular', 'circular-medium'],
+        urls: ['assets/fonts/circular/circular.css']
+      }
+    });
+
+    const electron = require('electron');
+    const Store = require('electron-store');
+
+    const remote = electron.remote;
+    const store = new Store();
+    window.store = store;
+
+    const onChangeHandler = event => {
+      const $input = event.currentTarget;
+
+      console.log($input.value);
+      store.set($input.dataset.label, $input.value);
+    }
+
+    const $inputs = Array.from(document.querySelectorAll('.input'));
+    $inputs.forEach($input => {
+      const label = $input.dataset.label;
+      const storeValue = store.get(label)
+      if (storeValue) {
+        $input.value = storeValue;
+      }
+      $input.addEventListener('change', onChangeHandler);
+    });
+
+    document.getElementById('done').addEventListener('click', () => {
+      remote.getCurrentWindow().close();
+    });
+  </script>
+</body>
+
+</html>

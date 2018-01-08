@@ -1,61 +1,130 @@
-require('dotenv').config();
-
 const electron = require('electron');
-// Module to control application life.
+
 const app = electron.app;
-// Module to create native browser window.
+const Menu = electron.Menu;
+
 const BrowserWindow = electron.BrowserWindow;
 
 const path = require('path');
 const url = require('url');
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+let settingsWindow;
 
-const createWindow = () => {
-  // Create the browser window.
+const openDevTools = () => mainWindow.webContents.openDevTools();
+
+const createSettingsWindow = () => {
+  settingsWindow = new BrowserWindow({
+    parent: mainWindow,
+    modal: true,
+    show: false,
+    width: 500,
+    height: 340,
+    resizable: false,
+  });
+
+  settingsWindow.loadURL(url.format({
+    pathname: path.join(__dirname, 'src/settings.html'),
+    protocol: 'file:',
+    slashes: true,
+  }));
+
+  settingsWindow.once('ready-to-show', () => {
+    settingsWindow.show();
+  });
+
+  settingsWindow.on('closed', () => {
+    settingsWindow = null;
+    mainWindow.webContents.reload();
+  });
+};
+
+global.createSettingsWindow = createSettingsWindow;
+
+const createGameWindow = () => {
+  const template = [
+    {
+      label: app.getName(),
+      submenu: [
+        {
+          label: 'Instellingen',
+          click: createSettingsWindow,
+        },
+        { type: 'separator' },
+        { role: 'hide', label: 'Verberg' },
+        { role: 'unhide', label: 'Toon' },
+        { type: 'separator' },
+        { role: 'quit', label: 'Sluit' },
+      ],
+    },
+    {
+      label: 'Wijzig',
+      submenu: [
+        { role: 'undo', label: 'Herstel' },
+        { role: 'redo', label: 'Opnieuw' },
+        { type: 'separator' },
+        { role: 'cut', label: 'Knip' },
+        { role: 'copy', label: 'Kopieer' },
+        { role: 'paste', labe: 'Plak' },
+        { role: 'pasteandmatchstyle', label: 'Plak en pas stijl aan' },
+        { role: 'delete', label: 'Verwijder' },
+        { role: 'selectall', label: 'Selecteer alles' },
+      ],
+    },
+    {
+      label: 'Weergave',
+      submenu: [
+        { role: 'reload', label: 'Herlaad' },
+        { role: 'forcereload', label: 'Forceer Herlaad' },
+        { type: 'separator' },
+        {
+          label: 'Open Console',
+          click: openDevTools,
+        },
+      ],
+    },
+    {
+      role: 'Help',
+      submenu: [
+        {
+          label: 'Learn More',
+          click() {
+            require('electron').shell.openExternal('https://electron.atom.io');
+          },
+        },
+      ],
+    },
+  ];
+
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+
   mainWindow = new BrowserWindow({ width: 1920, height: 1080 });
 
-  // and load the index.html of the app.
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'src/index.html'),
     protocol: 'file:',
     slashes: true,
   }));
 
-  // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 
-  // Emitted when the window is closed.
   mainWindow.on('closed', () => {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
     mainWindow = null;
   });
 };
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.on('ready', () => {
+  app.setName('ChopChop');
+  createGameWindow();
+});
 
-// Quit when all windows are closed.
 app.on('window-all-closed', () => {
-  // On macOS it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  // if (process.platform !== 'darwin') {}
   app.quit();
 });
 
 app.on('activate', () => {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
-    createWindow();
+    createGameWindow();
   }
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
