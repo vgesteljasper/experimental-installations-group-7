@@ -80,6 +80,10 @@ module.exports = class Instructions extends SuperState {
       this.rottenVeggie = this.add.sprite(posX, posY, name);
       this.rottenVeggie.anchor.setTo(0.5, 0.5);
       this.rottenVeggie.scale.setTo(scale, scale);
+
+      if (name === 'rotten-eggplant') {
+        this.playSplashAnimation();
+      }
     }
   }
 
@@ -166,39 +170,6 @@ module.exports = class Instructions extends SuperState {
     this.faderOnboarding.animations.play('fader', 6, true);
   }
 
-  playSplashAnimation() {
-    this.leverOnboarding.kill();
-
-    DISABLE_HIT = true;
-    ENABLE_LEVER = false;
-
-    this.fart.play();
-
-    this.splash = this.add.sprite(
-      this.world.centerX,
-      this.world.centerY - 20,
-      'splash-animation',
-      'splash/0001',
-    );
-    this.splash.anchor.setTo(0.5, 0.5);
-    this.splash.scale.setTo(1.8, 1.8);
-    this.splash.animations.add(
-      'splash',
-      Phaser.Animation.generateFrameNames('splash/', 1, 6, '', 4),
-      25,
-      true,
-      false,
-    );
-    this.splash.animations.play('splash', 25, false);
-
-    this.splash.events.onAnimationComplete.add((e) => {
-      e.kill();
-      this.setupReverseAnimation();
-      this.setupFaderAnimation();
-      ENABLE_SLIDER = true;
-    }, this);
-  }
-
   startVeggieSetup(veggie) {
     if (this.gameEnded) {
       return;
@@ -221,10 +192,10 @@ module.exports = class Instructions extends SuperState {
         break;
 
       case 'rotten-eggplant':
-        this.positionVegetableToChop('rotten-eggplant', center + 50, height - 380, 0.7);
         DISABLE_HIT = true;
         ENABLE_SLIDER = true;
-        this.playSplashAnimation();
+        this.positionVegetableToChop('rotten-eggplant', center + 50, height - 380, 0.7);
+        this.leverOnboarding.kill();
         break;
 
       default:
@@ -254,10 +225,37 @@ module.exports = class Instructions extends SuperState {
         COUNTER = 1;
       }
     }
+  }
 
-    if (VEGGIE_NAME === 'rotten-eggplant' && COUNTER === 2) {
-      this.playSplashAnimation();
-    }
+  playSplashAnimation() {
+    DISABLE_HIT = true;
+    ENABLE_LEVER = false;
+
+    this.fart.play();
+
+    this.splash = this.add.sprite(
+      this.world.centerX,
+      this.world.centerY - 20,
+      'splash-animation',
+      'splash/0001',
+    );
+    this.splash.anchor.setTo(0.5, 0.5);
+    this.splash.scale.setTo(1.8, 1.8);
+    this.splash.animations.add(
+      'splash',
+      Phaser.Animation.generateFrameNames('splash/', 1, 6, '', 4),
+      25,
+      true,
+      false,
+    );
+    this.splash.animations.play('splash', 25, false);
+
+    this.splash.events.onAnimationComplete.add((e) => {
+      e.kill();
+      this.setupReverseAnimation();
+      this.setupFaderAnimation();
+      ENABLE_SLIDER = true;
+    }, this);
   }
 
   setupNextVeggie() {
