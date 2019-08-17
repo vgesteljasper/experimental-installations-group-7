@@ -8,6 +8,8 @@ module.exports = class Menu extends Phaser.State {
   }
 
   registerActionTriggers() {
+    this.game.input.keyboard.addKey(Phaser.KeyCode.P).onUp.add(this.goToNearbyState, this);
+
     this.goToNearbyState = this.goToNearbyState.bind(this);
     Arduino.addEventListener('pressure-plate-change', this.goToNearbyState);
   }
@@ -92,7 +94,7 @@ module.exports = class Menu extends Phaser.State {
   }
 
   goToNearbyState(e) {
-    if (e.detail.active) {
+    if (!e.detail || e.detail.active) {
       this.state.start('Nearby');
       this.click.play();
     }

@@ -19,6 +19,10 @@ module.exports = class Arduino extends EventTarget {
       remote.getGlobal('createSettingsWindow')();
     }
 
+    if (serialport === 'null') {
+      return;
+    }
+
     this.port = new SerialPort(serialport, {
       baudRate: baudrate,
     });

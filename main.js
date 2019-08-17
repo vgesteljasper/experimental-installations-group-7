@@ -21,6 +21,9 @@ const createSettingsWindow = () => {
     width: 500,
     height: 340,
     resizable: false,
+    webPreferences: {
+      nodeIntegration: true,
+    },
   });
 
   settingsWindow.loadURL(url.format({
@@ -99,7 +102,13 @@ const createGameWindow = () => {
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 
-  mainWindow = new BrowserWindow({ width: 1920, height: 1080 });
+  mainWindow = new BrowserWindow({
+    width: 1920,
+    height: 1080,
+    webPreferences: {
+      nodeIntegration: true,
+    },
+  });
 
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'src/index.html'),
